@@ -10,7 +10,12 @@ public class Main {
         Player[] giocatori = Player.GeneratePlayers(numPlayers);
         for(Player pl : giocatori)
             System.out.println(pl.getName());
-
+        
+        //Create board with field number of players 
+        Board board= new Board(numPlayers);
+        System.out.println("Board generata: ");
+        board.printBoard();
+        
         // setting dei punti temporaneo, da rimuovere
         giocatori[2].setPoints(32);
         giocatori[1].setPoints(43);
