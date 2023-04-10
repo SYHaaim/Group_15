@@ -17,7 +17,7 @@ public class Main {
         board.printBoard();
         
         // setting dei punti temporaneo, da rimuovere
-        giocatori[2].setPoints(32);
+        giocatori[0].setPoints(32);
         giocatori[1].setPoints(43);
 
         Game.Leaderboard(giocatori);
