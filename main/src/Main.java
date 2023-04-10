@@ -23,8 +23,8 @@ public class Main {
         Game.Leaderboard(giocatori);
         
         //prova obiettivi personali
-        giocatori[0].NewPersonal();
-        giocatori[1].NewPersonal();
+        giocatori[0].printObjective();
+
        
        
     }
