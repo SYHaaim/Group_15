@@ -21,6 +21,11 @@ public class Main {
         giocatori[1].setPoints(43);
 
         Game.Leaderboard(giocatori);
-
+        
+        //prova obiettivi personali
+        giocatori[0].NewPersonal();
+        giocatori[1].NewPersonal();
+       
+       
     }
 }
