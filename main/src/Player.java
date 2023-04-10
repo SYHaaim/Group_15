@@ -1,13 +1,12 @@
 import java.util.Scanner;
 
-public class Player {
+public class Player extends PersonalObjective {
 
     //player class, handles player generation, points and personal objectives
     private final String name;
     private final int id;
     private int points;
     Library libreria;
-    PersonalObjective personal;
 
     public String getName() {
         return name;
