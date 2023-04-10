@@ -1,12 +1,13 @@
 import java.util.Scanner;
 
-public class Player extends PersonalObjective {
+public class Player {
 
     //player class, handles player generation, points and personal objectives
     private final String name;
     private final int id;
     private int points;
-    Library libreria;
+    private Library libreria;
+    private PersonalObjective persObj;
 
     public String getName() {
         return name;
@@ -24,6 +25,7 @@ public class Player extends PersonalObjective {
         this.name = name;
         this.id = id;
         this.points = 0;
+        this.persObj = new PersonalObjective();
     }
 
     public static Player[] GeneratePlayers(int numPlayers){
@@ -34,6 +36,11 @@ public class Player extends PersonalObjective {
             players[i] = new Player(i+1, sc.next());
         }
         return players;
+    }
+
+    //temporary method to see personal objective formatting
+    public void printObjective(){
+        persObj.printObj();
     }
 
     public static void SortByPoints(Player[] players){
