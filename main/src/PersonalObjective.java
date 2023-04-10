@@ -1,27 +1,29 @@
-public class PersonalObjective{
-	
-	private int[][] personal;
+import java.util.Random;
 
-	public void NewPersonal(){
-		
-		this.personal = new int[6][5];
-			
-		for(int i=1;i<=6;i++){
-			personal[(int)(Math.random()*5)][(int)(Math.random()*4)]=i;
-		}
-										
-		int rows = 6;
-		int columns = 5;
-	
-		for(int k=0;k<rows;k++){
-			for(int j=0;j<columns;j++) {
-				System.out.print(personal[k][j]);
-			}
-			System.out.println();
-		}
-		System.out.println();
+public class PersonalObjective{
+
+	private String[] objectives;
+
+	public PersonalObjective(){
+		this.objectives = new String[6];
+		generatePersonal();
 	}
-}	
-		
-	
-	
+
+	//da aggiungere il tipo della tessera nella formattazione degli obbiettivi: "x coord. - y coord. - tile type"
+	public void generatePersonal(){
+		String toAdd = " ";
+		Random r = new Random();
+
+		for (int i = 0; i < objectives.length; i++){
+			toAdd = (r.nextInt(5) + 1) + " - " + (r.nextInt(6)+1);
+			objectives[i] = toAdd;
+		}
+	}
+
+	public void printObj(){
+		for (String obj : this.objectives)
+			System.out.println(obj);
+	}
+}
+
+
