@@ -11,9 +11,11 @@ public class Main {
         for(Player pl : giocatori)
             System.out.println(pl.getName());
         
-        //Create board with field number of players 
+      //Create board with field number of players 
         Board board= new Board(numPlayers);
-        System.out.println("Board generata: ");
+        System.out.println("Board generata, premere un tasto per riempirla");
+        sc.nextLine();
+        board.fillBoard();
         board.printBoard();
         
         // setting dei punti temporaneo, da rimuovere
