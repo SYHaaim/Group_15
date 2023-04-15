@@ -5,7 +5,7 @@ public class Board {
 		
 		private final int LEN=9;
 		
-		//this board is used to save the structure that is different according with the number of players
+		//this board is used to save the structure that is different according to the number of players
 		private int[][] structureBoard;			
 		private TileType[][] mainBoard;
 		
@@ -55,12 +55,12 @@ public class Board {
 						randNum = random.nextInt(6)+1;
 						cardsLeft[randNum-1]--;
 						switch(randNum) {
-						case 1:	mainBoard[i][j]= TileType.CATS;  break;
-						case 2:	mainBoard[i][j]= TileType.BOOKS;  break;
-						case 3:	mainBoard[i][j]= TileType.TOYS;  break;
-						case 4:	mainBoard[i][j]= TileType.FRAMES;  break;
-						case 5:	mainBoard[i][j]= TileType.TROPHIES;  break;
-						case 6:	mainBoard[i][j]= TileType.PLANTS; break;
+						case 1:	mainBoard[i][j]= TileType.C;  break;
+						case 2:	mainBoard[i][j]= TileType.B;  break;
+						case 3:	mainBoard[i][j]= TileType.T;  break;
+						case 4:	mainBoard[i][j]= TileType.F;  break;
+						case 5:	mainBoard[i][j]= TileType.TR;  break;
+						case 6:	mainBoard[i][j]= TileType.P; break;
 						}
 					}
 					
@@ -82,10 +82,10 @@ public class Board {
 			for (int i=0; i<LEN; i++) {
 				for (int j=0; j<LEN; j++) {
 					if(mainBoard[i][j]==null)
-						System.out.printf("%-10s", "X");
+						System.out.printf("%-10s", "");
 						//System.out.print("%10s %10s %10s", mainBoard[i][j]);
 					else
-						System.out.printf("%-10s", mainBoard[i][j]);
+						System.out.printf("%-10s",mainBoard[i][j]);
 				}
 				System.out.println();
 			}
