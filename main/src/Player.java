@@ -9,6 +9,18 @@ public class Player {
     private Library libreria;
     private PersonalObjective persObj;
 
+    //temporary string that indicates the action a player executes in their turn
+    //to be changed with array of "Tile" with max length of 3
+    private String actionString;
+
+    public String getActionString() {
+        return actionString;
+    }
+
+    public void setActionString(String actionString) {
+        this.actionString = actionString;
+    }
+
     public String getName() {
         return name;
     }
