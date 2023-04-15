@@ -1,3 +1,13 @@
 public enum TileType {
-    CATS, BOOKS, TOYS, FRAMES, TROPHIES, PLANTS
+    C("CATS"),
+    B("BOOKS"),
+    T("TOYS"),
+    F("FRAMES"),
+    TR("TROPHIES"),
+    P("PLANTS");
+
+    public final String tileName;
+    private TileType(String tileName){
+        this.tileName = tileName;
+    }
 }
