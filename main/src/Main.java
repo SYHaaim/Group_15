@@ -17,15 +17,22 @@ public class Main {
         sc.nextLine();
         board.fillBoard();
         board.printBoard();
-        
+
+        //riga 21-27: azioni temporanee per ogni giocatore, test per vedere se i turni funzionano
+        for (Player pl: giocatori) {
+            Game.PlayerTurn(pl);
+        }
+        for (Player pl: giocatori) {
+            System.out.println(pl.getName() + ": " + pl.getActionString());
+        }
         // setting dei punti temporaneo, da rimuovere
         giocatori[0].setPoints(32);
         giocatori[1].setPoints(43);
 
-        Game.Leaderboard(giocatori);
+        Game.PrintLeaderboard(giocatori);
         
         //prova obiettivi personali
-        giocatori[0].printObjective();
+        //giocatori[0].printObjective();
 
        
        
