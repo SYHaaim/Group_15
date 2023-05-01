@@ -79,13 +79,23 @@ public class Board {
 		}
 		
 		public void printBoard() {
+			char startRow = 'A';
+			
+			//Print the numeric coordinates on top
+			System.out.printf("%-10s", "");
+			for (int i=1; i<=LEN; i++) {
+				System.out.printf("%-10s", i);
+			}
+			System.out.println();
+			
+			//print the board with vertical coordinates, X if the cell is empty, or the name of the cell
 			for (int i=0; i<LEN; i++) {
+				System.out.printf("%-10s", (char)(startRow + i));
 				for (int j=0; j<LEN; j++) {
 					if(mainBoard[i][j]==null)
-						System.out.printf("%-10s", "");
-						//System.out.print("%10s %10s %10s", mainBoard[i][j]);
+						System.out.printf("%-10s", "X");
 					else
-						System.out.printf("%-10s",mainBoard[i][j]);
+						System.out.printf("%-10s", mainBoard[i][j]);
 				}
 				System.out.println();
 			}
