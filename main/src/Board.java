@@ -6,8 +6,8 @@ public class Board {
 		private final int LEN=9;
 		
 		//this board is used to save the structure that is different according to the number of players
-		private int[][] structureBoard;			
-		private TileType[][] mainBoard;
+		private static int[][] structureBoard;
+		private static TileType[][] mainBoard;
 		
 		private int cardsLeft[] = new int[] {22,22,22,22,22,22};
 		
@@ -86,21 +86,29 @@ public class Board {
 			for (int i=1; i<=LEN; i++) {
 				System.out.printf("%-10s", i);
 			}
-			System.out.println();
+			//separates coordinates and board
+			System.out.println("\n----------------------------------------------------------------------------------------------");
 			
-			//print the board with vertical coordinates, X if the cell is empty, or the name of the cell
+			//print the board with vertical coordinates, * if the cell is empty, or the name of the cell
 			for (int i=0; i<LEN; i++) {
-				System.out.printf("%-10s", (char)(startRow + i));
+				System.out.printf("%-5s", (char)(startRow + i));
+				//separates coordinates and board
+				System.out.printf("%-5s"," | ");
 				for (int j=0; j<LEN; j++) {
 					if(mainBoard[i][j]==null)
-						System.out.printf("%-10s", "X");
+						System.out.printf("%-10s", "*");
 					else
 						System.out.printf("%-10s", mainBoard[i][j]);
 				}
 				System.out.println();
 			}
 		}
-		
+		public static TileType pickFromBoard(int row, int column){
+			TileType picked = mainBoard[row-1][column-1];
+			structureBoard[row-1][column-1] = 0;
+			mainBoard[row-1][column-1] = null;
+			return picked;
+		}
 		public int[][] getstructureBoard() {
 			return structureBoard;
 		}
@@ -116,4 +124,5 @@ public class Board {
 		public void setMainBoard() {
 			mainBoard = new TileType[LEN][LEN];
 		}
+
 }
