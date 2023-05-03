@@ -1,3 +1,4 @@
+
 import java.util.*;
 public class Main {
     public static void main(String[] args){
@@ -11,7 +12,7 @@ public class Main {
         for(Player pl : giocatori)
             System.out.println(pl.getName());
         
-      //Create board with field number of players 
+        //Create board with field number of players
         Board board= new Board(numPlayers);
         System.out.println("Board generata, premere un tasto per riempirla");
         sc.nextLine();
@@ -22,17 +23,25 @@ public class Main {
         for (Player pl: giocatori) {
             Game.PlayerTurn(pl);
         }
-        for (Player pl: giocatori) {
-            System.out.println(pl.getName() + ": " + pl.getActionString());
+        for (Player pl : giocatori){
+            System.out.println(pl.getName() + " ha preso: ");
+            pl.printPicked();
         }
-        // setting dei punti temporaneo, da rimuovere
+
+        //test per la board dopo aver preso X tessere
+        board.printBoard();
+
+
+      // setting dei punti temporaneo, da rimuovere
         giocatori[0].setPoints(32);
         giocatori[1].setPoints(43);
 
         Game.PrintLeaderboard(giocatori);
+
+
         
         //prova obiettivi personali
-        //giocatori[0].printObjective();
+        giocatori[0].printObjective();
 
        
        
