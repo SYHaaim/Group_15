@@ -11,15 +11,8 @@ public class Player {
 
     //temporary string that indicates the action a player executes in their turn
     //to be changed with array of "Tile" with max length of 3
-    private String actionString;
+    private TileType[] picked;
 
-    public String getActionString() {
-        return actionString;
-    }
-
-    public void setActionString(String actionString) {
-        this.actionString = actionString;
-    }
 
     public String getName() {
         return name;
@@ -38,6 +31,7 @@ public class Player {
         this.id = id;
         this.points = 0;
         this.persObj = new PersonalObjective();
+        this.picked = new TileType[3];
     }
 
     public static Player[] GeneratePlayers(int numPlayers){
@@ -55,6 +49,22 @@ public class Player {
         persObj.printObj();
     }
 
+    public void pickTiles(char row, int column, int pickedCount){
+        int rowNum = 0;
+        //letters from A to Z range with a numeric value 10 to 35, subtracting 9 i get their alphabet position
+         rowNum = (Character.getNumericValue(row) - 9) ;
+        this.picked[pickedCount] = Board.pickFromBoard(rowNum, column);
+    }
+
+    public void printPicked(){
+        for(int i = 0; i < this.picked.length; i++){
+            if (this.picked[i] != null){
+                System.out.println(this.picked[i]);
+            }
+            else
+                System.out.println("*");
+        }
+    }
     public static void SortByPoints(Player[] players){
         for (int i = 0; i < players.length-1; i++){
             if (players[i].points < players[i+1].points){
