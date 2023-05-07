@@ -14,7 +14,6 @@ public class Player {
     private TileType[] picked;
 
 
-
     public boolean isFirst() {
         return isFirst;
     }
