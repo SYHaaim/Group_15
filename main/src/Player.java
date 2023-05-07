@@ -1,3 +1,5 @@
+
+
 import java.util.Scanner;
 
 public class Player {
@@ -8,11 +10,17 @@ public class Player {
     private int points;
     private Library libreria;
     private PersonalObjective persObj;
-
-    //temporary string that indicates the action a player executes in their turn
-    //to be changed with array of "Tile" with max length of 3
+    private boolean isFirst = false;
     private TileType[] picked;
 
+
+
+    public boolean isFirst() {
+        return isFirst;
+    }
+    public int getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -34,12 +42,20 @@ public class Player {
         this.picked = new TileType[3];
     }
 
+    private static Player flagFirst(Player pl){
+        if (pl.id == 1)
+         pl.isFirst = true;
+
+        return pl;
+    }
     public static Player[] GeneratePlayers(int numPlayers){
         Scanner sc = new Scanner(System.in);
         Player[] players = new Player[numPlayers];
         for (int i = 0; i < players.length; i ++){
             System.out.println("come si chiama il " + (i+1) + "° giocatore?");
             players[i] = new Player(i+1, sc.next());
+
+            players[i] = flagFirst(players[i]);
         }
         return players;
     }
@@ -57,11 +73,10 @@ public class Player {
     }
 
     public void printPicked(){
-        for(int i = 0; i < this.picked.length; i++){
-            if (this.picked[i] != null){
-                System.out.println(this.picked[i]);
-            }
-            else
+        for (TileType tileType : this.picked) {
+            if (tileType != null) {
+                System.out.println(tileType);
+            } else
                 System.out.println("*");
         }
     }
