@@ -5,8 +5,8 @@ public class Game {
 
     public static void PrintLeaderboard(Player[] players){
         Player.SortByPoints(players);
-        for(int i = 0; i < players.length; i++)
-            System.out.println((i+1)+". "+ players[i].getName() + " punti: " + players[i].getPoints());
+        for (Player player : players)
+            System.out.println(player.getId() + ". " + player.getName() + " punti: " + player.getPoints());
     }
 
     public static void PlayerTurn(Player pl){
