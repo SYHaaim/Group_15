@@ -1,7 +1,8 @@
 
+import java.io.IOException;
 import java.util.*;
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         int numPlayers = 0;
         System.out.println("quanti giocatori stanno giocando? (non meno di 2 o più di 4)");
@@ -11,13 +12,14 @@ public class Main {
         Player[] giocatori = Player.GeneratePlayers(numPlayers);
         for(Player pl : giocatori)
             System.out.println(pl.getName());
-        
+
+
         //Create board with field number of players
         Board board= new Board(numPlayers);
         System.out.println("Board generata, premere un tasto per riempirla");
         sc.nextLine();
         board.fillBoard();
-        board.printBoard();
+        //board.printBoard();
 
         //riga 21-27: azioni temporanee per ogni giocatore, test per vedere se i turni funzionano
         for (Player pl: giocatori) {
@@ -39,7 +41,7 @@ public class Main {
         Game.PrintLeaderboard(giocatori);
 
 
-        
+
         //prova obiettivi personali
         giocatori[0].printObjective();
 

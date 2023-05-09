@@ -1,5 +1,6 @@
 
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Player {
@@ -14,6 +15,7 @@ public class Player {
     private TileType[] picked;
 
 
+    //region getter/setters
     public boolean isFirst() {
         return isFirst;
     }
@@ -32,8 +34,9 @@ public class Player {
     public void setPoints(int points) {
         this.points = points;
     }
+    //endregion
 
-    public Player(int id, String name) {
+    public Player(int id, String name) throws IOException {
         this.name = name;
         this.id = id;
         this.points = 0;
@@ -47,7 +50,7 @@ public class Player {
 
         return pl;
     }
-    public static Player[] GeneratePlayers(int numPlayers){
+    public static Player[] GeneratePlayers(int numPlayers) throws IOException {
         Scanner sc = new Scanner(System.in);
         Player[] players = new Player[numPlayers];
         for (int i = 0; i < players.length; i ++){
