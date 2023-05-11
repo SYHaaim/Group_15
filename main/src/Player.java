@@ -1,6 +1,4 @@
 
-
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Player {
@@ -36,7 +34,7 @@ public class Player {
     }
     //endregion
 
-    public Player(int id, String name) throws IOException {
+    public Player(int id, String name) {
         this.name = name;
         this.id = id;
         this.points = 0;
@@ -50,7 +48,7 @@ public class Player {
 
         return pl;
     }
-    public static Player[] GeneratePlayers(int numPlayers) throws IOException {
+    public static Player[] GeneratePlayers(int numPlayers) {
         Scanner sc = new Scanner(System.in);
         Player[] players = new Player[numPlayers];
         for (int i = 0; i < players.length; i ++){
