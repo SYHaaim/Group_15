@@ -1,7 +1,7 @@
 
 import java.util.*;
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchFieldException {
         Scanner sc = new Scanner(System.in);
         int numPlayers = 0;
         System.out.println("quanti giocatori stanno giocando? (non meno di 2 o più di 4)");
@@ -15,6 +15,7 @@ public class Main {
 
         //Create board with field number of players
         Board board= new Board(numPlayers);
+
         System.out.println("Board generata, premere un tasto per riempirla");
         sc.nextLine();
         board.fillBoard();
@@ -44,7 +45,6 @@ public class Main {
         //prova obiettivi personali
         giocatori[0].printObjective();
 
-       
        
     }
 }

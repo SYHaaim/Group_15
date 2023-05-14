@@ -8,16 +8,19 @@ public class Board {
 		//this board is used to save the structure that is different according to the number of players
 		private static int[][] structureBoard;
 		private static TileType[][] mainBoard;
-		
+
 		private int cardsLeft[] = new int[] {22,22,22,22,22,22};
 		
 		Random random = new Random();
+
+
 
 		public Board(int numPlayers) {
 			structureBoard = new int[LEN][LEN];
 			initBoard(numPlayers);
 			setMainBoard();
 			//printBoard();
+
 		}
 
 		//initialize board with numbers 1 if it's a card space, 0 if it's an empty space.
@@ -103,7 +106,10 @@ public class Board {
 				System.out.println();
 			}
 		}
-		public static TileType pickFromBoard(int row, int column){
+
+		public static TileType pickFromBoard(int row, int column) throws NoSuchFieldException {
+			if (structureBoard[row-1][column-1] == 0)
+				throw new NoSuchFieldException("casella vuota in riga: " + row + " colonna: " + column );
 			TileType picked = mainBoard[row-1][column-1];
 			structureBoard[row-1][column-1] = 0;
 			mainBoard[row-1][column-1] = null;
@@ -114,7 +120,7 @@ public class Board {
 		}
 
 		public void setstructureBoard(int[][] board) {
-			this.structureBoard = board;
+			structureBoard = board;
 		}
 		
 		public TileType[][] getMainBoard() {

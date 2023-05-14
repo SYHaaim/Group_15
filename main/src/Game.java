@@ -9,7 +9,8 @@ public class Game {
             System.out.println(player.getId() + ". " + player.getName() + " punti: " + player.getPoints());
     }
 
-    public static void PlayerTurn(Player pl){
+    public static void PlayerTurn(Player pl) throws NoSuchFieldException {
+
         int column = 0;
         int pickedCount = 0;
         char row = ' ';
@@ -21,6 +22,7 @@ public class Game {
 
             row = provideValidInput(row);
             column = provideValidInput(column);
+
 
             System.out.println("vuoi prendere altre caselle? (si/no)");
             if (sc.next().equalsIgnoreCase("NO")){
@@ -37,7 +39,7 @@ public class Game {
     }
 
 
-    private static char provideValidInput(char in){
+     static char provideValidInput(char in){
         boolean isValid = false;
         Scanner sc = new Scanner(System.in);
 
@@ -60,7 +62,7 @@ public class Game {
         }
         return in;
     }
-    private static int provideValidInput(int in){
+     static int provideValidInput(int in){
         boolean isValid = false;
         Scanner sc = new Scanner(System.in);
         while(!isValid){
