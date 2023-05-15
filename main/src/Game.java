@@ -35,6 +35,10 @@ public class Game {
             if(pickedCount > 2)
                 pickMore = false;
         }
+        
+        if(Board.checkFillBoard()) {
+        	Board.fillBoard();
+        }
 
     }
 

@@ -3,15 +3,15 @@ import java.util.Random;
 public class Board {
     //board class, handles main board generation and tiles positioning
 		
-		private final int LEN=9;
+		private static final int LEN=9;
 		
 		//this board is used to save the structure that is different according to the number of players
 		private static int[][] structureBoard;
 		private static TileType[][] mainBoard;
 
-		private int cardsLeft[] = new int[] {22,22,22,22,22,22};
+		private static int cardsLeft[] = new int[] {22,22,22,22,22,22};
 		
-		Random random = new Random();
+		static Random random = new Random();
 
 
 
@@ -45,7 +45,7 @@ public class Board {
 	                    		 		  {0, 0, 0, 0, p4, p3, 0, 0, 0}};
 		}
 		
-		public void fillBoard() {
+		public static void fillBoard() {
 			
 			int randNum;
 			
@@ -111,9 +111,28 @@ public class Board {
 			if (structureBoard[row-1][column-1] == 0)
 				throw new NoSuchFieldException("casella vuota in riga: " + row + " colonna: " + column );
 			TileType picked = mainBoard[row-1][column-1];
-			structureBoard[row-1][column-1] = 0;
+			//structureBoard[row-1][column-1] = 0;
 			mainBoard[row-1][column-1] = null;
 			return picked;
+		}
+		
+		public static boolean checkFillBoard(){
+			for(int i=0; i<LEN; i++) {
+				for(int j=0; j<LEN; j++) {
+					if (mainBoard[i][j]!=null) {
+						try {
+							if((i<LEN && mainBoard[i+1][j]!=null) || 
+								(i>0 && mainBoard[i-1][j]!=null) || 
+								(j<LEN && mainBoard[i][j+1]!=null) || 
+								(j>0 && mainBoard[i][j-1]!=null)) {
+									return false;
+							}
+						}catch(ArrayIndexOutOfBoundsException e) {
+						}
+					}
+				}
+			}
+			return true;
 		}
 		public int[][] getstructureBoard() {
 			return structureBoard;
