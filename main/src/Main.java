@@ -31,7 +31,9 @@ public class Main {
         }
 
         //test per la board dopo aver preso X tessere
+
         board.printBoard();
+
 
 
       // setting dei punti temporaneo, da rimuovere

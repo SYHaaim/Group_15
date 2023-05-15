@@ -9,7 +9,7 @@ public class Board {
 		private static int[][] structureBoard;
 		private static TileType[][] mainBoard;
 
-		private static int cardsLeft[] = new int[] {22,22,22,22,22,22};
+		private static int[] cardsLeft = new int[] {22,22,22,22,22,22};
 		
 		static Random random = new Random();
 
@@ -108,11 +108,19 @@ public class Board {
 		}
 
 		public static TileType pickFromBoard(int row, int column) throws NoSuchFieldException {
+
+			BoardNavigator nav = new BoardNavigator(mainBoard);
+			int correctRow = row-1;
+			int correctCol = column-1;
 			if (structureBoard[row-1][column-1] == 0)
 				throw new NoSuchFieldException("casella vuota in riga: " + row + " colonna: " + column );
-			TileType picked = mainBoard[row-1][column-1];
+
+			if (!nav.IsTilePickable(correctRow, correctCol))
+				throw new IllegalArgumentException("casella circondata, non possibile prenderla");
+
+			TileType picked = mainBoard[correctRow][correctCol];
 			//structureBoard[row-1][column-1] = 0;
-			mainBoard[row-1][column-1] = null;
+			mainBoard[correctRow][correctCol] = null;
 			return picked;
 		}
 		
