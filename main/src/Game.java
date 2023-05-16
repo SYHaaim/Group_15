@@ -3,14 +3,29 @@ import java.util.*;
 public class Game {
     //handles player turns and endgame etc..
 
-    public static void PrintLeaderboard(Player[] players){
-        Player.SortByPoints(players);
+    Player[] players;
+    int numPlayers;
+    public Game(Player[] players, int numPlayers){
+        this.players = players;
+        this.numPlayers = numPlayers;
+    }
+    public void PrintLeaderboard(Player[] players){
+        SortByPoints(players);
         for (Player player : players)
             System.out.println(player.getId() + ". " + player.getName() + " punti: " + player.getPoints());
     }
+    void SortByPoints(Player[] players){
+        for (int i = 0; i < players.length-1; i++){
+            if (players[i].getPoints() < players[i+1].getPoints()){
+                Player tmp = players[i+1];
+                players[i+1] = players[i];
+                players[i]=tmp;
+            }
+        }
+    }
+    public void PlayerTurn(Player pl, int numPlayers) throws NoSuchFieldException {
 
-    public static void PlayerTurn(Player pl) throws NoSuchFieldException {
-
+        BoardNavigator nav = new BoardNavigator(numPlayers);
         int column = 0;
         int pickedCount = 0;
         char row = ' ';
@@ -37,13 +52,12 @@ public class Game {
         }
 
         if(Board.checkFillBoard()) {
-        	Board.fillBoard();
+        	nav.fillBoard();
         }
-
     }
 
 
-     static char provideValidInput(char in){
+      char provideValidInput(char in){
         boolean isValid = false;
         Scanner sc = new Scanner(System.in);
 
@@ -66,7 +80,7 @@ public class Game {
         }
         return in;
     }
-     static int provideValidInput(int in){
+      int provideValidInput(int in){
         boolean isValid = false;
         Scanner sc = new Scanner(System.in);
         while(!isValid){

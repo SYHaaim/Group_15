@@ -1,11 +1,17 @@
-public class BoardNavigator {
-    private TileType[][] tempBoard;
+public class BoardNavigator extends Board {
+
+    private int [][] tempStructure;
+    TileType[][] tempBoard;
     private final int LEN = 9;
-    public BoardNavigator(TileType[][] tempBoard){
-        this.tempBoard = tempBoard;
+
+    public BoardNavigator(int numPlayers) {
+        super(numPlayers);
+        tempBoard = getMainBoard();
+        tempStructure = getstructureBoard();
     }
 
-     TileType getRight(int row, int column){
+    TileType getRight(int row, int column){
+
         if ((column+1) < LEN)
             return tempBoard[row][column+1];
 
@@ -13,6 +19,7 @@ public class BoardNavigator {
     }
 
      TileType getLeft(int row, int column){
+
         if ((column-1) > 0)
             return tempBoard[row][column-1];
 
@@ -20,6 +27,7 @@ public class BoardNavigator {
     }
 
      TileType getUp(int row, int column){
+
         if ((row-1) > 0)
             return tempBoard[row-1][column];
 
@@ -27,6 +35,7 @@ public class BoardNavigator {
     }
 
      TileType getDown(int row, int column){
+
         if ((row+1) < LEN)
             return tempBoard[row+1][column];
 
@@ -44,7 +53,11 @@ public class BoardNavigator {
         else return getLeft(row, column) == null;
     }
 
+    public boolean isTileNullOrEmpty(int row, int column){
+        if (tempStructure[row][column] == 0)
+            return true;
 
-
+        return tempBoard[row][column] == null;
+    }
 
 }

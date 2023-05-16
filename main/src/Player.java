@@ -13,6 +13,7 @@ public class Player {
     private TileType[] picked;
 
 
+
     //region getter/setters
     public boolean isFirst() {
         return isFirst;
@@ -81,13 +82,5 @@ public class Player {
                 System.out.println("*");
         }
     }
-    public static void SortByPoints(Player[] players){
-        for (int i = 0; i < players.length-1; i++){
-            if (players[i].points < players[i+1].points){
-                Player tmp = players[i+1];
-                players[i+1] = players[i];
-                players[i]=tmp;
-            }
-        }
-    }
+
 }

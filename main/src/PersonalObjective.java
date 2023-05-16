@@ -6,8 +6,10 @@ public class PersonalObjective{
 	//changes to be made?
 
 	private final String[] objectives;
+	private PersonalObjectiveCards generator;
 	public PersonalObjective() {
-		this.objectives = PersonalObjectiveCards.getRandomObjectiveCard();
+		this.generator = new PersonalObjectiveCards();
+		this.objectives = generator.getGeneratedCard();
 	}
 
 	//"x coord. - y coord. - tile type"

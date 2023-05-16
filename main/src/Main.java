@@ -9,12 +9,14 @@ public class Main {
         numPlayers = sc.nextInt();
         }
         Player[] giocatori = Player.GeneratePlayers(numPlayers);
+        Board board= new Board(numPlayers);
+        Game newGame = new Game(giocatori, numPlayers);
         for(Player pl : giocatori)
             System.out.println(pl.getName());
 
 
         //Create board with field number of players
-        Board board= new Board(numPlayers);
+
 
         System.out.println("Board generata, premere un tasto per riempirla");
         sc.nextLine();
@@ -22,8 +24,8 @@ public class Main {
         board.printBoard();
 
         //riga 21-27: azioni temporanee per ogni giocatore, test per vedere se i turni funzionano
-        for (Player pl: giocatori) {
-            Game.PlayerTurn(pl);
+        for (Player pl : giocatori) {
+            newGame.PlayerTurn(pl, numPlayers);
         }
         for (Player pl : giocatori){
             System.out.println(pl.getName() + " ha preso: ");
@@ -35,17 +37,19 @@ public class Main {
         board.printBoard();
 
 
+        //prova obiettivi personali
+        System.out.println("\n");
+        giocatori[0].printObjective();
+
 
       // setting dei punti temporaneo, da rimuovere
         giocatori[0].setPoints(32);
         giocatori[1].setPoints(43);
 
-        Game.PrintLeaderboard(giocatori);
+        newGame.PrintLeaderboard(giocatori);
 
 
 
-        //prova obiettivi personali
-        giocatori[0].printObjective();
 
        
     }
