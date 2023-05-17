@@ -3,7 +3,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws NoSuchFieldException {
         Scanner sc = new Scanner(System.in);
-        int numPlayers = 0; int Righe=6; int Colonne=5;
+        int numPlayers = 0;
         System.out.println("quanti giocatori stanno giocando? (non meno di 2 o più di 4)");
         while(numPlayers < 2 || numPlayers > 4){
         numPlayers = sc.nextInt();
@@ -27,25 +27,29 @@ public class Main {
         for (Player pl : giocatori) {
             newGame.PlayerTurn(pl, numPlayers);
         }
-        /*      for (Player pl : giocatori){
+
+        for (Player pl : giocatori){
         System.out.println(pl.getName() + " ha preso: ");
         pl.printPicked();
     }
-*/        
-    System.out.println("\n\n\n");
-    Library library=new Library();
-    int z=0;
+
+
+
+        //region da spostare nella classe Game
+        System.out.println("\n\n\n");
+
+      //deve essere messa come input dell'utente
+        int insertionColumn = sc.nextInt();
     for (Player pl : giocatori){  //inserisce tessere nella libreria
-    
-    	
+
     	System.out.println("LIBRERIA " +pl.getId()+ " GIOCATORE" );
-    	
-    	library.inserimentoLibrary(pl.printPicked(), library.CreaLibrary(Righe, Colonne), z);
-    	z++;
+
+    	pl.insertInLibrary(insertionColumn);
+    	//insertionColumn++; ??
     }
+        //endregion
 
         //test per la board dopo aver preso X tessere
-
         board.printBoard();
 
 
@@ -60,9 +64,5 @@ public class Main {
 
         newGame.PrintLeaderboard(giocatori);
 
-
-
-
-       
     }
 }

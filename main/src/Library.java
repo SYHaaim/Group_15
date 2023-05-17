@@ -1,35 +1,24 @@
 import java.util.*;
 
 public class Library {
-	
-	private int Righe=6;
-	private int Colonne= 5;
-	
-	
+
+	private final int ROWLEN = 6;
+	private final int COLUMNLEN = 5;
+	TileType[][] libreria;
 	public Library() {
-		
-		this.Righe=Righe;
-		this.Colonne=Colonne;
-	
-		
-		
+		this.libreria = new TileType[ROWLEN][COLUMNLEN];
 	}
 	
-	public TileType[][] CreaLibrary(int Righe, int Colonne) {
-		
-	TileType[][] libreria = new TileType[Righe][Colonne];	
-	return libreria;
-	
-	}
-	
-	public void inserimentoLibrary(TileType[] tileTypes, TileType[][] libreria, int z) {
-	
-		for(int i=0;i<(tileTypes.length);i++)
+	public void inserimentoLibrary(TileType[] tileTypes, int z) {
+		int pickedCounter = 0;
+		for(int i=COLUMNLEN;i>0;i--)
 		{
-			libreria[i][z]=tileTypes[i];
+				libreria[i][z] = tileTypes[pickedCounter];
+				pickedCounter++;
+				if (pickedCounter > (tileTypes.length-1))
+					break;
 		}
-		System.out.println(libreria);
-		
+
 	}
 	
 }

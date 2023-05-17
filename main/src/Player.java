@@ -9,6 +9,11 @@ public class Player {
     private int points;
     private Library libreria;
     private PersonalObjective persObj;
+
+    public Library getLibreria() {
+        return libreria;
+    }
+
     private boolean isFirst;
     private TileType[] picked;
 
@@ -42,6 +47,7 @@ public class Player {
         this.persObj = new PersonalObjective();
         this.picked = new TileType[3];
         this.isFirst = false;
+        this.libreria = new Library();
     }
 
     private static Player flagFirst(Player pl){
@@ -67,6 +73,10 @@ public class Player {
         persObj.printObj();
     }
 
+    public TileType[] getPicked() {
+        return picked;
+    }
+
     public void pickTiles(char row, int column, int pickedCount) throws NoSuchFieldException {
         int rowNum = 0;
         //letters from A to Z range with a numeric value 10 to 35, subtracting 9 i get their alphabet position
@@ -74,7 +84,11 @@ public class Player {
         this.picked[pickedCount] = Board.pickFromBoard(rowNum, column);
     }
 
-    public TileType[] printPicked(){
+    public void insertInLibrary(int column){
+        this.libreria.inserimentoLibrary(this.picked,column);
+    }
+
+    public void printPicked(){
         for (TileType pickedTiles : this.picked) {
             if (pickedTiles != null) {
                 System.out.println(pickedTiles);
@@ -82,10 +96,7 @@ public class Player {
             } else
                 System.out.println("*");
         }
-		return picked;
-		
-		
-		
+
     }
 
 }
