@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args) throws NoSuchFieldException {
         Scanner sc = new Scanner(System.in);
         int numPlayers = 0;
+        ArrayList<Enum> Righe=new ArrayList(); ArrayList<Enum> Colonne = new ArrayList();
         System.out.println("quanti giocatori stanno giocando? (non meno di 2 o più di 4)");
         while(numPlayers < 2 || numPlayers > 4){
         numPlayers = sc.nextInt();
@@ -27,10 +28,22 @@ public class Main {
         for (Player pl : giocatori) {
             newGame.PlayerTurn(pl, numPlayers);
         }
-        for (Player pl : giocatori){
-            System.out.println(pl.getName() + " ha preso: ");
-            pl.printPicked();
-        }
+        /*      for (Player pl : giocatori){
+        System.out.println(pl.getName() + " ha preso: ");
+        pl.printPicked();
+    }
+*/        
+    System.out.println("\n\n\n");
+    Library library=new Library();
+    
+    for (Player pl : giocatori){  //inserisce tessere nella libreria
+    
+    	
+    	System.out.println("LIBRERIA " +pl.getId()+ " GIOCATORE" );
+    	
+    	library.inserimentoLibrary(pl.printPicked(), library.CreaLibrary(Righe, Colonne));
+    	
+    }
 
         //test per la board dopo aver preso X tessere
 
