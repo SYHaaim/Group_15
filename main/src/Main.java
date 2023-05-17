@@ -3,8 +3,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws NoSuchFieldException {
         Scanner sc = new Scanner(System.in);
-        int numPlayers = 0;
-        ArrayList<Enum> Righe=new ArrayList(); ArrayList<Enum> Colonne = new ArrayList();
+        int numPlayers = 0; int Righe=6; int Colonne=5;
         System.out.println("quanti giocatori stanno giocando? (non meno di 2 o più di 4)");
         while(numPlayers < 2 || numPlayers > 4){
         numPlayers = sc.nextInt();
@@ -35,14 +34,14 @@ public class Main {
 */        
     System.out.println("\n\n\n");
     Library library=new Library();
-    
+    int z=0;
     for (Player pl : giocatori){  //inserisce tessere nella libreria
     
     	
     	System.out.println("LIBRERIA " +pl.getId()+ " GIOCATORE" );
     	
-    	library.inserimentoLibrary(pl.printPicked(), library.CreaLibrary(Righe, Colonne));
-    	
+    	library.inserimentoLibrary(pl.printPicked(), library.CreaLibrary(Righe, Colonne), z);
+    	z++;
     }
 
         //test per la board dopo aver preso X tessere

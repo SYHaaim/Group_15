@@ -1,8 +1,9 @@
 import java.util.*;
+
 public class Library {
 	
-	private ArrayList<Enum> Righe= new ArrayList();
-	private ArrayList<Enum> Colonne= new ArrayList();
+	private int Righe=6;
+	private int Colonne= 5;
 	
 	
 	public Library() {
@@ -14,24 +15,19 @@ public class Library {
 		
 	}
 	
-	public ArrayList<ArrayList<Enum>> CreaLibrary(ArrayList<Enum> Righe, ArrayList<Enum> Colonne) {
+	public TileType[][] CreaLibrary(int Righe, int Colonne) {
 		
-	ArrayList <ArrayList<Enum>> libreria= new ArrayList();
-		
-	libreria.add(Righe);
-	libreria.add(Colonne);
-	
+	TileType[][] libreria = new TileType[Righe][Colonne];	
 	return libreria;
 	
 	}
 	
-	public void inserimentoLibrary(TileType tileType, ArrayList<ArrayList<Enum>> libreria) {
-		int i=0;
-		
-		
-		//	Colonne.add(tileType);
-		
-		
+	public void inserimentoLibrary(TileType[] tileTypes, TileType[][] libreria, int z) {
+	
+		for(int i=0;i<(tileTypes.length);i++)
+		{
+			libreria[i][z]=tileTypes[i];
+		}
 		System.out.println(libreria);
 		
 	}

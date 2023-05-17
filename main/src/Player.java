@@ -74,15 +74,15 @@ public class Player {
         this.picked[pickedCount] = Board.pickFromBoard(rowNum, column);
     }
 
-    public TileType printPicked(){
+    public TileType[] printPicked(){
         for (TileType pickedTiles : this.picked) {
             if (pickedTiles != null) {
                 System.out.println(pickedTiles);
-                return pickedTiles;
+               
             } else
                 System.out.println("*");
         }
-		return null;
+		return picked;
 		
 		
 		
