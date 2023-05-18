@@ -1,10 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
-public class CommonObjectiveManager {
+public class CommonObjectiveGenerator {
     private static final ArrayList<String[]> TessereObbComuni = new ArrayList<>();
 
     private void readFromFile() throws FileNotFoundException {
