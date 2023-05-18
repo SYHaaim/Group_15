@@ -23,22 +23,22 @@ public class Library {
 	
 	System.out.println("*****************************************************************************************\n");
 	
-	int g=0;    //visualizzazione libreria
-	int f=0;
-	int h=0;
+	int Cont=0;    //visualizzazione libreria
+	int ContColonne=0;
+	int ContRighe=0;
 
-	while(g<6 && h<6)
+	while(Cont<6 && ContRighe<6)
 	{
 	
-	for(f=0;f<5;f++)
+	for(ContColonne=0;ContColonne<5;ContColonne++)
 	{
 		
-			System.out.print(libreria[h][f]+"\t\t");
+			System.out.print(libreria[ContRighe][ContColonne]+"\t\t");
 			
 		}
 	System.out.print("\n");
-	h++;
-	g++;
+	ContRighe++;
+	Cont++;
 	}
 	
 	System.out.println("\n*************************************************************************************");
