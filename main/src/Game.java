@@ -27,8 +27,10 @@ public class Game {
 
         BoardNavigator nav = new BoardNavigator(numPlayers);
         int column = 0;
-        int pickedCount = 0;
         char row = ' ';
+        int prevCol = 0;
+        char prevRow = ' ';
+        int pickedCount = 0;
         boolean pickMore = true;
         Scanner sc = new Scanner(System.in);
 
@@ -38,13 +40,23 @@ public class Game {
             row = provideValidInput(row);
             column = provideValidInput(column);
 
-
             System.out.println("vuoi prendere altre caselle? (si/no)");
             if (sc.next().equalsIgnoreCase("NO")){
                 pickMore = false;
             }
 
-            pl.pickTiles(row, column, pickedCount);
+            try{
+                pl.pickTiles(row, column, pickedCount, prevRow, prevCol);
+            }catch (Exception e){
+                System.out.println(e);
+                row = provideValidInput(row);
+                column = provideValidInput(column);
+                pl.pickTiles(row, column, pickedCount, prevRow, prevCol);
+            }
+
+            prevRow = row;
+            prevCol = column;
+
 
             pickedCount++;
             if(pickedCount > 2)

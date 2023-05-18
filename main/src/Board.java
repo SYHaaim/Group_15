@@ -105,16 +105,21 @@ public class Board {
         }
     }
 
-    public static TileType pickFromBoard(int row, int column) throws NoSuchFieldException {
+    public static TileType pickFromBoard(int row, int column, int prevRow, int prevCol) throws NoSuchFieldException {
 
         BoardNavigator nav = new BoardNavigator(Players);
         int correctRow = row-1;
         int correctCol = column-1;
+        int correctPrevRow = prevRow-1;
+        int correvtPrevCol = prevCol-1;
+
         if (nav.isTileNullOrEmpty(correctRow, correctCol))
             throw new NoSuchFieldException("casella vuota in riga: " + row + " colonna: " + column );
 
         if (!nav.IsTilePickable(correctRow, correctCol))
             throw new IllegalArgumentException("casella circondata, non possibile prenderla");
+        if (!nav.isAdjacent(correctRow, correctCol,correctPrevRow,correvtPrevCol))
+            throw new IllegalArgumentException("la casella selezionata non è adiacente a quella  presa in precedenza");
 
         TileType picked = mainBoard[correctRow][correctCol];
         //structureBoard[row-1][column-1] = 0;

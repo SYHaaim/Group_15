@@ -77,11 +77,15 @@ public class Player {
         return picked;
     }
 
-    public void pickTiles(char row, int column, int pickedCount) throws NoSuchFieldException {
+    public void pickTiles(char row, int column, int pickedCount, char prevRow, int prevCol) throws NoSuchFieldException {
         int rowNum = 0;
+        int prevRowNum = 0;
         //letters from A to Z range with a numeric value 10 to 35, subtracting 9 i get their alphabet position
         rowNum = (Character.getNumericValue(row) - 9) ;
-        this.picked[pickedCount] = Board.pickFromBoard(rowNum, column);
+        if (!(prevRow == ' '))
+            prevRowNum = (Character.getNumericValue(prevRow) - 9);
+
+        this.picked[pickedCount] = Board.pickFromBoard(rowNum, column, prevRowNum, prevCol);
     }
 
     public void insertInLibrary(int column){

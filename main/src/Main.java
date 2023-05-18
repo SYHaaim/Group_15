@@ -2,8 +2,6 @@
 import java.util.*;
 public class Main {
     public static void main(String[] args) throws NoSuchFieldException {
-        int gh=0;
-        gh++;
     	Scanner sc = new Scanner(System.in);
         int numPlayers = 0;
         System.out.print("Quanti giocatori stanno giocando? (Min 2 o Max di 4)\t");
@@ -28,21 +26,21 @@ public class Main {
         sc.nextLine();
         board.fillBoard();
         board.printBoard();
-        
-        //do{
-        
+
         //riga 21-27: azioni temporanee per ogni giocatore, test per vedere se i turni funzionano
        
-        	for (Player pl : giocatori) {
-        		 System.out.println("");
+        for (Player pl : giocatori)
+        {
+            System.out.println("\n");
             newGame.PlayerTurn(pl, numPlayers);
         }
 
-  /*      for (Player pl : giocatori){
-        System.out.println(pl.getName() + " ha preso: ");
-        pl.printPicked();
-    }
-*/
+        for (Player pl : giocatori)
+        {
+            System.out.println(pl.getName() + " ha preso: ");
+            pl.printPicked();
+        }
+
 
 
         //region da spostare nella classe Game
@@ -61,8 +59,7 @@ public class Main {
     	pl.insertInLibrary(insertionColumn);
     	
     	System.out.println("\n");
-    	
-    	//insertionColumn++; ??
+
     }
     
     
@@ -70,8 +67,7 @@ public class Main {
 
         //test per la board dopo aver preso X tessere
         board.printBoard();
-        
-        //} while(gh<3);
+
 
         //prova obiettivi personali
         System.out.println("\n");

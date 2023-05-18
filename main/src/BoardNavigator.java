@@ -60,4 +60,18 @@ public class BoardNavigator extends Board {
         return tempBoard[row][column] == null;
     }
 
+    public boolean isAdjacent(int row,int column, int prevRow, int prevCol){
+        if (prevRow == -1 && prevCol == -1)
+            // se prevRow e preCol valgono -1 vuol dire che la tessera presa è la prima delle 3
+            return true;
+
+        if (row == prevRow){
+            return tempBoard[prevRow][prevCol] == getRight(row, column) || tempBoard[prevRow][prevCol] == getRight(row, column);
+        } else if (column == prevCol) {
+            return tempBoard[prevRow][prevCol] == getUp(row, column) || tempBoard[prevRow][prevCol] == getDown(row, column);
+        }
+
+        return false;
+    }
+
 }
