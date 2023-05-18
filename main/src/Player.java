@@ -40,30 +40,24 @@ public class Player {
     }
     //endregion
 
-    public Player(int id, String name) {
+    public Player(int id, String name, boolean isFirst) {
         this.name = name;
         this.id = id;
         this.points = 0;
         this.persObj = new PersonalObjective();
         this.picked = new TileType[3];
-        this.isFirst = false;
+        this.isFirst = isFirst;
         this.libreria = new Library();
     }
 
-    private static Player flagFirst(Player pl){
-        if (pl.id == 1)
-         pl.isFirst = true;
-
-        return pl;
-    }
     public static Player[] GeneratePlayers(int numPlayers) {
         Scanner sc = new Scanner(System.in);
         Player[] players = new Player[numPlayers];
         for (int i = 0; i < players.length; i ++){
             System.out.println("come si chiama il " + (i+1) + "° giocatore?");
-            players[i] = new Player(i+1, sc.next());
+            players[i] = new Player(i+1, sc.next(), (i+1==1));
 
-            players[i] = flagFirst(players[i]);
+
         }
         return players;
     }

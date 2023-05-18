@@ -43,14 +43,8 @@ public class BoardNavigator extends Board {
     }
 
     public boolean IsTilePickable(int row, int column){
-
-        if (getUp(row, column) == null)
-            return true;
-        else if (getDown(row, column) == null)
-            return true;
-        else if (getRight(row, column) == null)
-            return true;
-        else return getLeft(row, column) == null;
+        return getUp(row, column) == null || getDown(row, column) == null ||
+                getLeft(row, column) == null || getRight(row, column) == null;
     }
 
     public boolean isTileNullOrEmpty(int row, int column){
