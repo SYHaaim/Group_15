@@ -28,25 +28,34 @@ public class Main {
             newGame.PlayerTurn(pl, numPlayers);
         }
 
-        for (Player pl : giocatori){
+  /*      for (Player pl : giocatori){
         System.out.println(pl.getName() + " ha preso: ");
         pl.printPicked();
     }
-
+*/
 
 
         //region da spostare nella classe Game
         System.out.println("\n\n\n");
 
       //deve essere messa come input dell'utente
-        int insertionColumn = sc.nextInt();
+        
+        
     for (Player pl : giocatori){  //inserisce tessere nella libreria
-
+    	
+    	System.out.print("Giocatore " +pl.getId()+ "\nIn che colonna vuoi inserire le tessere prese?.....\t");
+        int insertionColumn = sc.nextInt()-1;
+        
     	System.out.println("LIBRERIA " +pl.getId()+ " GIOCATORE" );
 
     	pl.insertInLibrary(insertionColumn);
+    	
+    	System.out.println("\n\n");
+    	
     	//insertionColumn++; ??
     }
+    
+    
         //endregion
 
         //test per la board dopo aver preso X tessere
