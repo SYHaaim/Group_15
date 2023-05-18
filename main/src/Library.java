@@ -20,6 +20,8 @@ public class Library {
 				libreria[(i-1)][z] = tileTypes[pickedCounter];
 				pickedCounter++;
 			}
+			if(libreria.length==30)
+			{ System.out.println(" LIBRERIA COMPLETATA !!!!!!!!");               }
 			else {
 			
 				libreria[i][z] = tileTypes[pickedCounter];
@@ -28,28 +30,47 @@ public class Library {
 					break;
 			}
 		}
-	
-	System.out.println("*****************************************************************************************\n");
-	
-	int Cont=0;    //visualizzazione libreria
-	int ContColonne=0;
-	int ContRighe=0;
-
-	while(Cont<6 && ContRighe<6)
-	{
-	
-	for(ContColonne=0;ContColonne<5;ContColonne++)
-	{
 		
-			System.out.print(libreria[ContRighe][ContColonne]+"\t\t");
+		
+		System.out.println("*****************************************************************************************\n");
+		
+		int Cont=0;    //visualizzazione libreria
+		int ContColonne=0;
+		int ContRighe=0;
+
+		while(Cont<6 && ContRighe<6)
+		{
+		
+		for(ContColonne=0;ContColonne<5;ContColonne++)
+		{
 			
+				System.out.print(libreria[ContRighe][ContColonne]+"\t\t");
+				
+			}
+		System.out.print("\n");
+		ContRighe++;
+		Cont++;
 		}
-	System.out.print("\n");
-	ContRighe++;
-	Cont++;
+		
+		System.out.println("\n*************************************************************************************");
+		
 	}
-	
-	System.out.println("\n*************************************************************************************");
-	}
+		public void ControlloLibreria(TileType[] tileTypes, int z) {
+			
+			CommonObjective com= new CommonObjective();
+			
+			if(libreria[0][0].equals(libreria[0][5]) &&libreria[0][5].equals(libreria[6][0])  && libreria[6][0].equals(libreria[6][5]))
+			{
+				System.out.println("Hai fatto punti con l'obbiettivo "+com.TessereComuni[0]);
+					
+				}
+				
+				}
+			
+		
+		
+		
 	
 }
+	
+

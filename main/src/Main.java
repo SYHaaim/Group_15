@@ -6,30 +6,35 @@ public class Main {
         gh++;
     	Scanner sc = new Scanner(System.in);
         int numPlayers = 0;
-        System.out.println("quanti giocatori stanno giocando? (non meno di 2 o più di 4)");
+        System.out.print("Quanti giocatori stanno giocando? (Min 2 o Max di 4)\t");
         while(numPlayers < 2 || numPlayers > 4){
         numPlayers = sc.nextInt();
         }
         Player[] giocatori = Player.GeneratePlayers(numPlayers);
         Board board= new Board(numPlayers);
         Game newGame = new Game(giocatori, numPlayers);
+        
+        System.out.println("\nGiocatori..........");
+        System.out.println("\n ***********");
+        
         for(Player pl : giocatori)
-            System.out.println(pl.getName());
-
+            System.out.println("    "+pl.getName());
+        System.out.println(" ***********");
 
         //Create board with field number of players
 
 
-        System.out.println("Board generata, premere un tasto per riempirla");
+        System.out.println("Board generata, premere un tasto per riempirla\n");
         sc.nextLine();
         board.fillBoard();
         board.printBoard();
         
-        do
-        {
+        //do{
         
         //riga 21-27: azioni temporanee per ogni giocatore, test per vedere se i turni funzionano
-        for (Player pl : giocatori) {
+       
+        	for (Player pl : giocatori) {
+        		 System.out.println("");
             newGame.PlayerTurn(pl, numPlayers);
         }
 
@@ -41,7 +46,7 @@ public class Main {
 
 
         //region da spostare nella classe Game
-        System.out.println("\n\n\n");
+        System.out.println("\n");
 
       //deve essere messa come input dell'utente
         
@@ -55,7 +60,7 @@ public class Main {
 
     	pl.insertInLibrary(insertionColumn);
     	
-    	System.out.println("\n\n");
+    	System.out.println("\n");
     	
     	//insertionColumn++; ??
     }
@@ -66,7 +71,7 @@ public class Main {
         //test per la board dopo aver preso X tessere
         board.printBoard();
         
-        } while(gh<3);
+        //} while(gh<3);
 
         //prova obiettivi personali
         System.out.println("\n");
