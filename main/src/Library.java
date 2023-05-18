@@ -15,10 +15,18 @@ public class Library {
 		
 		for(int i=COLUMNLEN;i>0;i--)
 		{
+			if (libreria[i][z]!=null)
+			{
+				libreria[(i-1)][z] = tileTypes[pickedCounter];
+				pickedCounter++;
+			}
+			else {
+			
 				libreria[i][z] = tileTypes[pickedCounter];
 				pickedCounter++;
 				if (pickedCounter > (tileTypes.length-1))
 					break;
+			}
 		}
 	
 	System.out.println("*****************************************************************************************\n");
