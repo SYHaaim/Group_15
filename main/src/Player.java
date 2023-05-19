@@ -35,6 +35,7 @@ public class Player {
         return points;
     }
 
+    //da cancellare
     public void setPoints(int points) {
         this.points = points;
     }
@@ -72,7 +73,7 @@ public class Player {
     }
 
     public void pickTiles(char row, int column, int pickedCount, char prevRow, int prevCol) throws NoSuchFieldException {
-        int rowNum = 0;
+        int rowNum;
         int prevRowNum = 0;
         //letters from A to Z range with a numeric value 10 to 35, subtracting 9 i get their alphabet position
         rowNum = (Character.getNumericValue(row) - 9) ;
@@ -96,10 +97,16 @@ public class Player {
         }
 
     }
-
+    public void playerObjectivesCheck(){
+        this.addPoints(this.libreria.checkPersonal(this.persObj));
+    }
+    public void addPoints(int points){
+        this.points += points;
+    }
     public void printPlayerLibrary(){
         this.libreria.printLibrary();
     }
+
 
 }
 

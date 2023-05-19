@@ -56,7 +56,7 @@ public class BoardNavigator extends Board {
 
     public boolean isAdjacent(int row,int column, int prevRow, int prevCol){
         if (prevRow == -1 && prevCol == -1)
-            // se prevRow e preCol valgono -1 vuol dire che la tessera presa è la prima delle 3
+            // se prevRow e preCol valgono -1 vuol dire che la tessera presa è la prima delle (massimo) 3 che si possono prendere
             return true;
 
         if (row == prevRow){

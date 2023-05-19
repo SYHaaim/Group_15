@@ -16,34 +16,6 @@ public enum TileType {
      TileType(String tileName){
         this.tileName = tileName;
     }
-
-    public static TileType generateRandomType(int cases){
-
-        TileType result = null;
-        switch (cases){
-            case 1:
-                result = C;
-                break;
-            case 2:
-                result = B;
-                break;
-            case 3:
-                result = T;
-                break;
-            case 4:
-                result = F;
-                break;
-            case 5:
-                result = TR;
-                break;
-            case 6:
-                result = P;
-                break;
-
-        }
-
-        return result;
-    }
     
 public static TileType assignTileType(int n) throws IllegalArgumentException{
     	

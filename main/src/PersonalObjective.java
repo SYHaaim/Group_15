@@ -19,6 +19,10 @@ public class PersonalObjective{
 			System.out.println(obj);
 
 	}
+
+	public String[] getObjectives() {
+		return objectives;
+	}
 }
 
 
