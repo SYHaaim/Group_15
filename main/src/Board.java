@@ -101,7 +101,7 @@ public class Board {
         }
     }
 
-    public static TileType pickFromBoard(int row, int column, int prevRow, int prevCol) throws NoSuchFieldException {
+    public TileType pickFromBoard(int row, int column, int prevRow, int prevCol) throws NoSuchFieldException {
 
         BoardNavigator nav = new BoardNavigator(Players);
         int correctRow = row-1;

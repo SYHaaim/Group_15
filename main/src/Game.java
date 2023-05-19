@@ -46,12 +46,12 @@ public class Game {
             }
 
             try{
-                pl.pickTiles(row, column, pickedCount, prevRow, prevCol);
+                pl.pickTiles(row, column, pickedCount, prevRow, prevCol,numPlayers);
             }catch (Exception e){
                 System.out.println(e);
                 row = provideValidInput(row);
                 column = provideValidInput(column);
-                pl.pickTiles(row, column, pickedCount, prevRow, prevCol);
+                pl.pickTiles(row, column, pickedCount, prevRow, prevCol,numPlayers);
             }
 
             prevRow = row;

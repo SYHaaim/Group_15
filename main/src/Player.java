@@ -74,7 +74,8 @@ public class Player {
         return picked;
     }
 
-    public void pickTiles(char row, int column, int pickedCount, char prevRow, int prevCol) throws NoSuchFieldException {
+    public void pickTiles(char row, int column, int pickedCount, char prevRow, int prevCol,int numPlayers) throws NoSuchFieldException {
+        BoardNavigator nav = new BoardNavigator(numPlayers);
         int rowNum;
         int prevRowNum = 0;
         //letters from A to Z range with a numeric value 10 to 35, subtracting 9 i get their alphabet position
@@ -82,7 +83,7 @@ public class Player {
         if (!(prevRow == ' '))
             prevRowNum = (Character.getNumericValue(prevRow) - 9);
 
-        this.picked[pickedCount] = Board.pickFromBoard(rowNum, column, prevRowNum, prevCol);
+        this.picked[pickedCount] = nav.pickFromBoard(rowNum, column, prevRowNum, prevCol);
     }
 
     public void insertInLibrary(int column){
