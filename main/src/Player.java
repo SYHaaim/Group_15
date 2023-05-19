@@ -1,4 +1,6 @@
 
+import objectives.PersonalObjective;
+
 import java.util.Scanner;
 
 public class Player {

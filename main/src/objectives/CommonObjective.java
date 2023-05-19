@@ -1,4 +1,4 @@
-
+package objectives;
 
 public class CommonObjective{
 
