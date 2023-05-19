@@ -9,13 +9,14 @@ public class Board {
     private static int[][] structureBoard = new int[LEN][LEN];
     private static TileType[][] mainBoard = new TileType[LEN][LEN];
 
-    private static int[] cardsLeft = new int[] {22,22,22,22,22,22};
-    static Random random = new Random();
+    //private static int[] cardsLeft = new int[] {22,22,22,22,22,22};
+
 
     private static int Players;
     public Board(int numPlayers) {
         Players = numPlayers;
         initBoard(Players);
+        fillBoard();
         //printBoard();
     }
 
@@ -44,6 +45,8 @@ public class Board {
     }
 
     public void fillBoard() {
+    	
+    	Random random = new Random();
 
         int randNum;
 
@@ -54,15 +57,8 @@ public class Board {
                     mainBoard[i][j]=null;
                 else {
                     randNum = random.nextInt(6)+1;
-                    cardsLeft[randNum-1]--;
-                    switch(randNum) {
-                        case 1:	mainBoard[i][j]= TileType.generateRandomType(1);  break;
-                        case 2:	mainBoard[i][j]= TileType.generateRandomType(2);  break;
-                        case 3:	mainBoard[i][j]= TileType.generateRandomType(3);  break;
-                        case 4:	mainBoard[i][j]= TileType.generateRandomType(4);  break;
-                        case 5:	mainBoard[i][j]= TileType.generateRandomType(5);  break;
-                        case 6:	mainBoard[i][j]= TileType.generateRandomType(6); break;
-                    }
+                    //cardsLeft[randNum-1]--;
+                    mainBoard[i][j] = TileType.assignTileType(randNum);
                 }
 
             }
@@ -160,6 +156,18 @@ public class Board {
 
     public void setMainBoard() {
         mainBoard = new TileType[LEN][LEN];
+    }
+    
+    public void setCasellaMainBoard() {
+        mainBoard = new TileType[LEN][LEN];
+    }
+    
+    public static TileType getCasellaMainBoard(int r,int c) {
+    	return mainBoard[r][c];
+    }
+    
+    public static int getCasellaStructureBoard(int r,int c) {
+    	return structureBoard[r][c];
     }
 
 }

@@ -24,7 +24,7 @@ public class Main {
 
         System.out.println("Board generata, premere un tasto per riempirla\n");
         sc.nextLine();
-        board.fillBoard();
+        //board.fillBoard();
         board.printBoard();
 
         //riga 21-27: azioni temporanee per ogni giocatore, test per vedere se i turni funzionano
