@@ -97,6 +97,10 @@ public class Player {
 
     }
 
+    public void printPlayerLibrary(){
+        this.libreria.printLibrary();
+    }
+
 }
 
 

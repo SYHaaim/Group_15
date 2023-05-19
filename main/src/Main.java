@@ -11,7 +11,7 @@ public class Main {
         Player[] giocatori = Player.GeneratePlayers(numPlayers);
         Board board= new Board(numPlayers);
         Game newGame = new Game(giocatori, numPlayers);
-        
+        board.fillBoard();
         System.out.println("\nGiocatori..........");
         System.out.println("\n ***********");
         
@@ -60,6 +60,8 @@ public class Main {
     	
     	System.out.println("\n");
 
+        pl.printPlayerLibrary();
+        System.out.println("\n");
     }
     
     

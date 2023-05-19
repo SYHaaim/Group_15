@@ -30,30 +30,32 @@ public class Library {
 					break;
 			}
 		}
-		
-		
+
+	}
+
+	public void printLibrary(){
 		System.out.println("*****************************************************************************************\n");
-		
+
 		int Cont=0;    //visualizzazione libreria
 		int ContColonne=0;
 		int ContRighe=0;
 
 		while(Cont<6 && ContRighe<6)
 		{
-		
-		for(int i=ContColonne;i<5;i++)
-		{
-			
+
+			for(int i=ContColonne;i<5;i++)
+			{
+
 				System.out.print(libreria[ContRighe][i]+"\t\t");
-				
+
 			}
-		System.out.print("\n");
-		ContRighe++;
-		Cont++;
+			System.out.print("\n");
+			ContRighe++;
+			Cont++;
 		}
-		
+
 		System.out.println("\n*************************************************************************************");
-		
+
 	}
 }
 

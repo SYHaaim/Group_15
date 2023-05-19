@@ -16,7 +16,7 @@ public class Board {
     public Board(int numPlayers) {
         Players = numPlayers;
         initBoard(Players);
-        fillBoard();
+
         //printBoard();
     }
 
