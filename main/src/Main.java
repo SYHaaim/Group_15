@@ -11,6 +11,7 @@ public class Main {
         Player[] giocatori = Player.GeneratePlayers(numPlayers);
         Board board= new Board(numPlayers);
         Game newGame = new Game(giocatori, numPlayers);
+
         board.fillBoard();
         System.out.println("\nGiocatori..........");
         System.out.println("\n ***********");
@@ -43,10 +44,9 @@ public class Main {
 
 
 
-        //region da spostare nella classe Game
+        //region da spostare nella classe Game (inserimento in libreria )
         System.out.println("\n");
 
-      //deve essere messa come input dell'utente
         
         
     for (Player pl : giocatori){  //inserisce tessere nella libreria
@@ -63,8 +63,9 @@ public class Main {
         pl.printPlayerLibrary();
         System.out.println("\n");
     }
-    
-    
+
+        //testing sugli obbiettivi
+        giocatori[0].playerObjectivesCheck();
         //endregion
 
         //test per la board dopo aver preso X tessere
@@ -77,9 +78,8 @@ public class Main {
 
 
       // setting dei punti temporaneo, da rimuovere
-        giocatori[0].setPoints(32);
-        giocatori[1].setPoints(43);
-
+         giocatori[0].setPoints(32);
+         giocatori[1].setPoints(43);
         newGame.PrintLeaderboard(giocatori);
 
     }

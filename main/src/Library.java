@@ -11,6 +11,7 @@ public class Library {
 	}
 	
 	public void inserimentoLibrary(TileType[] tileTypes, int z) {
+
 		int pickedCounter = 0;
 		
 		for(int i=COLUMNLEN;i>0;i--)
@@ -36,22 +37,25 @@ public class Library {
 	public void printLibrary(){
 		System.out.println("*****************************************************************************************\n");
 
-		int Cont=0;    //visualizzazione libreria
-		int ContColonne=0;
-		int ContRighe=0;
+		char startRow = 'A';
 
-		while(Cont<6 && ContRighe<6)
-		{
+		//Print the numeric coordinates on top
 
-			for(int i=ContColonne;i<5;i++)
-			{
+		for (int i=1; i<=COLUMNLEN; i++) {
+			System.out.printf("%-10s", i);
+		}
+		//separates coordinates and library
+		System.out.println("\n----------------------------------------------------------------------------------------------");
 
-				System.out.print(libreria[ContRighe][i]+"\t\t");
-
+		//print the board with vertical coordinates, * if the cell is empty, or the name of the cell
+		for (int i=0; i<ROWLEN; i++) {
+			for (int j=0; j<COLUMNLEN; j++) {
+				if(libreria[i][j]==null)
+					System.out.printf("%-10s", "*");
+				else
+					System.out.printf("%-10s", libreria[i][j]);
 			}
-			System.out.print("\n");
-			ContRighe++;
-			Cont++;
+			System.out.println();
 		}
 
 		System.out.println("\n*************************************************************************************");
@@ -64,14 +68,14 @@ public class Library {
 		int objectiveColumn;
 		TileType objectiveType;
 
-		for (String s : tempObj) {
+		for (int i = 0; i < tempObj.length; i++) {
 			// gli obb. personali sono formattati come "coord. x - coord. y - tipo tessera"
-			String[] split = s.split("-");
-			objectiveRow = Integer.parseInt(split[0].trim());
-			objectiveColumn = Integer.parseInt(split[1].trim());
+			String[] split = tempObj[i].split("-");
+			objectiveRow = (Integer.parseInt(split[0].trim()))-1;
+			objectiveColumn = (Integer.parseInt(split[1].trim()))-1;
 			objectiveType = TileType.valueOf(split[2].trim());
-			if (this.libreria[objectiveRow][objectiveColumn].equals(objectiveType)){
-				s = "completato";
+			if (this.libreria[objectiveRow][objectiveColumn] != null && this.libreria[objectiveRow][objectiveColumn].equals(objectiveType)){
+				tempObj[i]= "completato";
 			}
 		}
 		for (String s : tempObj){
