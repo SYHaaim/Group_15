@@ -70,7 +70,14 @@ public class Library {
 
 		for (int i = 0; i < tempObj.length; i++) {
 			// gli obb. personali sono formattati come "coord. x - coord. y - tipo tessera"
-			String[] split = tempObj[i].split("-");
+			String[] split;
+			try{
+			split = tempObj[i].split("-");}
+			catch (Exception e){
+				System.out.println(e);
+				continue;
+			}
+
 			objectiveRow = (Integer.parseInt(split[0].trim()))-1;
 			objectiveColumn = (Integer.parseInt(split[1].trim()))-1;
 			objectiveType = TileType.valueOf(split[2].trim());

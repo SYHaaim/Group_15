@@ -23,7 +23,7 @@ public class PersonalObjectiveCards {
             "3 - 3 - T",
             "4 - 5 - B",
             "5 - 4 - TR",
-            "6 - 6 - F"
+            "6 - 5 - F"
     };
 
     private final String[] card_3 = {
@@ -86,7 +86,7 @@ public class PersonalObjectiveCards {
             "4 - 5 - B",
             "5 - 2 - TR",
             "5 - 5 - P",
-            "1 - 6 - F"
+            "6 - 1 - F"
     };
 
     private final String[] card_10 = {
