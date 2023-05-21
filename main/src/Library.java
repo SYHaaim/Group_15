@@ -21,15 +21,19 @@ public class Library {
 				libreria[(i-1)][z] = tileTypes[pickedCounter];
 				pickedCounter++;
 			}
-			if(libreria.length==30)
-			{ System.out.println(" LIBRERIA COMPLETATA !!!!!!!!");               }
-			else {
 			
+			if(libreria[i][z]==null){
+				
 				libreria[i][z] = tileTypes[pickedCounter];
 				pickedCounter++;
 				if (pickedCounter > (tileTypes.length-1))
 					break;
 			}
+			
+			if(libreria.length==30)
+			{ System.out.println(" LIBRERIA COMPLETATA !!!!!!!!");  
+			}
+			
 		}
 
 	}
@@ -92,6 +96,72 @@ public class Library {
 		}
 		return completedCounter;
 	}
-}
+
+	public void TessereAdiacenti(TileType[] tileTypes)
+	{
+		int i,j,contpunt=1;      //i righe  j colonne   contpunt conta tessere adiacenti uguali
+		
+		for(i=0;i<ROWLEN;i++) {
+		
+			for(j=0;j<COLUMNLEN;j++)
+			{
+				
+			if((j!=0 || (j!=0 && i!=0) || (j!=0 && i!=5)) )
+			{
+				if(libreria[i][j]==(libreria[i][j-1]) && libreria[i][j-1]!=null && libreria[i][j]!=null )
+				{	
+					contpunt++; 
+					
+					}
+			}
+						
+			if((i!=0 || (j!=0 && i!=0) || (j!=4 && i!=0)))
+			{
+				if(libreria[i][j]==libreria[i-1][j] && libreria[i-1][j]!=null && libreria[i][j]!=null)
+				{
+					contpunt++; 
+					
+				}	
+			}
+			
+			}}
+		
+		System.out.println("tessere uguali..... "+contpunt);
+		
+		
+		
+	}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
