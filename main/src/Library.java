@@ -96,41 +96,61 @@ public class Library {
 		}
 		return completedCounter;
 	}
-
-	public void TessereAdiacenti(TileType[] tileTypes)
+	public int contPointsAdjacentTiles(TileType[][] libreria)
 	{
-		int i,j,contpunt=1;      //i righe  j colonne   contpunt conta tessere adiacenti uguali
-		
-		for(i=0;i<ROWLEN;i++) {
-		
-			for(j=0;j<COLUMNLEN;j++)
-			{
-				
-			if((j!=0 || (j!=0 && i!=0) || (j!=0 && i!=5)) )
-			{
-				if(libreria[i][j]==(libreria[i][j-1]) && libreria[i][j-1]!=null && libreria[i][j]!=null )
-				{	
-					contpunt++; 
-					
+		int contPoints=0;      
+		TileType[][] copiaLibreria = libreria;		//necessaria una copia della libreria che verrà modificata man mano all'interno di questo metodo
+
+		for(int i=0;i<ROWLEN;i++) {	
+			for(int j=0;j<COLUMNLEN;j++){		
+
+				if(copiaLibreria[i][j]!=null) {				
+					int contAdjacentTile = checkAroundTiles(copiaLibreria,i,j)+1;			//vengono trovate le celle adiacenti uguali alla cella data
+
+					//assegnamento punti in base al numero di celle adiacenti
+					switch(contAdjacentTile) {
+					case 3: contPoints+=2; break;
+					case 4: contPoints+=3; break;
+					case 5: contPoints+=5; break;
+					default: if(contAdjacentTile>=6)
+						contPoints+=8;
 					}
+				}
+
 			}
-						
-			if((i!=0 || (j!=0 && i!=0) || (j!=4 && i!=0)))
-			{
-				if(libreria[i][j]==libreria[i-1][j] && libreria[i-1][j]!=null && libreria[i][j]!=null)
-				{
-					contpunt++; 
-					
-				}	
-			}
-			
-			}}
-		
-		System.out.println("tessere uguali..... "+contpunt);
-		
-		
-		
-	}}
+		}
+
+		return contPoints;
+
+	}
+
+	//METODO RICHIAMATO RICORSIVAMENTE ALL'INTERNO DI contPointsAdjacentTiles(TileType[][] libreria)
+	public int checkAroundTiles(TileType[][] copiaLibreria, int r, int c) {
+
+		int cont=0;
+		TileType t = copiaLibreria[r][c];
+		copiaLibreria[r][c]=null;
+
+		if((r+1)<ROWLEN && copiaLibreria[r+1][c]==t) {
+			cont++;
+			cont+=checkAroundTiles(copiaLibreria, r+1, c);
+		}
+		if((r-1)>0 && copiaLibreria[r-1][c]==t) {
+			cont++;
+			cont+=checkAroundTiles(copiaLibreria, r-1, c);
+		}
+		if((c+1)<COLUMNLEN && copiaLibreria[r][c+1]==t) {
+			cont++;
+			cont+=checkAroundTiles(copiaLibreria, r, c+1);
+		}
+		if((c-1)>0 && copiaLibreria[r][c-1]==t) {
+			cont++;
+			cont+=checkAroundTiles(copiaLibreria, r, c-1);
+		}
+
+		return cont;
+	}
+}
 
 
 
