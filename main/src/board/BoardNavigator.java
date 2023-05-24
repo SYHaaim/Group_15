@@ -62,7 +62,7 @@ public class BoardNavigator extends Board {
             return true;
 
         if (row == prevRow){
-            return tempBoard[prevRow][prevCol] == getRight(row, column) || tempBoard[prevRow][prevCol] == getRight(row, column);
+            return tempBoard[prevRow][prevCol] == getRight(row, column) || tempBoard[prevRow][prevCol] == getLeft(row, column);
         } else if (column == prevCol) {
             return tempBoard[prevRow][prevCol] == getUp(row, column) || tempBoard[prevRow][prevCol] == getDown(row, column);
         }
