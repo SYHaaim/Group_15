@@ -1,6 +1,4 @@
-
-import java.util.ArrayList;
-import java.util.Random;
+package board;
 
 public enum TileType {
     C("CATS"),
