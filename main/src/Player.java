@@ -1,4 +1,7 @@
 
+import board.BoardNavigator;
+import board.TileType;
+import library.Library;
 import objectives.PersonalObjective;
 
 import java.util.Scanner;
@@ -83,10 +86,10 @@ public class Player {
         if (!(prevRow == ' '))
             prevRowNum = (Character.getNumericValue(prevRow) - 9);
 
-        this.picked[pickedCount] = nav.pickFromBoard(rowNum, column, prevRowNum, prevCol);
+        this.picked[pickedCount] = nav.pickFromBoard(rowNum, column);
     }
 
-    public void insertInLibrary(int column){
+    public void insertInLibrary(int column) throws Exception {
         this.libreria.inserimentoLibrary(this.picked,column);
     }
 
@@ -99,6 +102,10 @@ public class Player {
                 System.out.println("*");
         }
 
+    }
+
+    public boolean isPlayerLibraryFull(){
+        return this.libreria.isLibraryFull();
     }
     public void playerObjectivesCheck(){
         this.addPoints(this.libreria.checkPersonal(this.persObj));

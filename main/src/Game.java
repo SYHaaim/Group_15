@@ -1,3 +1,6 @@
+import board.Board;
+import board.BoardNavigator;
+
 import java.util.*;
 
 public class Game {
@@ -28,31 +31,30 @@ public class Game {
         BoardNavigator nav = new BoardNavigator(numPlayers);
         int column = 0;
         char row = ' ';
-        int prevCol = 0;
         char prevRow = ' ';
+        int prevCol = 0;
         int pickedCount = 0;
         boolean pickMore = true;
         Scanner sc = new Scanner(System.in);
 
         System.out.println("TURNO DI: " + pl.getName());
         while(pickMore){
+            row = ' '; //   se il giocatore decide di prendere un'altra casella, una volta finito il primo ciclo, resetto riga e colonna -
+            column = 0; // - cosicchè non mi venga dato l'errore di casella vuota, visto che i valori precedenti rimarrebbero salvati
 
-            row = provideValidInput(row);
-            column = provideValidInput(column);
+            while(!isValidTile(row, column, prevRow, prevCol, numPlayers)){
+                row = provideValidInput(row);
+                column = provideValidInput(column);
+            }
+
 
             System.out.println("vuoi prendere altre caselle? (si/no)");
             if (sc.next().equalsIgnoreCase("NO")){
                 pickMore = false;
             }
 
-            try{
-                pl.pickTiles(row, column, pickedCount, prevRow, prevCol,numPlayers);
-            }catch (Exception e){
-                System.out.println(e);
-                row = provideValidInput(row);
-                column = provideValidInput(column);
-                pl.pickTiles(row, column, pickedCount, prevRow, prevCol,numPlayers);
-            }
+            pl.pickTiles(row, column, pickedCount, prevRow, prevCol,numPlayers);
+
 
             prevRow = row;
             prevCol = column;
@@ -68,6 +70,21 @@ public class Game {
         }
     }
 
+    public void insertPicked(Player pl) throws Exception {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Giocatore " +pl.getId()+ "\nIn che colonna vuoi inserire le tessere prese?.....\t");
+        int insertionColumn = sc.nextInt()-1;
+
+        System.out.println("LIBRERIA " +pl.getId()+ " GIOCATORE" );
+
+        pl.insertInLibrary(insertionColumn);
+
+        System.out.println("\n");
+
+        pl.printPlayerLibrary();
+        System.out.println("\n");
+    }
 
       char provideValidInput(char in){
         boolean isValid = false;
@@ -111,5 +128,45 @@ public class Game {
             }
         }
         return in;
+    }
+
+
+    public boolean isValidTile(char row, int col, char prevRow, int prevCol, int numPlayers) {
+
+        BoardNavigator nav = new BoardNavigator(numPlayers);
+        int correctRow = (Character.getNumericValue(row) - 9)-1;
+        int correctCol = col-1;
+        int correctPrevRow = (Character.getNumericValue(prevRow) - 9)-1;
+        int correctPrevCol = prevCol-1;
+
+        if (correctRow < 0)
+            return false;
+
+        if (nav.isTileNullOrEmpty(correctRow, correctCol)){
+            System.out.println("casella vuota in riga: " + row + " colonna: " + col);
+            return false;
+        }
+
+        if (!nav.IsTilePickable(correctRow, correctCol)){
+            System.out.println("casella circondata, non possibile prenderla");
+            return false;
+        }
+
+        if (!nav.isAdjacent(correctRow, correctCol,correctPrevRow,correctPrevCol)){
+            System.out.println("la casella selezionata non è adiacente a quella  presa in precedenza");
+            return false;
+        }
+
+        return true;
+    }
+    public boolean isEndgame(Player[] pl){
+        for (Player player : pl){
+            if (player.isPlayerLibraryFull()){
+                System.out.println(player + " ha riempito la libreria");
+                return true;
+            }
+
+        }
+        return false;
     }
 }

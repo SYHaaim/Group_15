@@ -1,18 +1,19 @@
 
+import board.Board;
+import objectives.CommonObjective;
+
 import java.util.*;
 public class Main {
-    public static void main(String[] args) throws NoSuchFieldException {
-    	Scanner sc = new Scanner(System.in);
-    	int numPlayers = 0;
-    	  
-		System.out.print("Quanti giocatori stanno giocando? (Min 2 o Max di 4)\t");
-		do {
-			numPlayers=sc.nextInt();
-			if(numPlayers<2 || numPlayers>4)
-			{System.out.println("Errore, inserire un numero compreso tra 2 e 4");}
-			
-		}while(numPlayers<2 || numPlayers>4);
+    public static void main(String[] args) throws Exception {
 
+
+    	Scanner sc = new Scanner(System.in);
+        int numPlayers = 0;
+        System.out.print("Quanti giocatori stanno giocando? (Min 2 o Max di 4)\t");
+        while(numPlayers < 2 || numPlayers > 4){
+        numPlayers = sc.nextInt();
+        }
+        CommonObjective common1 = new CommonObjective(); // test obbiettivo comune
         Player[] giocatori = Player.GeneratePlayers(numPlayers);
         Board board= new Board(numPlayers);
         Game newGame = new Game(giocatori, numPlayers);
@@ -20,21 +21,24 @@ public class Main {
         board.fillBoard();
         System.out.println("\nGiocatori..........");
         System.out.println("\n ***********");
+
+
+
         
         for(Player pl : giocatori)
             System.out.println("    "+pl.getName());
         System.out.println(" ***********");
 
-        //Create board with field number of players
+        common1.printCommonObj();
 
 
-        System.out.println("Board generata, premere un tasto per riempirla\n");
+
+        System.out.println("board.Board generata, premere un tasto per riempirla\n");
         sc.nextLine();
         //board.fillBoard();
         board.printBoard();
 
-        //riga 21-27: azioni temporanee per ogni giocatore, test per vedere se i turni funzionano
-       
+
         for (Player pl : giocatori)
         {
             System.out.println("\n");
@@ -55,18 +59,7 @@ public class Main {
         
         
     for (Player pl : giocatori){  //inserisce tessere nella libreria
-    	
-    	System.out.print("Giocatore " +pl.getId()+ "\nIn che colonna vuoi inserire le tessere prese?.....\t");
-        int insertionColumn = sc.nextInt()-1;
-        
-    	System.out.println("LIBRERIA " +pl.getId()+ " GIOCATORE" );
-
-    	pl.insertInLibrary(insertionColumn);
-    	
-    	System.out.println("\n");
-
-        pl.printPlayerLibrary();
-        System.out.println("\n");
+        newGame.insertPicked(pl);
     }
 
         //testing sugli obbiettivi
