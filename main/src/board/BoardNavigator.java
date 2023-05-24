@@ -49,7 +49,7 @@ public class BoardNavigator extends Board {
                 getLeft(row, column) == null || getRight(row, column) == null;
     }
 
-    public boolean isTileNullOrEmpty(int row, int column){
+     public boolean isTileNullOrEmpty(int row, int column){
         if (tempStructure[row][column] == 0)
             return true;
 
