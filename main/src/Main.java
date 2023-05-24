@@ -3,11 +3,16 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws NoSuchFieldException {
     	Scanner sc = new Scanner(System.in);
-        int numPlayers = 0;
-        System.out.print("Quanti giocatori stanno giocando? (Min 2 o Max di 4)\t");
-        while(numPlayers < 2 || numPlayers > 4){
-        numPlayers = sc.nextInt();
-        }
+    	int numPlayers = 0;
+    	  
+		System.out.print("Quanti giocatori stanno giocando? (Min 2 o Max di 4)\t");
+		do {
+			numPlayers=sc.nextInt();
+			if(numPlayers<2 || numPlayers>4)
+			{System.out.println("Errore, inserire un numero compreso tra 2 e 4");}
+			
+		}while(numPlayers<2 || numPlayers>4);
+
         Player[] giocatori = Player.GeneratePlayers(numPlayers);
         Board board= new Board(numPlayers);
         Game newGame = new Game(giocatori, numPlayers);
