@@ -1,19 +1,26 @@
 package objectives;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
-import java.math.*;
 
 public class CommonObjectiveGenerator {
     //private static final ArrayList<String[]> TessereObbComuni = new ArrayList<>();
 
 	private String generatedObjective;
 	private int generatedId;
-
-	public CommonObjectiveGenerator() throws FileNotFoundException {
-		generatedObjective = readFromFile();
+	private final String descr = "Sei gruppi separati formati ciascuno da due tessere adiacenti dello stesso tipo. Le tessere di un gruppo possono essere diverse da quelle di un altro gruppo.\n" +
+			"- Quattro tessere dello stesso tipo ai quattro angoli della Libreria.\n" +
+			"- Quattro gruppi separati formati ciascuno da quattro tessere adiacenti dello stesso tipo. Le tessere di un gruppo possono essere diverse da quelle di un altro gruppo.\n" +
+			"- Due gruppi separati di 4 tessere dello stesso tipo che formano un quadrato 2x2. Le tessere dei due gruppi devono essere dello stesso tipo.\n" +
+			"- Tre colonne formate ciascuna da 6 tessere di uno, due o tre tipi differenti. Colonne diverse possono avere combinazioni diverse di tipi di tessere.\n" +
+			"- Cinque tessere dello stesso tipo che formano una diagonale.\n" +
+			"- Quattro righe formate ciascuna da 5 tessere di uno, due o tre tipi differenti. Righe diverse possono avere combinazioni diverse di tipi di tessere\n" +
+			"- Due colonne formate ciascuna da 6 diversi tipi di tessere.\n" +
+			"- Due righe formate ciascuna da 5 diversi tipi di tessere.\n" +
+			"- Cinque tessere dello stesso tipo che formano una X.\n";
+	public CommonObjectiveGenerator() {
+		generatedObjective = generateRandomCommon();
 	}
 
 	public String getGeneratedObjective() {
@@ -24,17 +31,10 @@ public class CommonObjectiveGenerator {
 		return generatedId;
 	}
 
-	private String readFromFile() throws FileNotFoundException {
-    	String line = null;
+	private String generateRandomCommon() {
 		String goals;
 		Random r = new Random();
-		Scanner scdescription=new Scanner(new File("main/resources/description.txt"));
-		int i = 0;
-		while(scdescription.hasNext()) {                 
-			line += scdescription.nextLine();
-		}
-		assert line != null;
-		String[] objs = line.split("-");
+		String[] objs = descr.split("-");
 		this.generatedId = r.nextInt(9)+1;
 		goals = objs[this.generatedId];
 		return goals;

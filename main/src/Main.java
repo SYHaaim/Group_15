@@ -11,7 +11,7 @@ public class Main {
 
 
     	Scanner sc = new Scanner(System.in);
-        int numPlayers = 0; int ik=0;
+        int numPlayers = 0; int count=0;
         System.out.print("Quanti giocatori stanno giocando? (Min 2 o Max di 4)\t");
 		do {
 			numPlayers=sc.nextInt();
@@ -21,6 +21,7 @@ public class Main {
 		}while(numPlayers<2 || numPlayers>4);
 
         CommonObjective common1 = new CommonObjective(); // test obbiettivo comune
+        common1.printCommonObj();
         Player[] giocatori = Player.GeneratePlayers(numPlayers);
         Board board= new Board(numPlayers);
         Game newGame = new Game(giocatori, numPlayers);
@@ -84,8 +85,8 @@ public class Main {
 
         //test per la board dopo aver preso X tessere
         board.printBoard();
-        ik++;
-        }while(ik<3);
+        count++;
+        }while(count<3);
         //prova obiettivi personali
         System.out.println("\n");
         giocatori[0].printObjective();
