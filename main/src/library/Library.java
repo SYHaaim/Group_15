@@ -54,7 +54,7 @@ public class Library {
 
 	}
 
-	public TileType[][] printLibrary(){
+	public void printLibrary(){
 		System.out.println("*****************************************************************************************\n");
 
 		char startRow = 'A';
@@ -79,9 +79,7 @@ public class Library {
 		}
 
 		System.out.println("\n*************************************************************************************");
-		return libreria;
-	
-	
+
 	}
 
 	public int checkPersonal(PersonalObjective personal){
