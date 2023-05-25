@@ -54,7 +54,7 @@ public class Library {
 
 	}
 
-	public void printLibrary(){
+	public TileType[][] printLibrary(){
 		System.out.println("*****************************************************************************************\n");
 
 		char startRow = 'A';
@@ -79,6 +79,9 @@ public class Library {
 		}
 
 		System.out.println("\n*************************************************************************************");
+		return libreria;
+	
+	
 	}
 
 	public int checkPersonal(PersonalObjective personal){
@@ -165,7 +168,7 @@ public class Library {
 		}
 
 		return cont;
-	}
+	}	
 
 	public boolean isLibraryFull(){
 		for (int i = 0; i < ROWLEN; i++){

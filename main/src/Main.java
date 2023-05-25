@@ -1,6 +1,9 @@
 
 import board.Board;
+import board.TileType;
+import library.Library;
 import objectives.CommonObjective;
+
 
 import java.util.*;
 public class Main {
@@ -8,16 +11,22 @@ public class Main {
 
 
     	Scanner sc = new Scanner(System.in);
-        int numPlayers = 0;
+        int numPlayers = 0; int ik=0;
         System.out.print("Quanti giocatori stanno giocando? (Min 2 o Max di 4)\t");
-        while(numPlayers < 2 || numPlayers > 4){
-        numPlayers = sc.nextInt();
-        }
+		do {
+			numPlayers=sc.nextInt();
+			if(numPlayers<2 || numPlayers>4)
+			{System.out.println("Errore, inserire un numero compreso tra 2 e 4");}
+
+		}while(numPlayers<2 || numPlayers>4);
+
         CommonObjective common1 = new CommonObjective(); // test obbiettivo comune
         Player[] giocatori = Player.GeneratePlayers(numPlayers);
         Board board= new Board(numPlayers);
         Game newGame = new Game(giocatori, numPlayers);
-
+        
+    
+        
         board.fillBoard();
         System.out.println("\nGiocatori..........");
         System.out.println("\n ***********");
@@ -37,7 +46,7 @@ public class Main {
         sc.nextLine();
         //board.fillBoard();
         board.printBoard();
-
+        do {
 
         for (Player pl : giocatori)
         {
@@ -63,13 +72,20 @@ public class Main {
     }
 
         //testing sugli obbiettivi
-        giocatori[0].playerObjectivesCheck();
+  //      giocatori[0].playerObjectivesCheck();
+      
+      //  controlli obbiettivi comuni
+ /*       for (Player pl : giocatori){  
+        	System.out.println("giocatoree... " +pl.getId());
+        	common1.checkCommonObjectives(2,pl.printPlayerLibrary());
+        }*/
+        
         //endregion
 
         //test per la board dopo aver preso X tessere
         board.printBoard();
-
-
+        ik++;
+        }while(ik<3);
         //prova obiettivi personali
         System.out.println("\n");
         giocatori[0].printObjective();

@@ -28,7 +28,7 @@ public class CommonObjectiveGenerator {
     	String line = null;
 		String goals;
 		Random r = new Random();
-		Scanner scdescription=new Scanner(new File("resources/description.txt"));
+		Scanner scdescription=new Scanner(new File("main/resources/description.txt"));
 		int i = 0;
 		while(scdescription.hasNext()) {                 
 			line += scdescription.nextLine();

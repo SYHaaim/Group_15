@@ -92,6 +92,7 @@ public class Player {
     public void insertInLibrary(int column) throws Exception {
         this.libreria.inserimentoLibrary(this.picked,column);
     }
+  
 
     public void printPicked(){
         for (TileType pickedTiles : this.picked) {
@@ -113,8 +114,8 @@ public class Player {
     public void addPoints(int points){
         this.points += points;
     }
-    public void printPlayerLibrary(){
-        this.libreria.printLibrary();
+    public TileType[][] printPlayerLibrary(){
+        return this.libreria.printLibrary();
     }
 
 
