@@ -14,12 +14,13 @@ public class CommonObjectiveGenerator {
 			"- Quattro gruppi separati formati ciascuno da quattro tessere adiacenti dello stesso tipo. Le tessere di un gruppo possono essere diverse da quelle di un altro gruppo.\n" +
 			"- Due gruppi separati di 4 tessere dello stesso tipo che formano un quadrato 2x2. Le tessere dei due gruppi devono essere dello stesso tipo.\n" +
 			"- Tre colonne formate ciascuna da 6 tessere di uno, due o tre tipi differenti. Colonne diverse possono avere combinazioni diverse di tipi di tessere.\n" +
+			"- Otto tessere dello stesso tipo, nessuna restrizione sulle posizioni.\n" +
 			"- Cinque tessere dello stesso tipo che formano una diagonale.\n" +
 			"- Quattro righe formate ciascuna da 5 tessere di uno, due o tre tipi differenti. Righe diverse possono avere combinazioni diverse di tipi di tessere\n" +
 			"- Due colonne formate ciascuna da 6 diversi tipi di tessere.\n" +
 			"- Due righe formate ciascuna da 5 diversi tipi di tessere.\n" +
 			"- Cinque tessere dello stesso tipo che formano una X.\n"+
-			"- Otto tessere dello stesso tipo, nessuna restrizione sulle posizioni.\n" +
+			
 			"- Cinque colonne di altezza crescente o decrescente.\n";
 	public CommonObjectiveGenerator() {
 		generatedObjective = generateRandomCommon();
