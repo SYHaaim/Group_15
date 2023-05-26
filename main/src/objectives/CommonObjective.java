@@ -80,6 +80,25 @@ public class CommonObjective{
 				case 8:
 				case 9: //Due colonne formate ciascuna da 6 diversi tipi di tessere
 					
+					int colonne=0,countcolonne=0;
+					for(int i=0;i<tileTypes.length;i++)
+					{
+						for(int j=0;j<tileTypes.length;j++)
+						{
+							if(tileTypes[i][j]!=tileTypes[i+1][j])
+							{
+								colonne++;
+								if(colonne==5)
+								{
+									System.out.println("colonna "+(j+1)+ "con tutti elementi diversi");
+									countcolonne++;
+								}
+							}
+							if(countcolonne==2)
+								break;
+						}
+						
+					}
 				
 					
 				case 10: //Due righe formate ciascuna da 5 diversi tipi di tessere.
