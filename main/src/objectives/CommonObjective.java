@@ -42,7 +42,41 @@ public class CommonObjective{
 				case 4:
 				case 5:
 				case 6:
-				case 7:
+				case 7: //5 tessere dello stesso tipo che formano una diagonale
+					boolean find = true;
+					
+					for(int i=0; i<2; i++) {
+						int r=i, c=0;
+						TileType t = tileTypes[r][c];
+						for(int j=0; j<5; j++) {
+							find=true;
+							if(t!=tileTypes[r][c]) {
+								find=false;
+								break;
+							}
+							r++; c++;
+						}
+					}
+					
+					for(int i=0; i<2; i++) {
+						int r=i, c=4;
+						TileType t = tileTypes[r][c];
+						for(int j=0; j<5; j++) {
+							find=true;
+							if(t!=tileTypes[r][c]) {
+								find=false;
+								break;
+							}
+							r++; c--;
+						}
+					}
+					
+					if(find==true) {
+						System.out.println("5 tessere uguali in diagonale......");
+					}
+					
+					break;
+					
 				case 8:
 				case 9: //Due righe formate ciascuna da 5 diversi tipi di tessere.
 					
@@ -67,6 +101,46 @@ public class CommonObjective{
 					}
 					
 				case 10:
+				case 11:
+				case 12:
+					int prec = Integer.MAX_VALUE;
+					boolean objectiveCompleted = true;
+					for(int i=0; i<5; i++) {
+						int cont=0;
+						for(int j=0; j<6; j++) {
+							if(tileTypes[i][j]!=null)
+								cont++;
+						}
+						if(cont>prec) {
+							objectiveCompleted = false;
+							break;
+						}	
+						prec=cont;
+					}
+					if(objectiveCompleted == true) {
+						System.out.println("5 colonne di altezza decrescente");
+						break;
+					}
+					
+					prec = 0;
+					objectiveCompleted = true;
+					for(int i=0; i<5; i++) {
+						int cont=0;
+						for(int j=0; j<6; j++) {
+							if(tileTypes[i][j]!=null)
+								cont++;
+						}
+						if(cont<prec) {
+							objectiveCompleted = false;
+							break;
+						}
+						prec=cont;
+					}
+					
+					if(objectiveCompleted == true) {
+						System.out.println("5 colonne di altezza crescente");
+						break;
+					}
 			}
 		}
 
