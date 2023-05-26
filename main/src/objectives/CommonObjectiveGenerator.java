@@ -18,7 +18,9 @@ public class CommonObjectiveGenerator {
 			"- Quattro righe formate ciascuna da 5 tessere di uno, due o tre tipi differenti. Righe diverse possono avere combinazioni diverse di tipi di tessere\n" +
 			"- Due colonne formate ciascuna da 6 diversi tipi di tessere.\n" +
 			"- Due righe formate ciascuna da 5 diversi tipi di tessere.\n" +
-			"- Cinque tessere dello stesso tipo che formano una X.\n";
+			"- Cinque tessere dello stesso tipo che formano una X.\n"+
+			"- Otto tessere dello stesso tipo, nessuna restrizione sulle posizioni.\n" +
+			"- Cinque colonne di altezza crescente o decrescente.\n";
 	public CommonObjectiveGenerator() {
 		generatedObjective = generateRandomCommon();
 	}

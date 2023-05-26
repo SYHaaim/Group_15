@@ -39,6 +39,8 @@ public class Game {
 
         System.out.println("TURNO DI: " + pl.getName());
         while(pickMore){
+
+
             row = ' '; //   se il giocatore decide di prendere un'altra casella, una volta finito il primo ciclo, resetto riga e colonna -
             column = 0; // - cosicchè non mi venga dato l'errore di casella vuota, visto che i valori precedenti rimarrebbero salvati
 
@@ -47,22 +49,19 @@ public class Game {
                 column = provideValidInput(column);
             }
 
+            pl.pickTiles(row, column, pickedCount, prevRow, prevCol,numPlayers);
+            pickedCount++;
+            if(pickedCount > 2)
+                break;
 
             System.out.println("vuoi prendere altre caselle? (si/no)");
             if (sc.next().equalsIgnoreCase("NO")){
                 pickMore = false;
             }
 
-            pl.pickTiles(row, column, pickedCount, prevRow, prevCol,numPlayers);
-
-
             prevRow = row;
             prevCol = column;
 
-
-            pickedCount++;
-            if(pickedCount > 2)
-                pickMore = false;
         }
 
         if(Board.checkFillBoard()) {
@@ -78,7 +77,13 @@ public class Game {
 
         System.out.println("LIBRERIA " +pl.getId()+ " GIOCATORE" );
 
-        pl.insertInLibrary(insertionColumn);
+        try{
+            pl.insertInLibrary(insertionColumn);
+        }catch (Exception e){
+            System.out.println(e + ", riprova");
+            insertPicked(pl);
+        }
+
 
         System.out.println("\n");
 
@@ -162,7 +167,7 @@ public class Game {
     public boolean isEndgame(Player[] pl){
         for (Player player : pl){
             if (player.isPlayerLibraryFull()){
-                System.out.println(player + " ha riempito la libreria");
+                System.out.println(player.getName() + " ha riempito la libreria");
                 return true;
             }
 

@@ -28,31 +28,14 @@ public class Library {
 			}
 			insertRow = (ROWLEN - occupiedSpots)-1;
 			if (insertRow<0)
-				throw new Exception("colonna tutta occupata " + insertRow);
+				throw new Exception("colonna tutta occupata ");
 
 			libreria[insertRow][insertionCol] = tileTypes[i];
 			occupiedSpots = 0;
 		}
-		
-		/*for(int i=COLUMNLEN;i>0;i--)
-		{
-			if (libreria[i][insertionCol]!=null)
-			{
-				libreria[(i-1)][insertionCol] = tileTypes[pickedCounter];
-				pickedCounter++;
-			}
-			
-			if(libreria[i][insertionCol]==null){
-				
-				libreria[i][insertionCol] = tileTypes[pickedCounter];
-				pickedCounter++;
-				if (pickedCounter > (tileTypes.length-1))
-					break;
-			}
-			
-		}*/
 
 	}
+
 
 	public void printLibrary(){
 		System.out.println("*****************************************************************************************\n");

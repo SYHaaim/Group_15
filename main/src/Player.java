@@ -4,6 +4,7 @@ import board.TileType;
 import library.Library;
 import objectives.PersonalObjective;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Player {
@@ -103,6 +104,10 @@ public class Player {
                 System.out.println("*");
         }
 
+    }
+
+    public void resetPicked(){
+        Arrays.fill(this.picked, null);
     }
 
     public boolean isPlayerLibraryFull(){

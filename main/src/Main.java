@@ -1,7 +1,5 @@
 
 import board.Board;
-import board.TileType;
-import library.Library;
 import objectives.CommonObjective;
 
 
@@ -11,7 +9,7 @@ public class Main {
 
 
     	Scanner sc = new Scanner(System.in);
-        int numPlayers = 0; int count=0;
+        int numPlayers = 0;
         System.out.print("Quanti giocatori stanno giocando? (Min 2 o Max di 4)\t");
 		do {
 			numPlayers=sc.nextInt();
@@ -38,55 +36,33 @@ public class Main {
         for(Player pl : giocatori)
             System.out.println("    "+pl.getName());
         System.out.println(" ***********");
+        int playCount =0;
 
         common1.printCommonObj();
-
-
-
-        System.out.println("board.Board generata, premere un tasto per riempirla\n");
-        sc.nextLine();
-        //board.fillBoard();
         board.printBoard();
-        do {
-
-        for (Player pl : giocatori)
-        {
-            System.out.println("\n");
-            newGame.PlayerTurn(pl, numPlayers);
-        }
-
-        for (Player pl : giocatori)
-        {
-            System.out.println(pl.getName() + " ha preso: ");
-            pl.printPicked();
-        }
 
 
+        while(!newGame.isEndgame(giocatori)) {
 
-        //region da spostare nella classe Game (inserimento in libreria )
+        newGame.PlayerTurn(giocatori[playCount], numPlayers);
+
+            System.out.println(giocatori[playCount].getName() + " ha preso: ");
+            giocatori[playCount].printPicked();
+
         System.out.println("\n");
 
-        
-        
-    for (Player pl : giocatori){  //inserisce tessere nella libreria
-        newGame.insertPicked(pl);
-    }
+        //inserisce tessere nella libreria
+        newGame.insertPicked(giocatori[playCount]);
 
-        //testing sugli obbiettivi
-  //      giocatori[0].playerObjectivesCheck();
-      
-      //  controlli obbiettivi comuni
- /*       for (Player pl : giocatori){  
-        	System.out.println("giocatoree... " +pl.getId());
-        	common1.checkCommonObjectives(2,pl.printPlayerLibrary());
-        }*/
-        
-        //endregion
 
+        giocatori[playCount].resetPicked();
         //test per la board dopo aver preso X tessere
         board.printBoard();
-        count++;
-        }while(count<3);
+        playCount++;
+
+        if (playCount > numPlayers-1)
+            playCount = 0;
+        }
         //prova obiettivi personali
         System.out.println("\n");
         giocatori[0].printObjective();
