@@ -78,7 +78,11 @@ public class CommonObjective{
 					break;
 					
 				case 8:
-				case 9: //Due righe formate ciascuna da 5 diversi tipi di tessere.
+				case 9: //Due colonne formate ciascuna da 6 diversi tipi di tessere
+					
+				
+					
+				case 10: //Due righe formate ciascuna da 5 diversi tipi di tessere.
 					
 					int Righe=0,contRighe=0;
 					for(int i=0;i<tileTypes.length;i++)
@@ -100,7 +104,6 @@ public class CommonObjective{
 						
 					}
 					
-				case 10:
 				case 11:
 				case 12:
 					int prec = Integer.MAX_VALUE;
