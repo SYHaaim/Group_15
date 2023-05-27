@@ -39,6 +39,52 @@ public class CommonObjective{
 							System.out.println("4 tessere uguali agli angoli......");}
 					break;
 				case 3:
+					 
+					int groupCounter = 0;
+					for(int c=0;c<4;c++)
+					{
+						int tileCounter = 0;
+						for(int r=0;r<5;r++)
+						{
+							if(tileTypes[r][c] == tileTypes[r+1][c]) {
+								tileCounter++;
+								
+								if(tileCounter == 3) {
+									groupCounter++;
+								}
+							}
+							else {
+								tileCounter = 0;
+							}
+						}
+					}
+					
+					for(int r=0;r<5;r++)
+					{
+						int tileCounter = 0;
+						for(int c=0;c<4;c++)
+						{
+							if(tileTypes[r][c] == tileTypes[r][c+1]) {
+								tileCounter++;
+								
+								if(tileCounter == 3) {
+									groupCounter++;
+								}
+							}
+							else {
+								tileCounter = 0;
+							}
+						}
+					}
+					
+					if(groupCounter > 1) {						
+						System.out.println("Quattro gruppi separati formati ciascuno da quattro tessere adiacenti dello stesso tipo");
+					}
+					
+					
+					
+					
+					
 				case 4:
 				case 5:
 				case 6:
