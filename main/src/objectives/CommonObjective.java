@@ -27,7 +27,56 @@ public class CommonObjective{
 			 //gli id sono progressivi rispettivamente il loro ordinamento nel file "description.txt"
 			
 			switch (objectiveId){
-				case 1:
+				case 1: //Sei gruppi separati formati ciascuno da due tessere adiacenti dello stesso tipo.
+					int groupCounter = 0;
+					for(int c=0;c<4;c++)
+					{
+						int tileCounter = 0;
+						for(int r=0;r<5;r++)
+						{
+							if(tileTypes[r][c] == tileTypes[r+1][c]) {
+								tileCounter++;
+								
+								if(tileCounter == 1) {
+									groupCounter++;
+									tileCounter = 0;
+									r++;
+								}
+							}
+							else {
+								tileCounter = 0;
+							}
+						}
+					}
+					
+					for(int r=0;r<5;r++)
+					{
+						int tileCounter = 0;
+						for(int c=0;c<4;c++)
+						{
+							if(tileTypes[r][c] == tileTypes[r][c+1]) {
+								tileCounter++;
+								
+								if(tileCounter == 1) {
+									groupCounter++;
+									tileCounter = 0;
+									c++;
+								}
+							}
+							else {
+								tileCounter = 0;
+							}
+						}
+					}
+					
+					if(groupCounter > 5) {						
+						System.out.println("Sei gruppi separati formati ciascuno da due tessere adiacenti dello stesso tipo.");
+					}
+					
+					break;
+					
+					
+					
 							
 								
 				case 2: //Quattro tessere dello stesso tipo ai quattro angoli della Libreria.
@@ -38,9 +87,9 @@ public class CommonObjective{
 							{
 							System.out.println("4 tessere uguali agli angoli......");}
 					break;
-				case 3:
+				case 3: //Quattro gruppi separati formati ciascuno da quattro tessere adiacenti dello stesso tipo
 					 
-					int groupCounter = 0;
+					groupCounter = 0;
 					for(int c=0;c<4;c++)
 					{
 						int tileCounter = 0;
@@ -51,6 +100,8 @@ public class CommonObjective{
 								
 								if(tileCounter == 3) {
 									groupCounter++;
+									tileCounter = 0;
+									r++;
 								}
 							}
 							else {
@@ -69,6 +120,8 @@ public class CommonObjective{
 								
 								if(tileCounter == 3) {
 									groupCounter++;
+									tileCounter = 0;
+									c++;
 								}
 							}
 							else {
@@ -81,7 +134,7 @@ public class CommonObjective{
 						System.out.println("Quattro gruppi separati formati ciascuno da quattro tessere adiacenti dello stesso tipo");
 					}
 					
-					
+					break;
 					
 					
 					
