@@ -283,9 +283,9 @@ public class CommonObjective{
 					
 					prec = 0;
 					objectiveCompleted = true;
-					for(int i=0; i<5; i++) {
+					for(int i=0; i<ROWLEN; i++) {
 						int cont=0;
-						for(int j=0; j<6; j++) {
+						for(int j=0; j<COLUMNLEN; j++) {
 							if(tileTypes[i][j]!=null)
 								cont++;
 						}
