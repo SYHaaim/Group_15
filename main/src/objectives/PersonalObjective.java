@@ -1,28 +1,29 @@
 package objectives;
 
 
-public class PersonalObjective{
+public class PersonalObjective {
 
-	//changes to be made?
+    //changes to be made?
 
-	private final String[] objectives;
-	private PersonalObjectiveCards generator;
-	public PersonalObjective() {
-		this.generator = new PersonalObjectiveCards();
-		this.objectives = generator.getGeneratedCard();
-	}
+    private final String[] objectives;
+    private PersonalObjectiveCards generator;
 
-	//"x coord. - y coord. - tile type"
+    public PersonalObjective() {
+        this.generator = new PersonalObjectiveCards();
+        this.objectives = generator.getGeneratedCard();
+    }
 
-	public void printObj(){
-		for (String obj : this.objectives)
-			System.out.println(obj);
+    //"x coord. - y coord. - tile type"
 
-	}
+    public void printObj() {
+        for (String obj : this.objectives)
+            System.out.println(obj);
 
-	public String[] getObjectives() {
-		return objectives;
-	}
+    }
+
+    public String[] getObjectives() {
+        return objectives;
+    }
 }
 
 

@@ -8,24 +8,28 @@ public class Game {
 
     Player[] players;
     int numPlayers;
-    public Game(Player[] players, int numPlayers){
+
+    public Game(Player[] players, int numPlayers) {
         this.players = players;
         this.numPlayers = numPlayers;
     }
-    public void PrintLeaderboard(Player[] players){
+
+    public void PrintLeaderboard(Player[] players) {
         SortByPoints(players);
         for (Player player : players)
             System.out.println(player.getId() + ". " + player.getName() + " punti: " + player.getPoints());
     }
-    void SortByPoints(Player[] players){
-        for (int i = 0; i < players.length-1; i++){
-            if (players[i].getPoints() < players[i+1].getPoints()){
-                Player tmp = players[i+1];
-                players[i+1] = players[i];
-                players[i]=tmp;
+
+    void SortByPoints(Player[] players) {
+        for (int i = 0; i < players.length - 1; i++) {
+            if (players[i].getPoints() < players[i + 1].getPoints()) {
+                Player tmp = players[i + 1];
+                players[i + 1] = players[i];
+                players[i] = tmp;
             }
         }
     }
+
     public void PlayerTurn(Player pl, int numPlayers) throws NoSuchFieldException {
 
         BoardNavigator nav = new BoardNavigator(numPlayers);
@@ -38,24 +42,24 @@ public class Game {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("TURNO DI: " + pl.getName());
-        while(pickMore){
+        while (pickMore) {
 
 
             row = ' '; //   se il giocatore decide di prendere un'altra casella, una volta finito il primo ciclo, resetto riga e colonna -
             column = 0; // - cosicchè non mi venga dato l'errore di casella vuota, visto che i valori precedenti rimarrebbero salvati
 
-            while(!isValidTile(row, column, prevRow, prevCol, numPlayers)){
+            while (!isValidTile(row, column, prevRow, prevCol, numPlayers)) {
                 row = provideValidInput(row);
                 column = provideValidInput(column);
             }
 
-            pl.pickTiles(row, column, pickedCount, prevRow, prevCol,numPlayers);
+            pl.pickTiles(row, column, pickedCount, prevRow, prevCol, numPlayers);
             pickedCount++;
-            if(pickedCount > 2)
+            if (pickedCount > 2)
                 break;
 
             System.out.println("vuoi prendere altre caselle? (si/no)");
-            if (sc.next().equalsIgnoreCase("NO")){
+            if (sc.next().equalsIgnoreCase("NO")) {
                 pickMore = false;
             }
 
@@ -64,13 +68,13 @@ public class Game {
 
         }
 
-        if(Board.checkFillBoard()) {
-        	nav.fillBoard();
+        if (Board.checkFillBoard()) {
+            nav.fillBoard();
         }
     }
 
     public void insertPicked(Player pl) {
-        System.out.println("\n\n"  + "OBIETTIVI DI " + pl.getName() + ": ");
+        System.out.println("\n\n" + "OBIETTIVI DI " + pl.getName() + ": ");
         pl.printObjective();
         System.out.println("\n\n" + pl.getName() + "HA PRESO: ");
         pl.printPicked();
@@ -78,21 +82,21 @@ public class Game {
         Scanner sc = new Scanner(System.in);
         System.out.println("in caso di errore ricomicerai il processo di inserimento da capo");
         System.out.print(pl.getName() + "\n\nIn che colonna vuoi inserire le tessere prese?.....\t");
-        int insertionColumn = sc.nextInt()-1;
+        int insertionColumn = sc.nextInt() - 1;
 
-        try{
+        try {
             pl.insertInLibrary(insertionColumn);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e + ", riprova");
             insertPicked(pl);
         }
     }
 
-      char provideValidInput(char in){
+    char provideValidInput(char in) {
         boolean isValid = false;
         Scanner sc = new Scanner(System.in);
 
-        while(!isValid){
+        while (!isValid) {
 
             System.out.println("Scegli la riga da cui prendere una casella (A - I)");
             try {
@@ -111,10 +115,11 @@ public class Game {
         }
         return in;
     }
-      int provideValidInput(int in){
+
+    int provideValidInput(int in) {
         boolean isValid = false;
         Scanner sc = new Scanner(System.in);
-        while(!isValid){
+        while (!isValid) {
 
             System.out.println("Scegli la colonna da cui prendere una casella (1 - 9)");
             try {
@@ -136,34 +141,35 @@ public class Game {
     public boolean isValidTile(char row, int col, char prevRow, int prevCol, int numPlayers) {
 
         BoardNavigator nav = new BoardNavigator(numPlayers);
-        int correctRow = (Character.getNumericValue(row) - 9)-1;
-        int correctCol = col-1;
-        int correctPrevRow = (Character.getNumericValue(prevRow) - 9)-1;
-        int correctPrevCol = prevCol-1;
+        int correctRow = (Character.getNumericValue(row) - 9) - 1;
+        int correctCol = col - 1;
+        int correctPrevRow = (Character.getNumericValue(prevRow) - 9) - 1;
+        int correctPrevCol = prevCol - 1;
 
         if (correctRow < 0)
             return false;
 
-        if (nav.isTileNullOrEmpty(correctRow, correctCol)){
+        if (nav.isTileNullOrEmpty(correctRow, correctCol)) {
             System.out.println("casella vuota in riga: " + row + " colonna: " + col);
             return false;
         }
 
-        if (!nav.IsTilePickable(correctRow, correctCol)){
+        if (!nav.IsTilePickable(correctRow, correctCol)) {
             System.out.println("casella circondata, non possibile prenderla");
             return false;
         }
 
-        if (!nav.isAdjacent(correctRow, correctCol,correctPrevRow,correctPrevCol)){
+        if (!nav.isAdjacent(correctRow, correctCol, correctPrevRow, correctPrevCol)) {
             System.out.println("la casella selezionata non è adiacente a quella  presa in precedenza");
             return false;
         }
 
         return true;
     }
-    public boolean isEndgame(Player[] pl){
-        for (Player player : pl){
-            if (player.isPlayerLibraryFull()){
+
+    public boolean isEndgame(Player[] pl) {
+        for (Player player : pl) {
+            if (player.isPlayerLibraryFull()) {
                 System.out.println(player.getName() + " ha riempito la libreria");
                 return true;
             }

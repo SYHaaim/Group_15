@@ -17,25 +17,27 @@ public class Player {
     private PersonalObjective persObj;
 
 
-
     private boolean isFirst;
     private TileType[] picked;
-
 
 
     //region getter/setters
     public Library getShelf() {
         return shelf;
     }
+
     public boolean isFirst() {
         return isFirst;
     }
+
     public int getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public int getPoints() {
         return points;
     }
@@ -54,9 +56,9 @@ public class Player {
     public static Player[] GeneratePlayers(int numPlayers) {
         Scanner sc = new Scanner(System.in);
         Player[] players = new Player[numPlayers];
-        for (int i = 0; i < players.length; i ++){
-            System.out.println("come si chiama il " + (i+1) + "° giocatore?");
-            players[i] = new Player(i+1, sc.next(), (i+1==1));
+        for (int i = 0; i < players.length; i++) {
+            System.out.println("come si chiama il " + (i + 1) + "° giocatore?");
+            players[i] = new Player(i + 1, sc.next(), (i + 1 == 1));
 
 
         }
@@ -64,7 +66,7 @@ public class Player {
     }
 
     //temporary method to see personal objective formatting
-    public void printObjective(){
+    public void printObjective() {
         persObj.printObj();
     }
 
@@ -72,12 +74,12 @@ public class Player {
         return picked;
     }
 
-    public void pickTiles(char row, int column, int pickedCount, char prevRow, int prevCol,int numPlayers) throws NoSuchFieldException {
+    public void pickTiles(char row, int column, int pickedCount, char prevRow, int prevCol, int numPlayers) throws NoSuchFieldException {
         BoardNavigator nav = new BoardNavigator(numPlayers);
         int rowNum;
         int prevRowNum = 0;
         //letters from A to Z range with a numeric value 10 to 35, subtracting 9 i get their alphabet position
-        rowNum = (Character.getNumericValue(row) - 9) ;
+        rowNum = (Character.getNumericValue(row) - 9);
         if (!(prevRow == ' '))
             prevRowNum = (Character.getNumericValue(prevRow) - 9);
 
@@ -85,16 +87,16 @@ public class Player {
     }
 
     public void insertInLibrary(int column) throws Exception {
-        this.shelf.inserimentoLibrary(this.picked,column);
+        this.shelf.inserimentoLibrary(this.picked, column);
     }
-  
 
-    public void printPicked(){
+
+    public void printPicked() {
         int tileCounter = 1;
         for (TileType pickedTiles : this.picked) {
             if (pickedTiles != null) {
                 System.out.println(tileCounter + ". " + pickedTiles);
-               
+
             } else
                 System.out.println(tileCounter + ". *");
 
@@ -103,28 +105,33 @@ public class Player {
 
     }
 
-    public void resetPicked(){
+    public void resetPicked() {
         Arrays.fill(this.picked, null);
     }
 
     //test method
-    public void libFill(){
+    public void libFill() {
         this.shelf.testFill();
     }
-    public void groupedTiles(){
+
+    public void groupedTiles() {
         this.addPoints(this.shelf.contPointsAdjacentTiles());
     }
-    public boolean isPlayerLibraryFull(){
+
+    public boolean isPlayerLibraryFull() {
         return this.shelf.isLibraryFull();
     }
-    public void playerObjectivesCheck(){
+
+    public void playerObjectivesCheck() {
         this.addPoints(this.shelf.checkPersonal(this.persObj));
     }
-    public void addPoints(int points){
+
+    public void addPoints(int points) {
         this.points += points;
     }
-    public void printPlayerLibrary(){
-         this.shelf.printLibrary();
+
+    public void printPlayerLibrary() {
+        this.shelf.printLibrary();
     }
 
 
