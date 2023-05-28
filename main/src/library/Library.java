@@ -26,6 +26,9 @@ public class Library {
 		int occupiedSpots = 0;
 		int insertRow = 0;
 		int tileSelector = 0;
+
+		if (!hasEnoughFreeSpots(tileTypes, insertionCol))
+			throw new Exception("non ci sono abbastanza spazi in questa colonna ");
 		
 		for (int i = 0; i < tileTypes.length; i ++){
 
@@ -62,8 +65,6 @@ public class Library {
 	public void printLibrary(){
 		System.out.println("*****************************************************************************************\n");
 
-		char startRow = 'A';
-
 		//Print the numeric coordinates on top
 
 		for (int i=1; i<=COLUMNLEN; i++) {
@@ -93,6 +94,8 @@ public class Library {
 		int objectiveRow;
 		int objectiveColumn;
 		TileType objectiveType;
+
+
 
 		for (int i = 0; i < tempObj.length; i++) {
 			// gli obb. personali sono formattati come "coord. x - coord. y - tipo tessera"
@@ -173,6 +176,21 @@ public class Library {
 		return cont;
 	}	
 
+	boolean hasEnoughFreeSpots(TileType[] picked, int insertionCol){
+
+		int pickedCounter = 0;
+		int freeSpots = 0;
+
+		for (int k = 0; k < picked.length;k++)
+			if (picked[k] != null)
+				pickedCounter++;
+
+		for (int i = 0; i < ROWLEN; i++)
+				if (this.libreria[i][insertionCol] == null)
+					freeSpots++;
+
+		return pickedCounter <= freeSpots;
+	}
 	public boolean isLibraryFull(){
 		for (int i = 0; i < ROWLEN; i++){
 			for (int j = 0; j < COLUMNLEN; j++){
