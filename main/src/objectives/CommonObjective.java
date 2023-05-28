@@ -1,6 +1,7 @@
 package objectives;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import board.TileType;
 import library.Library;
@@ -10,23 +11,47 @@ public class CommonObjective{
 		private int cardId;
 		private String descrizione;
 		private CommonObjectiveGenerator generator;
-		private int[] objectivePoiints = {8,4,6,2};
+		private final ArrayList<Integer> points = new ArrayList<>();
+		private final int ROWLEN = 6;
+		private final int COLUMNLEN = 5;
 
- 		public CommonObjective() throws FileNotFoundException {
+ 		public CommonObjective(int numPlayers) throws FileNotFoundException {
 			this.generator = new CommonObjectiveGenerator();
 			this.descrizione = generator.getGeneratedObjective();
 			this.cardId = generator.getGeneratedId();
+			initPoints(numPlayers);
 
 		}
 
+		void initPoints(int numPlayers){
+			switch (numPlayers) {
+				case 2:
+					points.add(8);
+					points.add(4);
+					break;
+
+				case 3:
+					points.add(8);
+					points.add(6);
+					points.add(4);
+					break;
+
+				case 4:
+					points.add(8);
+					points.add(6);
+					points.add(4);
+					points.add(2);
+					break;
+			}
+		}
 		public void printCommonObj(){
 			System.out.println(this.cardId +" - "+this.descrizione);
 		}
 
-		public void checkCommonObjectives(int objectiveId, TileType[][] tileTypes){
+		public int checkCommonObjectives(TileType[][] tileTypes){
 			 //gli id sono progressivi rispettivamente il loro ordinamento nel file "description.txt"
-			
-			switch (objectiveId){
+			int completedScore = 0;
+			switch (cardId){
 				case 1: //Sei gruppi separati formati ciascuno da due tessere adiacenti dello stesso tipo.
 					int groupCounter = 0;
 					for(int c=0;c<4;c++)
@@ -34,7 +59,7 @@ public class CommonObjective{
 						int tileCounter = 0;
 						for(int r=0;r<5;r++)
 						{
-							if(tileTypes[r][c] == tileTypes[r+1][c]) {
+							if(tileTypes[r][c] != null && tileTypes[r][c] == tileTypes[r+1][c]) {
 								tileCounter++;
 								
 								if(tileCounter == 1) {
@@ -54,7 +79,7 @@ public class CommonObjective{
 						int tileCounter = 0;
 						for(int c=0;c<4;c++)
 						{
-							if(tileTypes[r][c] == tileTypes[r][c+1]) {
+							if(tileTypes[r][c] != null && tileTypes[r][c] == tileTypes[r][c+1]) {
 								tileCounter++;
 								
 								if(tileCounter == 1) {
@@ -69,8 +94,10 @@ public class CommonObjective{
 						}
 					}
 					
-					if(groupCounter > 5) {						
-						System.out.println("Sei gruppi separati formati ciascuno da due tessere adiacenti dello stesso tipo.");
+					if(groupCounter > 5) {
+						completedScore = points.get(0);
+						points.remove(0);
+						return completedScore;
 					}
 					
 					break;
@@ -85,7 +112,10 @@ public class CommonObjective{
 							tileTypes[0][4]==tileTypes[5][0] &&
 									tileTypes[5][4]==tileTypes[5][0] )
 							{
-							System.out.println("4 tessere uguali agli angoli......");}
+								completedScore = points.get(0);
+								points.remove(0);
+								return completedScore;
+							}
 					break;
 				case 3: //Quattro gruppi separati formati ciascuno da quattro tessere adiacenti dello stesso tipo
 					 
@@ -130,8 +160,10 @@ public class CommonObjective{
 						}
 					}
 					
-					if(groupCounter > 1) {						
-						System.out.println("Quattro gruppi separati formati ciascuno da quattro tessere adiacenti dello stesso tipo");
+					if(groupCounter > 1) {
+						completedScore = points.get(0);
+						points.remove(0);
+						return completedScore;
 					}
 					
 					break;
@@ -170,8 +202,10 @@ public class CommonObjective{
 						}
 					}
 					
-					if(find==true) {
-						System.out.println("5 tessere uguali in diagonale......");
+					if(find) {
+						completedScore = points.get(0);
+						points.remove(0);
+						return completedScore;
 					}
 					
 					break;
@@ -180,11 +214,11 @@ public class CommonObjective{
 				case 9: //Due colonne formate ciascuna da 6 diversi tipi di tessere
 					
 					int colonne=0,countcolonne=0;
-					for(int i=0;i<tileTypes.length;i++)
+					for(int i=0;i<ROWLEN;i++)
 					{
-						for(int j=0;j<tileTypes.length;j++)
+						for(int j=0;j<COLUMNLEN;j++)
 						{
-							if(tileTypes[i][j]!=tileTypes[i+1][j])
+							if((i+1) < ROWLEN && tileTypes[i][j]!=tileTypes[i+1][j])
 							{
 								colonne++;
 								if(colonne==5)
@@ -193,42 +227,46 @@ public class CommonObjective{
 									countcolonne++;
 								}
 							}
-							if(countcolonne==2)
-								break;
+							if(countcolonne==2){
+								completedScore = points.get(0);
+								points.remove(0);
+								return completedScore;
+							}
 						}
-						
 					}
-				
+					break;
 					
 				case 10: //Due righe formate ciascuna da 5 diversi tipi di tessere.
 					
 					int Righe=0,contRighe=0;
-					for(int i=0;i<tileTypes.length;i++)
+					for(int i=0;i<ROWLEN;i++)
 					{
-						for(int j=0;j<tileTypes.length;j++)
+						for(int j=0;j<COLUMNLEN;j++)
 						{
-							if(tileTypes[i][j]!=tileTypes[i][j+1])
+							if((j+1) < COLUMNLEN && tileTypes[i][j]!=tileTypes[i][j+1])
 							{
 								Righe++;
 								if(Righe==4)
 								{
-									System.out.println("riga "+(i+1)+ "con tutti elementi diversi");
 									contRighe++;
 								}
 							}
-							if(contRighe==2)
-								break;
+							if(contRighe==2){
+								completedScore = points.get(0);
+								points.remove(0);
+								return completedScore;
+							}
 						}
-						
 					}
+					break;
 					
 				case 11:
 				case 12:
 					int prec = Integer.MAX_VALUE;
 					boolean objectiveCompleted = true;
-					for(int i=0; i<5; i++) {
+					for(int i=0; i<ROWLEN; i++) {
 						int cont=0;
-						for(int j=0; j<6; j++) {
+						for(int j=0; j<COLUMNLEN; j++) {
 							if(tileTypes[i][j]!=null)
 								cont++;
 						}
@@ -238,7 +276,7 @@ public class CommonObjective{
 						}	
 						prec=cont;
 					}
-					if(objectiveCompleted == true) {
+					if(objectiveCompleted) {
 						System.out.println("5 colonne di altezza decrescente");
 						break;
 					}
@@ -258,14 +296,17 @@ public class CommonObjective{
 						prec=cont;
 					}
 					
-					if(objectiveCompleted == true) {
-						System.out.println("5 colonne di altezza crescente");
-						break;
+					if(objectiveCompleted) {
+						completedScore = points.get(0);
+						points.remove(0);
+						return completedScore;
+
 					}
+					break;
 			}
+			return 0;
 		}
 
-	
 }
 	               
 	       

@@ -1,7 +1,5 @@
 package objectives;
 
-import java.io.*;
-import java.util.Scanner;
 import java.util.Random;
 
 public class CommonObjectiveGenerator {
@@ -37,7 +35,7 @@ public class CommonObjectiveGenerator {
 		String goals;
 		Random r = new Random();
 		String[] objs = descr.split("-");
-		this.generatedId = r.nextInt(9)+1;
+		this.generatedId = r.nextInt(11)+1;
 		goals = objs[this.generatedId];
 		return goals;
     }

@@ -3,6 +3,8 @@ package library;
 import objectives.PersonalObjective;
 import board.*;
 
+import java.util.Scanner;
+
 public class Library {
 
 	private final int ROWLEN = 6;
@@ -12,15 +14,21 @@ public class Library {
 	public Library() {
 		this.libreria = new TileType[ROWLEN][COLUMNLEN];
 	}
-	
+
+	public TileType[][] getLibreria() {
+		return libreria;
+	}
+
 	public void inserimentoLibrary(TileType[] tileTypes, int insertionCol) throws Exception {
 
+		Scanner sc = new Scanner(System.in);
 		//int pickedCounter = 0;
 		int occupiedSpots = 0;
 		int insertRow = 0;
+		int tileSelector = 0;
 		
 		for (int i = 0; i < tileTypes.length; i ++){
-			
+
 			for (int j = ROWLEN-1; j >=0 ;j--){
 				if (this.libreria[j][insertionCol] != null){
 					occupiedSpots++;
@@ -30,12 +38,26 @@ public class Library {
 			if (insertRow<0)
 				throw new Exception("colonna tutta occupata ");
 
-			libreria[insertRow][insertionCol] = tileTypes[i];
+			System.out.println("quale tessera vuoi inserire per " + (i+1) +"^a? (utilizza i numeri alla sinistra delle tessere per scegliere)" );
+			tileSelector = sc.nextInt()-1;
+			if (tileTypes[tileSelector] == null){
+				throw new Exception("tessera vuota o già piazzata");
+			}
+			if (tileSelector > 2){
+				throw new Exception("tessera inesistente");
+			}
+
+			libreria[insertRow][insertionCol] = tileTypes[tileSelector];
 			occupiedSpots = 0;
+
+			if (i == 0 && tileTypes[1] == null)
+				break;
+			else if (i == 1 && tileTypes[2] == null)
+				break;
+
 		}
 
 	}
-
 
 	public void printLibrary(){
 		System.out.println("*****************************************************************************************\n");
@@ -96,10 +118,10 @@ public class Library {
 		}
 		return completedCounter;
 	}
-	public int contPointsAdjacentTiles(TileType[][] libreria)
+	public int contPointsAdjacentTiles()
 	{
 		int contPoints=0;      
-		TileType[][] copiaLibreria = libreria;		//necessaria una copia della libreria che verrà modificata man mano all'interno di questo metodo
+		TileType[][] copiaLibreria = this.libreria;		//necessaria una copia della libreria che verrà modificata man mano all'interno di questo metodo
 
 		for(int i=0;i<ROWLEN;i++) {	
 			for(int j=0;j<COLUMNLEN;j++){		
@@ -160,6 +182,15 @@ public class Library {
 		}
 
 		return true;
+	}
+
+	//test method
+	public void testFill(){
+		for (int i = 0; i < ROWLEN; i++){
+			for (int j = 0; j < COLUMNLEN; j++){
+				 this.libreria[i][j] = TileType.B;
+			}
+		}
 	}
 }
 

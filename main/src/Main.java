@@ -7,7 +7,6 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws Exception {
 
-
     	Scanner sc = new Scanner(System.in);
         int numPlayers = 0;
         System.out.print("Quanti giocatori stanno giocando? (Min 2 o Max di 4)\t");
@@ -18,8 +17,9 @@ public class Main {
 
 		}while(numPlayers<2 || numPlayers>4);
 
-        CommonObjective common1 = new CommonObjective(); // test obbiettivo comune
-        common1.printCommonObj();
+        CommonObjective common1 = new CommonObjective(numPlayers);
+        CommonObjective common2 = new CommonObjective(numPlayers);// test obbiettivo comune
+
         Player[] giocatori = Player.GeneratePlayers(numPlayers);
         Board board= new Board(numPlayers);
         Game newGame = new Game(giocatori, numPlayers);
@@ -28,26 +28,27 @@ public class Main {
         
         board.fillBoard();
         System.out.println("\nGiocatori..........");
-        System.out.println("\n ***********");
+        System.out.println("\n *********** ");
 
-
-
-        
         for(Player pl : giocatori)
             System.out.println("    "+pl.getName());
-        System.out.println(" ***********");
+        System.out.println(" *********** \n\n");
+
+
         int playCount =0;
 
-        common1.printCommonObj();
-        board.printBoard();
-
-
+         board.printBoard();
         while(!newGame.isEndgame(giocatori)) {
 
-        newGame.PlayerTurn(giocatori[playCount], numPlayers);
+            System.out.println("OBIETTIVI COMUNI: " +  "\n");
+            common1.printCommonObj();
+            System.out.println("");
+            common2.printCommonObj();
+            System.out.println("\n");
 
-            System.out.println(giocatori[playCount].getName() + " ha preso: ");
-            giocatori[playCount].printPicked();
+
+
+        newGame.PlayerTurn(giocatori[playCount], numPlayers);
 
         System.out.println("\n");
 
@@ -57,20 +58,29 @@ public class Main {
 
         giocatori[playCount].resetPicked();
         //test per la board dopo aver preso X tessere
+        System.out.println("caricando il prossimo turno...");
+        Thread.sleep(1500);
         board.printBoard();
-        playCount++;
 
+        //controllo degli obbiettivi comuni ogni turno
+        giocatori[playCount].addPoints(common1.checkCommonObjectives(giocatori[playCount].getShelf().getLibreria()));
+        giocatori[playCount].addPoints(common2.checkCommonObjectives(giocatori[playCount].getShelf().getLibreria()));
+
+        playCount++;
         if (playCount > numPlayers-1)
             playCount = 0;
         }
-        //prova obiettivi personali
+
         System.out.println("\n");
-        giocatori[0].printObjective();
+
+        //conteggio punti
+        for (Player pl : giocatori){
+            pl.groupedTiles();
+            pl.playerObjectivesCheck();
+        }
 
 
-      // setting dei punti temporaneo, da rimuovere
-         giocatori[0].setPoints(32);
-         giocatori[1].setPoints(43);
+
         newGame.PrintLeaderboard(giocatori);
 
     }

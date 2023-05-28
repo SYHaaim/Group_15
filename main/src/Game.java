@@ -69,13 +69,16 @@ public class Game {
         }
     }
 
-    public void insertPicked(Player pl) throws Exception {
+    public void insertPicked(Player pl) {
+        System.out.println("\n\n"  + "OBIETTIVI DI " + pl.getName() + ": ");
+        pl.printObjective();
+        System.out.println("\n\n" + pl.getName() + "HA PRESO: ");
+        pl.printPicked();
+        System.out.println("\n\n");
         Scanner sc = new Scanner(System.in);
-
-        System.out.print("Giocatore " +pl.getId()+ "\nIn che colonna vuoi inserire le tessere prese?.....\t");
+        System.out.println("in caso di errore ricomicerai il processo di inserimento da capo");
+        System.out.print(pl.getName() + "\n\nIn che colonna vuoi inserire le tessere prese?.....\t");
         int insertionColumn = sc.nextInt()-1;
-
-        System.out.println("LIBRERIA " +pl.getId()+ " GIOCATORE" );
 
         try{
             pl.insertInLibrary(insertionColumn);
@@ -84,7 +87,7 @@ public class Game {
             insertPicked(pl);
         }
 
-
+        System.out.println("LIBRERIA DI " +pl.getName());
         System.out.println("\n");
 
         pl.printPlayerLibrary();

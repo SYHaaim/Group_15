@@ -13,12 +13,10 @@ public class Player {
     private final String name;
     private final int id;
     private int points;
-    private Library libreria;
+    private Library shelf;
     private PersonalObjective persObj;
 
-    public Library getLibreria() {
-        return libreria;
-    }
+
 
     private boolean isFirst;
     private TileType[] picked;
@@ -26,24 +24,20 @@ public class Player {
 
 
     //region getter/setters
+    public Library getShelf() {
+        return shelf;
+    }
     public boolean isFirst() {
         return isFirst;
     }
     public int getId() {
         return id;
     }
-
     public String getName() {
         return name;
     }
-
     public int getPoints() {
         return points;
-    }
-
-    //da cancellare
-    public void setPoints(int points) {
-        this.points = points;
     }
     //endregion
 
@@ -54,7 +48,7 @@ public class Player {
         this.persObj = new PersonalObjective();
         this.picked = new TileType[3];
         this.isFirst = isFirst;
-        this.libreria = new Library();
+        this.shelf = new Library();
     }
 
     public static Player[] GeneratePlayers(int numPlayers) {
@@ -91,17 +85,20 @@ public class Player {
     }
 
     public void insertInLibrary(int column) throws Exception {
-        this.libreria.inserimentoLibrary(this.picked,column);
+        this.shelf.inserimentoLibrary(this.picked,column);
     }
   
 
     public void printPicked(){
+        int tileCounter = 1;
         for (TileType pickedTiles : this.picked) {
             if (pickedTiles != null) {
-                System.out.println(pickedTiles);
+                System.out.println(tileCounter + ". " + pickedTiles);
                
             } else
-                System.out.println("*");
+                System.out.println(tileCounter + ". *");
+
+            tileCounter++;
         }
 
     }
@@ -110,17 +107,24 @@ public class Player {
         Arrays.fill(this.picked, null);
     }
 
+    //test method
+    public void libFill(){
+        this.shelf.testFill();
+    }
+    public void groupedTiles(){
+        this.addPoints(this.shelf.contPointsAdjacentTiles());
+    }
     public boolean isPlayerLibraryFull(){
-        return this.libreria.isLibraryFull();
+        return this.shelf.isLibraryFull();
     }
     public void playerObjectivesCheck(){
-        this.addPoints(this.libreria.checkPersonal(this.persObj));
+        this.addPoints(this.shelf.checkPersonal(this.persObj));
     }
     public void addPoints(int points){
         this.points += points;
     }
     public void printPlayerLibrary(){
-         this.libreria.printLibrary();
+         this.shelf.printLibrary();
     }
 
 
