@@ -36,8 +36,12 @@ public class Main {
 
 
         int playCount =0;
+        Scanner white = new Scanner(System.in); // scanner usato solo per promptare l'invio dell'utente
+        System.out.println("PREMI INVIO PER INIZIARE");
+        white.nextLine();
 
-         board.printBoard();
+
+        board.printBoard();
         while(!newGame.isEndgame(giocatori)) {
 
             System.out.println("OBIETTIVI COMUNI: " +  "\n");
@@ -46,21 +50,20 @@ public class Main {
             common2.printCommonObj();
             System.out.println("\n");
 
-
-
         newGame.PlayerTurn(giocatori[playCount], numPlayers);
 
         System.out.println("\n");
 
         //inserisce tessere nella libreria
         newGame.insertPicked(giocatori[playCount]);
-
+            System.out.println("LIBRERIA DI " + giocatori[playCount].getName());
+            System.out.println("\n");
+            giocatori[playCount].printPlayerLibrary();
+            System.out.println("\n");
 
         giocatori[playCount].resetPicked();
         //test per la board dopo aver preso X tessere
-        System.out.println("caricando il prossimo turno...");
-        Thread.sleep(1500);
-        board.printBoard();
+
 
         //controllo degli obbiettivi comuni ogni turno
         giocatori[playCount].addPoints(common1.checkCommonObjectives(giocatori[playCount].getShelf().getLibreria()));
@@ -69,6 +72,10 @@ public class Main {
         playCount++;
         if (playCount > numPlayers-1)
             playCount = 0;
+
+        System.out.println("premi invio per il prossimo turno...");
+        white.nextLine();
+        board.printBoard();
         }
 
         System.out.println("\n");

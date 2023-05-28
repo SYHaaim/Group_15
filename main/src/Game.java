@@ -86,12 +86,6 @@ public class Game {
             System.out.println(e + ", riprova");
             insertPicked(pl);
         }
-
-        System.out.println("LIBRERIA DI " +pl.getName());
-        System.out.println("\n");
-
-        pl.printPlayerLibrary();
-        System.out.println("\n");
     }
 
       char provideValidInput(char in){
