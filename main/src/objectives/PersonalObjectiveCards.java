@@ -4,7 +4,9 @@ package objectives;
 
 import java.util.ArrayList;
 import java.util.Random;
-
+/**
+ * gestisce la generazione randomica degli obbiettivi personali
+ */
 public class PersonalObjectiveCards {
 
 
@@ -137,6 +139,7 @@ public class PersonalObjectiveCards {
         cards.add(card_4);
         cards.add(card_5);
         cards.add(card_6);
+        cards.add(card_7);
         cards.add(card_8);
         cards.add(card_9);
         cards.add(card_10);
@@ -144,6 +147,10 @@ public class PersonalObjectiveCards {
         cards.add(card_12);
     }
 
+    /**
+     * sceglie una delle 12 carte personali da assegnare al giocatore randomicamente
+     * @return String[], rappresenta una carta obbiettivo personale
+     * */
     public String[] getRandomObjectiveCard() {
         String[] generated;
         Random r = new Random();

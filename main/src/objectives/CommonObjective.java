@@ -6,16 +6,26 @@ import java.util.*;
 import board.TileType;
 import library.Library;
 
+/**
+ * gestisce i controlli sugli obbiettivi comuni
+ */
 public class CommonObjective {
 
+
+    /**
+     * id dell'obbiettivo generato dal generator
+     */
     private int cardId;
+    /**
+     * descrizione dell'obbiettivo comune generato
+     */
     private String descrizione;
     private CommonObjectiveGenerator generator;
     private final ArrayList<Integer> points = new ArrayList<>();
     private final int ROWLEN = 6;
     private final int COLUMNLEN = 5;
 
-    public CommonObjective(int numPlayers) throws FileNotFoundException {
+    public CommonObjective(int numPlayers){
         this.generator = new CommonObjectiveGenerator();
         this.descrizione = generator.getGeneratedObjective();
         this.cardId = generator.getGeneratedId();
@@ -52,7 +62,7 @@ public class CommonObjective {
     public int checkCommonObjectives(TileType[][] tileTypes) {
         //gli id sono progressivi rispettivamente il loro ordinamento nel file "description.txt"
         int completedScore = 0;
-        switch (cardId) {
+        switch ((cardId + 1)) {
             case 1: //Sei gruppi separati formati ciascuno da due tessere adiacenti dello stesso tipo.
                 int groupCounter = 0;
                 for (int c = 0; c < 4; c++) {
@@ -155,101 +165,98 @@ public class CommonObjective {
 
 
             case 4: //Due gruppi separati di 4 tessere dello stesso tipo che formano un quadrato 2x2
-            	
-				groupCounter = 0;
-				List<TileType> groupList = new  ArrayList<TileType>();
-				TileType controlList[][] = tileTypes;
-				for(int c=0;c<3;c++)
-				{
-											
-					for(int r=0;r<4;r++)
-					{
-						if(controlList[r][c] != null &&
-					    	controlList[r][c+1] != null &&
-							controlList[r+1][c] != null &&
-							controlList[r+1][c+1] != null) {
-													
-								if(controlList[r][c] == controlList[r][c+1] &&
-									controlList[r][c+1] == controlList[r+1][c+1] &&
-									controlList[r+1][c+1] == controlList[r+1][c]) {														
-									
-									groupList.add(controlList[r][c]);
-									
-									controlList[r][c] = null;
-									controlList[r][c+1] = null;
-									controlList[r+1][c] = null;
-									controlList[r+1][c+1] = null;
-																										
-									r++;
-									}
-							}
-					}							
-				}
-				
-				for (int i = 0; i < groupList.size();i++) {
-					groupCounter = 0;
-					for (int j = 0; j < groupList.size(); i++) {
-						if(j != i) {
-							if(groupList.get(i) == groupList.get(j)) {
-								groupCounter++;
-							}
-						}
-						if(groupCounter == 2) {
-							completedScore = points.get(0);
-                            points.remove(0);
-                            return completedScore;
-						}
-					}
-				}
-            	
-				break;
-            	
-            	
-            case 5:
-            case 6: 
-            	int counterC = 0;
-            	int counterB = 0;
-            	int counterT = 0;
-            	int counterF = 0;
-            	int counterTR = 0;
-            	int counterP = 0;
-            	
-            	for (int c = 0; c < 4; c++) {
-                    for (int r = 0; r < 5; r++) {
-                    	if(tileTypes[r][c] != null) {
-	                    	if(tileTypes[r][c] == TileType.C) {
-	                    		counterC++;
-	                    	}
-	                    	else if(tileTypes[r][c] == TileType.B) {
-	                    		counterB++;
-	                    	}
-	                    	else if(tileTypes[r][c] == TileType.T) {
-	                    		counterT++;
-	                    	}
-	                    	else if(tileTypes[r][c] == TileType.F) {
-	                    		counterF++;
-	                    	}
-	                    	else if(tileTypes[r][c] == TileType.TR) {
-	                    		counterTR++;
-	                    	}
-	                    	else if(tileTypes[r][c] == TileType.P) {
-	                    		counterP++;
-	                    	}
-                    	}
-                    	
-                    	if(counterC == 8 || counterB == 8 || counterT == 8 || counterF == 8 || counterTR == 8 || counterP == 8) {
-                    		completedScore = points.get(0);
-                            points.remove(0);
-                            return completedScore;
-                    	}
-                    	
+
+                groupCounter = 0;
+                List<TileType> groupList = new ArrayList<TileType>();
+                TileType controlList[][] = new TileType[ROWLEN][COLUMNLEN];
+
+                for (int i = 0; i < ROWLEN; i++) {
+                    for (int j = 0; j < COLUMNLEN; j++)
+                        controlList[i][j] = tileTypes[i][j];
+                }
+                for (int c = 0; c < 3; c++) {
+
+                    for (int r = 0; r < 4; r++) {
+                        if (controlList[r][c] != null &&
+                                controlList[r][c + 1] != null &&
+                                controlList[r + 1][c] != null &&
+                                controlList[r + 1][c + 1] != null) {
+
+                            if (controlList[r][c] == controlList[r][c + 1] &&
+                                    controlList[r][c + 1] == controlList[r + 1][c + 1] &&
+                                    controlList[r + 1][c + 1] == controlList[r + 1][c]) {
+
+                                groupList.add(controlList[r][c]);
+
+                                controlList[r][c] = null;
+                                controlList[r][c + 1] = null;
+                                controlList[r + 1][c] = null;
+                                controlList[r + 1][c + 1] = null;
+
+                                r++;
+                            }
+                        }
                     }
-            	}   	
-                    	
-                break;    	
-                    	
-            	
-            	
+                }
+
+                for (int i = 0; i < groupList.size(); i++) {
+                    groupCounter = 0;
+                    for (int j = 0; j < groupList.size(); i++) {
+                        if (j != i) {
+                            if (groupList.get(i) == groupList.get(j)) {
+                                groupCounter++;
+                            }
+                        }
+                        if (groupCounter == 2) {
+                            completedScore = points.get(0);
+                            points.remove(0);
+                            return completedScore;
+                        }
+                    }
+                }
+
+                break;
+
+
+            case 5:
+            case 6:
+                int counterC = 0;
+                int counterB = 0;
+                int counterT = 0;
+                int counterF = 0;
+                int counterTR = 0;
+                int counterP = 0;
+
+                for (int c = 0; c < 4; c++) {
+                    for (int r = 0; r < 5; r++) {
+                        if (tileTypes[r][c] != null) {
+                            if (tileTypes[r][c] == TileType.C) {
+                                counterC++;
+                            } else if (tileTypes[r][c] == TileType.B) {
+                                counterB++;
+                            } else if (tileTypes[r][c] == TileType.T) {
+                                counterT++;
+                            } else if (tileTypes[r][c] == TileType.F) {
+                                counterF++;
+                            } else if (tileTypes[r][c] == TileType.TR) {
+                                counterTR++;
+                            } else if (tileTypes[r][c] == TileType.P) {
+                                counterP++;
+                            }
+                        }
+
+                        if (counterC == 8 || counterB == 8 || counterT == 8 || counterF == 8 || counterTR == 8 || counterP == 8) {
+                            completedScore = points.get(0);
+                            points.remove(0);
+                            return completedScore;
+                        }
+
+                    }
+                }
+
+                break;
+
+
             case 7: //5 tessere dello stesso tipo che formano una diagonale
                 boolean find = true;
 
@@ -331,7 +338,33 @@ public class CommonObjective {
                 }
                 break;
 
-            case 11:
+            case 11: //cinque tessere uguali che formano una X
+                TileType center;
+                TileType upRight;
+                TileType upLeft;
+                TileType downRight;
+                TileType downLeft;
+
+                for (int i = 1; i < (ROWLEN - 1); i++) {
+                    for (int j = 1; j < (COLUMNLEN - 1); j++) {
+                        center = tileTypes[i][j];
+                        if (center == null)
+                            continue;
+                        upRight = tileTypes[i - 1][j + 1];
+                        upLeft = tileTypes[i - 1][j - 1];
+                        downRight = tileTypes[i + 1][j + 1];
+                        downLeft = tileTypes[i - 1][j - 1];
+
+                        if (upRight.equals(center) && upLeft.equals(center)
+                                && downRight.equals(center) && downLeft.equals(center)) {
+                            completedScore = points.get(0);
+                            points.remove(0);
+                            return completedScore;
+                        }
+                    }
+                }
+
+
             case 12:
                 int prec = Integer.MAX_VALUE;
                 boolean objectiveCompleted = true;

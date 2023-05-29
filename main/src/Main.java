@@ -75,7 +75,7 @@ public class Main {
             //controllo degli obbiettivi comuni ogni turno
             giocatori[playCount].addPoints(common1.checkCommonObjectives(giocatori[playCount].getShelf().getLibreria()));
             giocatori[playCount].addPoints(common2.checkCommonObjectives(giocatori[playCount].getShelf().getLibreria()));
-
+            giocatori[1].libFill();
             playCount++;
             if (playCount > numPlayers - 1)
                 playCount = 0;
@@ -86,7 +86,6 @@ public class Main {
         }
 
         System.out.println("\n");
-
 
         //conteggio punti
         for (int i = 0; i < giocatori.length; i++) {

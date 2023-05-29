@@ -2,10 +2,14 @@ package objectives;
 
 import java.util.Random;
 
-public class CommonObjectiveGenerator {
-    //private static final ArrayList<String[]> TessereObbComuni = new ArrayList<>();
 
-    private String generatedObjective;
+/**
+ * gestisce la generazione randomica di un obbiettivo comune
+ */
+
+public class CommonObjectiveGenerator {
+
+    private final String generatedObjective;
     private int generatedId;
     private final String descr = "Sei gruppi separati formati ciascuno da due tessere adiacenti dello stesso tipo. Le tessere di un gruppo possono essere diverse da quelle di un altro gruppo.\n" +
             "- Quattro tessere dello stesso tipo ai quattro angoli della Libreria.\n" +
@@ -24,27 +28,34 @@ public class CommonObjectiveGenerator {
         generatedObjective = generateRandomCommon();
     }
 
+    /**
+     *
+     * @return descrizione dell'obbiettivo generato
+     */
     public String getGeneratedObjective() {
         return generatedObjective;
     }
 
+    /**
+     *
+     * @return id dell'obbiettivo generato, compreso tra 0 e 11
+     */
     public int getGeneratedId() {
         return generatedId;
     }
 
+    /**
+     * sceglie uno tra i 12 obbiettivi e salva l'id che viene richiamato per identificare l'obbiettivo generato
+     * @return la descrizione dell'obbiettivo comune generato
+     */
     private String generateRandomCommon() {
         String goals;
         Random r = new Random();
         String[] objs = descr.split("-");
-        this.generatedId = r.nextInt(11) + 1;
+        this.generatedId = r.nextInt(11);
         goals = objs[this.generatedId];
         return goals;
     }
 
-    // private String[] randomGoal(int nPlayer) {
-
-    //int prova = (int) (Math.random() * nPlayer);
-
-    //}
 }
 

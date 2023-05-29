@@ -5,8 +5,10 @@ import board.*;
 
 import java.util.Scanner;
 
+/**
+ * gestisce la generazione e i cambiamenti della libreria dei giocatori
+ */
 public class Library {
-
     private final int ROWLEN = 6;
     private final int COLUMNLEN = 5;
     TileType[][] libreria;
@@ -18,6 +20,13 @@ public class Library {
     public TileType[][] getLibreria() {
         return libreria;
     }
+
+    /**
+     * metodo utilizzato per inserire le tessere prese dal giocatore nella sua libreria
+     * @param tileTypes tessere prese dal giocatore corrente
+     * @param insertionCol colonna in cui saranno inserite le tessere del giocatore
+     * @throws Exception se è impossibile inserire le tessere nella colonna specificata
+     */
 
     public void inserimentoLibrary(TileType[] tileTypes, int insertionCol) throws Exception {
 
@@ -62,6 +71,9 @@ public class Library {
 
     }
 
+    /**
+     * stampa la libreria del giocatore corrente
+     */
     public void printLibrary() {
         System.out.println("*****************************************************************************************\n");
 
@@ -88,6 +100,11 @@ public class Library {
 
     }
 
+    /**
+     * controllo del completamento degli obbiettivi personali
+     * @param personal oggetto che indica gli obbiettivi personali del giocatore corrente
+     * @return contatore progressivo che indica quanti dei 6 obbiettivi sono stati completati e rispettivi punti
+     */
     public int checkPersonal(PersonalObjective personal) {
         String[] tempObj = personal.getObjectives();
         int completedCounter = 0;
@@ -120,7 +137,16 @@ public class Library {
                 completedCounter++;
             }
         }
-        return completedCounter;
+
+        switch (completedCounter){
+            case 1: return 1;
+            case 2: return 2;
+            case 3: return 4;
+            case 4: return 6;
+            case 5: return 9;
+            case 6: return 12;
+            default: return 0;
+        }
     }
 
     public int contPointsAdjacentTiles() {
@@ -184,6 +210,12 @@ public class Library {
         return cont;
     }
 
+    /**
+     * controlla che la colonna scelta dall'utente per inserire le tessere prese abbia abbastanza spazi liberi
+     * @param picked tessere prese dal giocatore corrente
+     * @param insertionCol colonna in cui il giocatore vuole inserire le sue tessere
+     * @return true: ha abbastanza spazi / false: non ha abbastanza spazi
+     */
     boolean hasEnoughFreeSpots(TileType[] picked, int insertionCol) {
 
         int pickedCounter = 0;
@@ -200,6 +232,10 @@ public class Library {
         return pickedCounter <= freeSpots;
     }
 
+    /**
+     * controllo usato per il trigger di endgame
+     * @return true: se la libreria del giocatore corrente è piena / false: la libreria ha spazi vuoti
+     */
     public boolean isLibraryFull() {
         for (int i = 0; i < ROWLEN; i++) {
             for (int j = 0; j < COLUMNLEN; j++) {

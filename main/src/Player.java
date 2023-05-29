@@ -6,28 +6,34 @@ import objectives.PersonalObjective;
 
 import java.util.Arrays;
 import java.util.Scanner;
-
+/**
+ * classe che gestisce la generazione e il conteggio di punti dei giocatori
+ */
 public class Player {
 
-    //player class, handles player generation, points and personal objectives
+
+
     private final String name;
     private final int id;
     private int points;
+    /**
+     * oggetto libreria del giocatore corrente
+     */
     private Library shelf;
-    private PersonalObjective persObj;
-
-
-    private boolean isFirst;
+    /**
+     * lista degli obbiettivi personali del giocatore corrente
+     */
+    private final PersonalObjective persObj;
+    private final boolean isFirst;
+    /**
+     * tessere prese dal giocatore ogni turno
+     */
     private TileType[] picked;
 
 
     //region getter/setters
     public Library getShelf() {
         return shelf;
-    }
-
-    public boolean isFirst() {
-        return isFirst;
     }
 
     public int getId() {
@@ -43,6 +49,12 @@ public class Player {
     }
     //endregion
 
+    /**
+     *
+     * @param id id del giocatore
+     * @param name nome o soprannome del giocatore
+     * @param isFirst flag per capire se il giocatore in questione è il primo
+     */
     public Player(int id, String name, boolean isFirst) {
         this.name = name;
         this.id = id;
@@ -53,6 +65,11 @@ public class Player {
         this.shelf = new Library();
     }
 
+    /**
+     * metodo che genera un numero specificato di giocatori dall'utente
+     * @param numPlayers il numero di giocatori che partecipano al game
+     * @return un array di giocatori, con tutti i campi settati
+     */
     public static Player[] GeneratePlayers(int numPlayers) {
         Scanner sc = new Scanner(System.in);
         Player[] players = new Player[numPlayers];
@@ -70,18 +87,19 @@ public class Player {
         persObj.printObj();
     }
 
-    public TileType[] getPicked() {
-        return picked;
-    }
-
-    public void pickTiles(char row, int column, int pickedCount, char prevRow, int prevCol, int numPlayers) throws NoSuchFieldException {
+    /***
+     * intermezzo tra la plancia e il flow di gioco, prende le tessere specificate dalla board
+     * @param row riga in cui si trova la tessera specificata dall'utente
+     * @param column colonna in cui si trova la tessera specificata dall'utente
+     * @param pickedCount numero progressivo, indica prima, seconda o terza tessera
+     * @param numPlayers numero totale di giocatori in partita
+     * @throws NoSuchFieldException se si tenta di prendere qualcosa in uno spazio vuoto della board
+     */
+    public void pickTiles(char row, int column, int pickedCount, int numPlayers) throws NoSuchFieldException {
         BoardNavigator nav = new BoardNavigator(numPlayers);
         int rowNum;
-        int prevRowNum = 0;
         //letters from A to Z range with a numeric value 10 to 35, subtracting 9 i get their alphabet position
         rowNum = (Character.getNumericValue(row) - 9);
-        if (!(prevRow == ' '))
-            prevRowNum = (Character.getNumericValue(prevRow) - 9);
 
         this.picked[pickedCount] = nav.pickFromBoard(rowNum, column);
     }
@@ -89,7 +107,6 @@ public class Player {
     public void insertInLibrary(int column) throws Exception {
         this.shelf.inserimentoLibrary(this.picked, column);
     }
-
 
     public void printPicked() {
         int tileCounter = 1;

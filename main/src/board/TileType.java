@@ -1,5 +1,8 @@
 package board;
 
+/**
+ * tipi di tessere esistenti nel gioco
+ */
 public enum TileType {
     C("CATS"),
     B("BOOKS"),

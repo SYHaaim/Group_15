@@ -1,5 +1,8 @@
 package board;
 
+/**
+ * usata per navigare tra gli spazi della board principale
+ */
 public class BoardNavigator extends Board {
 
     private int [][] tempStructure;
@@ -12,6 +15,12 @@ public class BoardNavigator extends Board {
         tempStructure = getstructureBoard();
     }
 
+    /**
+     *
+     * @param row riga della tessera corrente
+     * @param column colonna della tessera corrente
+     * @return tessera a destra di quella specificata
+     */
     TileType getRight(int row, int column){
 
         if ((column+1) < LEN)
@@ -20,6 +29,12 @@ public class BoardNavigator extends Board {
         return tempBoard[row][column];
     }
 
+    /**
+     *
+     * @param row riga della tessera corrente
+     * @param column colonna della tessera corrente
+     * @return tessera a sinistra di quella specificata
+     */
      TileType getLeft(int row, int column){
 
         if ((column-1) > 0)
@@ -28,6 +43,12 @@ public class BoardNavigator extends Board {
         return tempBoard[row][column];
     }
 
+    /**
+     *
+     * @param row riga della tessera corrente
+     * @param column colonna della tessera corrente
+     * @return tessera sopra a quella specificata
+     */
      TileType getUp(int row, int column){
 
         if ((row-1) > 0)
@@ -36,6 +57,12 @@ public class BoardNavigator extends Board {
         return tempBoard[row][column];
     }
 
+    /**
+     *
+     * @param row riga della tessera corrente
+     * @param column colonna della tessera corrente
+     * @return tessera sotto a quella specificata
+     */
      TileType getDown(int row, int column){
 
         if ((row+1) < LEN)
@@ -44,6 +71,12 @@ public class BoardNavigator extends Board {
         return tempBoard[row][column];
     }
 
+    /**
+     *
+     * @param row riga della tessera specificata
+     * @param column colonna della tessera specificata
+     * @return true: la tessera ha almeno un lato libero / false: la tessera è circondata
+     */
     public boolean IsTilePickable(int row, int column){
         return getUp(row, column) == null || getDown(row, column) == null ||
                 getLeft(row, column) == null || getRight(row, column) == null;

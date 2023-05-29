@@ -3,9 +3,11 @@ import board.BoardNavigator;
 
 import java.util.*;
 
+/**
+ * gestisce la turnanzione dei giocatori
+ */
 public class Game {
     //handles player turns and endgame etc..
-
     Player[] players;
     int numPlayers;
     //codici per testi colorati
@@ -16,12 +18,20 @@ public class Game {
         this.numPlayers = numPlayers;
     }
 
+    /**
+     * stampa ordinata rispetto ai punti per determinare il vincitore
+     * @param players lista di tutti i giocatori nella partita corrente
+     */
     public void PrintLeaderboard(Player[] players) {
         SortByPoints(players);
         for (Player player : players)
             System.out.println(player.getId() + ". " + player.getName() + " punti: " + player.getPoints());
     }
 
+    /**
+     * ordinamento decrescente rispetto ai punti dei giocatori
+     * @param players lista di tutti i giocatori nella partita corrente
+     */
     void SortByPoints(Player[] players) {
         for (int i = 0; i < players.length - 1; i++) {
             if (players[i].getPoints() < players[i + 1].getPoints()) {
@@ -32,6 +42,12 @@ public class Game {
         }
     }
 
+    /**
+     *
+     * @param pl giocatore corrente
+     * @param numPlayers numero totale di giocatori nella partita
+     * @throws NoSuchFieldException in caso un giocatore scelga una tessera che non può essere presa
+     */
     public void PlayerTurn(Player pl, int numPlayers) throws NoSuchFieldException {
 
         BoardNavigator nav = new BoardNavigator(numPlayers);
@@ -55,7 +71,7 @@ public class Game {
                 column = provideValidInput(column);
             }
 
-            pl.pickTiles(row, column, pickedCount, prevRow, prevCol, numPlayers);
+            pl.pickTiles(row, column, pickedCount,numPlayers);
             pickedCount++;
             if (pickedCount > 2)
                 break;
@@ -75,12 +91,17 @@ public class Game {
         }
     }
 
+    /**
+     * metodo usato per far inserire al giocatore corrente le tessere prese da esso nella sua libreria
+     * @param pl giocatore corrente
+     * @throws InterruptedException in caso il wait di 1s vada in errore
+     */
     public void insertPicked(Player pl) throws InterruptedException {
-        System.out.println("\n\n" + "OBIETTIVI DI " + pl.getName() + ": ");
+        System.out.println("\n" + "OBIETTIVI DI " + pl.getName() + ": ");
         pl.printObjective();
-        System.out.println("\n\n" + pl.getName() + "HA PRESO: ");
+        System.out.println("\n" + pl.getName() + "HA PRESO: ");
         pl.printPicked();
-        System.out.println("\n\n");
+        System.out.println("\n");
         Scanner sc = new Scanner(System.in);
         System.out.println("in caso di errore ricomicerai il processo di inserimento da capo");
         System.out.print(pl.getName() + "\n\nIn che colonna vuoi inserire le tessere prese?.....\t");
@@ -141,6 +162,15 @@ public class Game {
     }
 
 
+    /**
+     * controlla che la tessera specificata dall'utente può essere presa
+     * @param row riga in cui si trova la tessera specificata
+     * @param col colonna in cui si trova la tessera specificata
+     * @param prevRow riga della tessera presa in precedenza
+     * @param prevCol colonna della tessera presa in precedenza
+     * @param numPlayers numero totale dei giocatori in partita
+     * @return true: se la tessera è valida false: se la tessera specificata non può essere presa
+     */
     public boolean isValidTile(char row, int col, char prevRow, int prevCol, int numPlayers) {
 
         BoardNavigator nav = new BoardNavigator(numPlayers);
@@ -170,10 +200,15 @@ public class Game {
         return true;
     }
 
+    /**
+     *
+     * @param pl lista di tutti i giocatori nella partita corrente
+     * @return true: se almeno uno dei giocatori ha riempito la libreria / false: nessuno dei giocatori ha riempito la libreria
+     */
     public boolean isEndgame(Player[] pl) {
         for (Player player : pl) {
             if (player.isPlayerLibraryFull()) {
-                System.out.println(player.getName() + " ha riempito la libreria");
+                System.out.println(player.getName().toUpperCase() + " ha riempito la libreria");
                 return true;
             }
 
