@@ -1,23 +1,28 @@
 
 import board.Board;
 import objectives.CommonObjective;
-
-
 import java.util.*;
 
 public class Main {
+
+    //codici per testi colorati
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
     public static void main(String[] args) throws Exception {
 
         Scanner sc = new Scanner(System.in);
         int numPlayers = 0;
+        char playerIn;
         System.out.print("Quanti giocatori stanno giocando? (Min 2 o Max di 4)\t");
         do {
-            numPlayers = sc.nextInt();
+            playerIn = sc.next().charAt(0);
+            numPlayers = Character.getNumericValue(playerIn);
+
             if (numPlayers < 2 || numPlayers > 4) {
-                System.out.println("Errore, inserire un numero compreso tra 2 e 4");
+                System.out.println(ANSI_RED + "Errore, inserire un numero compreso tra 2 e 4" +  ANSI_RESET);
             }
 
-        } while (numPlayers < 2 || numPlayers > 4);
+        } while (numPlayers < 2 || numPlayers > 4 || !Character.isDigit(playerIn));
 
         CommonObjective common1 = new CommonObjective(numPlayers);
         CommonObjective common2 = new CommonObjective(numPlayers);// test obbiettivo comune
@@ -47,7 +52,6 @@ public class Main {
 
             System.out.println("OBIETTIVI COMUNI: " + "\n");
             common1.printCommonObj();
-            System.out.println("");
             common2.printCommonObj();
             System.out.println("\n");
 
@@ -91,4 +95,5 @@ public class Main {
         newGame.PrintLeaderboard(giocatori);
 
     }
+
 }

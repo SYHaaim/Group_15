@@ -8,7 +8,9 @@ public class Game {
 
     Player[] players;
     int numPlayers;
-
+    //codici per testi colorati
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
     public Game(Player[] players, int numPlayers) {
         this.players = players;
         this.numPlayers = numPlayers;
@@ -73,7 +75,7 @@ public class Game {
         }
     }
 
-    public void insertPicked(Player pl) {
+    public void insertPicked(Player pl) throws InterruptedException {
         System.out.println("\n\n" + "OBIETTIVI DI " + pl.getName() + ": ");
         pl.printObjective();
         System.out.println("\n\n" + pl.getName() + "HA PRESO: ");
@@ -87,7 +89,8 @@ public class Game {
         try {
             pl.insertInLibrary(insertionColumn);
         } catch (Exception e) {
-            System.out.println(e + ", riprova");
+            System.out.println(ANSI_RED + e + ", riprova" +  ANSI_RESET);
+            Thread.sleep(1000);
             insertPicked(pl);
         }
     }
@@ -150,17 +153,17 @@ public class Game {
             return false;
 
         if (nav.isTileNullOrEmpty(correctRow, correctCol)) {
-            System.out.println("casella vuota in riga: " + row + " colonna: " + col);
+            System.out.println(ANSI_RED + "casella vuota in riga: " + row + " colonna: " + col + ANSI_RESET);
             return false;
         }
 
         if (!nav.IsTilePickable(correctRow, correctCol)) {
-            System.out.println("casella circondata, non possibile prenderla");
+            System.out.println(ANSI_RED + "tessera circondata, non possibile prenderla" + ANSI_RESET);
             return false;
         }
 
         if (!nav.isAdjacent(correctRow, correctCol, correctPrevRow, correctPrevCol)) {
-            System.out.println("la casella selezionata non è adiacente a quella  presa in precedenza");
+            System.out.println(ANSI_RED + "la tessera selezionata non è adiacente a quella presa in precedenza" + ANSI_RESET);
             return false;
         }
 
