@@ -1,7 +1,7 @@
 package objectives;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.util.*;
 
 import board.TileType;
 import library.Library;
@@ -155,6 +155,50 @@ public class CommonObjective {
 
 
             case 4:
+            	
+				groupCounter = 0;
+				List<TileType> groupList = new  ArrayList<TileType>();
+				TileType controlList[][] = tileTypes;
+				for(int c=0;c<3;c++)
+				{
+											
+					for(int r=0;r<4;r++)
+					{
+						if(controlList[r][c] == controlList[r][c+1] &&
+								controlList[r][c+1] == controlList[r+1][c+1] &&
+										controlList[r+1][c+1] == controlList[r+1][c]) {														
+							
+							groupList.add(controlList[r][c]);
+							
+							controlList[r][c] = null;
+							controlList[r][c+1] = null;
+							controlList[r+1][c] = null;
+							controlList[r+1][c+1] = null;
+																								
+							r++;
+							}
+					}							
+				}
+				
+				for (int i = 0; i < groupList.size();i++) {
+					groupCounter = 0;
+					for (int j = 0; j < groupList.size(); i++) {
+						if(j != i) {
+							if(groupList.get(i) == groupList.get(j)) {
+								groupCounter++;
+							}
+						}
+						if(groupCounter == 2) {
+							completedScore = points.get(0);
+                            points.remove(0);
+                            return completedScore;
+						}
+					}
+				}
+            	
+            	
+            	
+            	
             case 5:
             case 6:
             case 7: //5 tessere dello stesso tipo che formano una diagonale
