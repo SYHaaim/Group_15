@@ -114,7 +114,7 @@ public class CommonObjective {
                 for (int c = 0; c < 4; c++) {
                     int tileCounter = 0;
                     for (int r = 0; r < 5; r++) {
-                        if (tileTypes[r][c] == tileTypes[r + 1][c]) {
+                        if (tileTypes[r][c] != null && tileTypes[r][c] == tileTypes[r + 1][c]) {
                             tileCounter++;
 
                             if (tileCounter == 3) {
@@ -131,7 +131,7 @@ public class CommonObjective {
                 for (int r = 0; r < 5; r++) {
                     int tileCounter = 0;
                     for (int c = 0; c < 4; c++) {
-                        if (tileTypes[r][c] == tileTypes[r][c + 1]) {
+                        if (tileTypes[r][c] != null && tileTypes[r][c] == tileTypes[r][c + 1]) {
                             tileCounter++;
 
                             if (tileCounter == 3) {
@@ -154,7 +154,7 @@ public class CommonObjective {
                 break;
 
 
-            case 4:
+            case 4: //Due gruppi separati di 4 tessere dello stesso tipo che formano un quadrato 2x2
             	
 				groupCounter = 0;
 				List<TileType> groupList = new  ArrayList<TileType>();
@@ -164,18 +164,24 @@ public class CommonObjective {
 											
 					for(int r=0;r<4;r++)
 					{
-						if(controlList[r][c] == controlList[r][c+1] &&
-								controlList[r][c+1] == controlList[r+1][c+1] &&
-										controlList[r+1][c+1] == controlList[r+1][c]) {														
-							
-							groupList.add(controlList[r][c]);
-							
-							controlList[r][c] = null;
-							controlList[r][c+1] = null;
-							controlList[r+1][c] = null;
-							controlList[r+1][c+1] = null;
-																								
-							r++;
+						if(controlList[r][c] != null &&
+					    	controlList[r][c+1] != null &&
+							controlList[r+1][c] != null &&
+							controlList[r+1][c+1] != null) {
+													
+								if(controlList[r][c] == controlList[r][c+1] &&
+									controlList[r][c+1] == controlList[r+1][c+1] &&
+									controlList[r+1][c+1] == controlList[r+1][c]) {														
+									
+									groupList.add(controlList[r][c]);
+									
+									controlList[r][c] = null;
+									controlList[r][c+1] = null;
+									controlList[r+1][c] = null;
+									controlList[r+1][c+1] = null;
+																										
+									r++;
+									}
 							}
 					}							
 				}
