@@ -1,4 +1,3 @@
-
 import board.BoardNavigator;
 import board.TileType;
 import library.Library;
@@ -6,11 +5,11 @@ import objectives.PersonalObjective;
 
 import java.util.Arrays;
 import java.util.Scanner;
+
 /**
  * classe che gestisce la generazione e il conteggio di punti dei giocatori
  */
 public class Player {
-
 
 
     private final String name;
@@ -31,28 +30,9 @@ public class Player {
     private TileType[] picked;
 
 
-    //region getter/setters
-    public Library getShelf() {
-        return shelf;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-    //endregion
-
     /**
-     *
-     * @param id id del giocatore
-     * @param name nome o soprannome del giocatore
+     * @param id      id del giocatore
+     * @param name    nome o soprannome del giocatore
      * @param isFirst flag per capire se il giocatore in questione è il primo
      */
     public Player(int id, String name, boolean isFirst) {
@@ -67,6 +47,7 @@ public class Player {
 
     /**
      * metodo che genera un numero specificato di giocatori dall'utente
+     *
      * @param numPlayers il numero di giocatori che partecipano al game
      * @return un array di giocatori, con tutti i campi settati
      */
@@ -93,9 +74,9 @@ public class Player {
      * @param column colonna in cui si trova la tessera specificata dall'utente
      * @param pickedCount numero progressivo, indica prima, seconda o terza tessera
      * @param numPlayers numero totale di giocatori in partita
-     * @throws NoSuchFieldException se si tenta di prendere qualcosa in uno spazio vuoto della board
+     *
      */
-    public void pickTiles(char row, int column, int pickedCount, int numPlayers) throws NoSuchFieldException {
+    public void pickTiles(char row, int column, int pickedCount, int numPlayers) {
         BoardNavigator nav = new BoardNavigator(numPlayers);
         int rowNum;
         //letters from A to Z range with a numeric value 10 to 35, subtracting 9 i get their alphabet position
@@ -114,8 +95,7 @@ public class Player {
             if (pickedTiles != null) {
                 System.out.println(tileCounter + ". " + pickedTiles);
 
-            } else
-                System.out.println(tileCounter + ". *");
+            } else System.out.println(tileCounter + ". *");
 
             tileCounter++;
         }
@@ -124,11 +104,6 @@ public class Player {
 
     public void resetPicked() {
         Arrays.fill(this.picked, null);
-    }
-
-    //test method
-    public void libFill() {
-        this.shelf.testFill();
     }
 
     public void groupedTiles() {
@@ -150,6 +125,20 @@ public class Player {
     public void printPlayerLibrary() {
         this.shelf.printLibrary();
     }
+
+    //region getter/setters
+    public Library getShelf() {
+        return shelf;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+    //endregion
 
 
 }

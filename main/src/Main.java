@@ -6,11 +6,13 @@ import java.util.*;
 
 public class Main {
 
-    //codici per testi colorati
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_RED = "\u001B[31m";
 
     public static void main(String[] args) throws Exception {
+        //codici per testi colorati
+
+        String ANSI_RESET = "\u001B[0m";
+        String ANSI_RED = "\u001B[31m";
+        String ANSI_BLUE = "\u001B[34m";
 
         Scanner sc = new Scanner(System.in);
         int numPlayers = 0;
@@ -45,7 +47,8 @@ public class Main {
 
         int playCount = 0;
         Scanner white = new Scanner(System.in); // scanner usato solo per promptare l'invio dell'utente
-        System.out.println("PREMI INVIO PER INIZIARE");
+        System.out.println("SI CONSIGLIA DI ALLARGARE AL MASSIMO LA CONSOLE PER UN'ESPERIENZA MIGLIORE");
+        System.out.println(ANSI_BLUE + "PREMI INVIO PER INIZIARE" + ANSI_RESET);
         white.nextLine();
 
 
@@ -55,12 +58,14 @@ public class Main {
             System.out.println("OBIETTIVI COMUNI: " + "\n");
             common1.printCommonObj();
             common2.printCommonObj();
-            System.out.println("\n");
 
             newGame.PlayerTurn(giocatori[playCount], numPlayers);
 
             System.out.println("\n");
-
+            System.out.println("LIBRERIA DI " + giocatori[playCount].getName());
+            giocatori[playCount].printPlayerLibrary();
+            System.out.println("premi invio per iniziare ad inserire le tue tessere");
+            white.nextLine();
             //inserisce tessere nella libreria
             newGame.insertPicked(giocatori[playCount]);
             System.out.println("LIBRERIA DI " + giocatori[playCount].getName());
@@ -69,20 +74,24 @@ public class Main {
             System.out.println("\n");
 
             giocatori[playCount].resetPicked();
-            //test per la board dopo aver preso X tessere
-
 
             //controllo degli obbiettivi comuni ogni turno
             giocatori[playCount].addPoints(common1.checkCommonObjectives(giocatori[playCount].getShelf().getLibreria()));
             giocatori[playCount].addPoints(common2.checkCommonObjectives(giocatori[playCount].getShelf().getLibreria()));
-            giocatori[1].libFill();
             playCount++;
             if (playCount > numPlayers - 1)
                 playCount = 0;
 
             System.out.println("premi invio per il prossimo turno...");
             white.nextLine();
+
+            if (Board.checkFillBoard()) {
+                board.fillBoard();
+            }
+
             board.printBoard();
+
+
         }
 
         System.out.println("\n");

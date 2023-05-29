@@ -2,27 +2,39 @@ package board;
 
 import java.util.Random;
 
+/**
+ * classe della plancia soggiorno, contiene tutte le tessere e gestisce il loro posizionamento
+ */
 public class Board {
     //board class, handles main board generation and tiles positioning
 
     private static final int LEN=9;
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_WHITE = "\u001B[37m";
 
     //this board is used to save the structure that is different according to the number of players
+    /**
+     * matrice usata come struttra per la board principale, cambia dimensioni in base al numero di giocatori
+     */
     private static int[][] structureBoard = new int[LEN][LEN];
+    /**
+     * board principale, contiene le tessere
+     */
     private static TileType[][] mainBoard = new TileType[LEN][LEN];
-
-    //private static int[] cardsLeft = new int[] {22,22,22,22,22,22};
-
-
     private static int Players;
+
     public Board(int numPlayers) {
         Players = numPlayers;
         initBoard(Players);
-
-        //printBoard();
     }
 
     //initialize board with numbers 1 if it's a card space, 0 if it's an empty space.
+
+    /**
+     * la struttura della board cambia in base al numero di giocatori, se è uno spazio tessera sarà 1, altrimenti 0
+     * @param numPlayers numero di giocatori nella partita
+     */
     private void initBoard(int numPlayers){
         //this variable will be 1 only if there are 3 or 4 players else, they'll be 0
         int p3 = 0;
@@ -46,6 +58,9 @@ public class Board {
 
     }
 
+    /**
+     * riempe la plancia con tipi di tessere randomiche
+     */
     public void fillBoard() {
     	
     	Random random = new Random();
@@ -68,22 +83,13 @@ public class Board {
 
     }
 
-    public void printStructureBoard() {
-        for (int i=0; i<LEN; i++) {
-            for (int j=0; j<LEN; j++)
-                System.out.print(structureBoard[i][j]+" ");
-
-            System.out.println();
-        }
-    }
-
     public void printBoard() {
         char startRow = 'A';
 
         //Print the numeric coordinates on top
         System.out.printf("%-10s", "");
         for (int i=1; i<=LEN; i++) {
-            System.out.printf("%-10s", i);
+            System.out.printf("%-6s", i);
         }
         //separates coordinates and board
         System.out.println("\n----------------------------------------------------------------------------------------------");
@@ -95,24 +101,26 @@ public class Board {
             System.out.printf("%-5s"," | ");
             for (int j=0; j<LEN; j++) {
                 if(mainBoard[i][j]==null)
-                    System.out.printf("%-10s", "*");
+                    System.out.printf(ANSI_WHITE+"%-10s", "*"+ANSI_RESET);
                 else
-                    System.out.printf("%-10s", mainBoard[i][j]);
+                    System.out.printf(ANSI_GREEN+"%-10s", mainBoard[i][j]+ANSI_RESET);
             }
             System.out.println();
         }
     }
 
-    public TileType pickFromBoard(int row, int column) throws NoSuchFieldException {
+    /**
+     * metodo dove avviene l'estrazione delle tessera da parte del giocatore
+     * @param row riga dove si trova la tessera che si vuole prendere
+     * @param column colonna dove si trova la tessera che si vuole prendere
+     * @return valore della tessera specificata
+     */
+    public TileType pickFromBoard(int row, int column) {
 
-        BoardNavigator nav = new BoardNavigator(Players);
         int correctRow = row-1;
         int correctCol = column-1;
-      /*  int correctPrevRow = prevRow-1;
-        int correvtPrevCol = prevCol-1;*/
 
         TileType picked = mainBoard[correctRow][correctCol];
-        //structureBoard[row-1][column-1] = 0;
         mainBoard[correctRow][correctCol] = null;
         return picked;
     }
@@ -140,28 +148,8 @@ public class Board {
         return structureBoard;
     }
 
-    public void setstructureBoard(int[][] board) {
-        structureBoard = board;
-    }
-
     public TileType[][] getMainBoard() {
         return mainBoard;
-    }
-
-    public void setMainBoard() {
-        mainBoard = new TileType[LEN][LEN];
-    }
-    
-    public void setCasellaMainBoard() {
-        mainBoard = new TileType[LEN][LEN];
-    }
-    
-    public static TileType getCasellaMainBoard(int r,int c) {
-    	return mainBoard[r][c];
-    }
-    
-    public static int getCasellaStructureBoard(int r,int c) {
-    	return structureBoard[r][c];
     }
 
 }

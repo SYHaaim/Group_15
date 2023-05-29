@@ -247,14 +247,6 @@ public class Library {
         return true;
     }
 
-    //test method
-    public void testFill() {
-        for (int i = 0; i < ROWLEN; i++) {
-            for (int j = 0; j < COLUMNLEN; j++) {
-                this.libreria[i][j] = TileType.B;
-            }
-        }
-    }
 }
 
 

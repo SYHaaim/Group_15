@@ -1,10 +1,9 @@
 package objectives;
 
-import java.io.FileNotFoundException;
-import java.util.*;
 
+import java.util.*;
 import board.TileType;
-import library.Library;
+
 
 /**
  * gestisce i controlli sugli obbiettivi comuni
@@ -15,7 +14,7 @@ public class CommonObjective {
     /**
      * id dell'obbiettivo generato dal generator
      */
-    private int cardId;
+    private final int cardId;
     /**
      * descrizione dell'obbiettivo comune generato
      */
@@ -25,7 +24,7 @@ public class CommonObjective {
     private final int ROWLEN = 6;
     private final int COLUMNLEN = 5;
 
-    public CommonObjective(int numPlayers){
+    public CommonObjective(int numPlayers) {
         this.generator = new CommonObjectiveGenerator();
         this.descrizione = generator.getGeneratedObjective();
         this.cardId = generator.getGeneratedId();
@@ -56,9 +55,15 @@ public class CommonObjective {
     }
 
     public void printCommonObj() {
-        System.out.println(this.cardId + " - " + this.descrizione);
+        System.out.println((this.cardId + 1) + " - " + this.descrizione);
     }
 
+    /**
+     * controllo sul completamento degli obbiettivi comuni
+     *
+     * @param tileTypes libreria del giocatore corrente
+     * @return numero di punti associati all'obbiettivo
+     */
     public int checkCommonObjectives(TileType[][] tileTypes) {
         //gli id sono progressivi rispettivamente il loro ordinamento nel file "description.txt"
         int completedScore = 0;
@@ -168,7 +173,7 @@ public class CommonObjective {
 
                 groupCounter = 0;
                 List<TileType> groupList = new ArrayList<TileType>();
-                TileType controlList[][] = new TileType[ROWLEN][COLUMNLEN];
+                TileType[][] controlList = new TileType[ROWLEN][COLUMNLEN];
 
                 for (int i = 0; i < ROWLEN; i++) {
                     for (int j = 0; j < COLUMNLEN; j++)

@@ -1,4 +1,3 @@
-import board.Board;
 import board.BoardNavigator;
 
 import java.util.*;
@@ -13,6 +12,7 @@ public class Game {
     //codici per testi colorati
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_BLUE = "\u001B[34m";
     public Game(Player[] players, int numPlayers) {
         this.players = players;
         this.numPlayers = numPlayers;
@@ -24,8 +24,11 @@ public class Game {
      */
     public void PrintLeaderboard(Player[] players) {
         SortByPoints(players);
-        for (Player player : players)
-            System.out.println(player.getId() + ". " + player.getName() + " punti: " + player.getPoints());
+        int count = 1;
+        for (Player player : players){
+            System.out.println( count + ". " + player.getName() + " punti: " + player.getPoints());
+            count++;
+        }
     }
 
     /**
@@ -46,9 +49,8 @@ public class Game {
      *
      * @param pl giocatore corrente
      * @param numPlayers numero totale di giocatori nella partita
-     * @throws NoSuchFieldException in caso un giocatore scelga una tessera che non può essere presa
      */
-    public void PlayerTurn(Player pl, int numPlayers) throws NoSuchFieldException {
+    public void PlayerTurn(Player pl, int numPlayers) {
 
         BoardNavigator nav = new BoardNavigator(numPlayers);
         int column = 0;
@@ -59,9 +61,13 @@ public class Game {
         boolean pickMore = true;
         Scanner sc = new Scanner(System.in);
 
+
         System.out.println("TURNO DI: " + pl.getName());
         while (pickMore) {
 
+            if (nav.isBoardAllEmpty()){
+                break;
+            }
 
             row = ' '; //   se il giocatore decide di prendere un'altra casella, una volta finito il primo ciclo, resetto riga e colonna -
             column = 0; // - cosicchè non mi venga dato l'errore di casella vuota, visto che i valori precedenti rimarrebbero salvati
@@ -86,9 +92,6 @@ public class Game {
 
         }
 
-        if (Board.checkFillBoard()) {
-            nav.fillBoard();
-        }
     }
 
     /**
@@ -97,21 +100,30 @@ public class Game {
      * @throws InterruptedException in caso il wait di 1s vada in errore
      */
     public void insertPicked(Player pl) throws InterruptedException {
+        char col;
+        int insertionColumn;
         System.out.println("\n" + "OBIETTIVI DI " + pl.getName() + ": ");
         pl.printObjective();
-        System.out.println("\n" + pl.getName() + "HA PRESO: ");
+        System.out.println("\n" + pl.getName() + " HA PRESO: ");
         pl.printPicked();
         System.out.println("\n");
         Scanner sc = new Scanner(System.in);
-        System.out.println("in caso di errore ricomicerai il processo di inserimento da capo");
+        System.out.println(ANSI_BLUE + "in caso di errore ricomicerai il processo di inserimento da capo" + ANSI_RESET);
         System.out.print(pl.getName() + "\n\nIn che colonna vuoi inserire le tessere prese?.....\t");
-        int insertionColumn = sc.nextInt() - 1;
+        do{
+             col = sc.next().charAt(0);
+             insertionColumn = Character.getNumericValue(col);
+             if (!Character.isDigit(col)){
+                 System.out.println(ANSI_RED + "inserire un numero" + ANSI_RESET);
+             }
+        }while(!Character.isDigit(col));
 
         try {
             pl.insertInLibrary(insertionColumn);
         } catch (Exception e) {
-            System.out.println(ANSI_RED + e + ", riprova" +  ANSI_RESET);
+            System.out.println(ANSI_RED + e + ", riprova (attendi 1 secondo)" +  ANSI_RESET);
             Thread.sleep(1000);
+            pl.printPlayerLibrary();
             insertPicked(pl);
         }
     }
