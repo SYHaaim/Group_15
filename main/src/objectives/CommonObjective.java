@@ -218,8 +218,73 @@ public class CommonObjective {
                 break;
 
 
-            case 5:
-            case 6:
+            case 5:  //Tre colonne formate ciascuna da 6 tessere di uno, due o tre tipi differenti
+            	
+            	int counterDifferentTyle = 0;
+            	int colGroup = 0;
+            	for (int c = 0; c < 4; c++) {
+            		 int counterTyleC = 0;
+                     int counterTyleB = 0;
+                     int counterTyleT = 0;
+                     int counterTyleF = 0;
+                     int counterTyleTR = 0;
+                     int counterTyleP = 0;
+                     boolean notFull = false;
+                    for (int r = 0; r < 5; r++) {
+                        if(tileTypes[r][c] != null) {
+                        	if (tileTypes[r][c] == TileType.C) {
+                        		counterTyleC++;
+                            } else if (tileTypes[r][c] == TileType.B) {
+                            	counterTyleB++;                            		
+                            } else if (tileTypes[r][c] == TileType.T) {
+                            	counterTyleT++; 
+                            } else if (tileTypes[r][c] == TileType.F) {
+                            	counterTyleF++; 
+                            } else if (tileTypes[r][c] == TileType.TR) {
+                            	counterTyleTR++; 
+                            } else if (tileTypes[r][c] == TileType.P) {
+                            	counterTyleP++; 
+                            }                                                                       	
+                        }
+                        else {
+                        	notFull = true;
+                        }
+                    }
+                    if(notFull == false) {
+	                    counterDifferentTyle = 0;
+	                    if(counterTyleC > 0) {
+	                    	counterDifferentTyle++;
+	                    }
+	                    if(counterTyleB > 0) {
+	                    	counterDifferentTyle++;
+	                    }
+	                    if(counterTyleT > 0) {
+	                    	counterDifferentTyle++;
+	                    }
+	                    if(counterTyleF > 0) {
+	                    	counterDifferentTyle++;
+	                    }
+	                    if(counterTyleTR > 0) {
+	                    	counterDifferentTyle++;
+	                    }
+	                    if(counterTyleP > 0) {
+	                    	counterDifferentTyle++;
+	                    }                    
+	                    if(counterDifferentTyle < 4) {
+	                    	colGroup++;
+	                    	if(colGroup == 3) {
+	                    		completedScore = points.get(0);
+	                            points.remove(0);
+	                            return completedScore;
+	                    	}
+                    	}
+                    }
+                }
+            	
+            	break;
+	
+            case 6:  // Otto tessere dello stesso tipo, nessuna restrizione sulle posizioni
+            	
                 int counterC = 0;
                 int counterB = 0;
                 int counterT = 0;
