@@ -202,11 +202,54 @@ public class CommonObjective {
 					}
 				}
             	
-            	
+				break;
             	
             	
             case 5:
-            case 6:
+            case 6: 
+            	int counterC = 0;
+            	int counterB = 0;
+            	int counterT = 0;
+            	int counterF = 0;
+            	int counterTR = 0;
+            	int counterP = 0;
+            	
+            	for (int c = 0; c < 4; c++) {
+                    for (int r = 0; r < 5; r++) {
+                    	if(tileTypes[r][c] != null) {
+	                    	if(tileTypes[r][c] == TileType.C) {
+	                    		counterC++;
+	                    	}
+	                    	else if(tileTypes[r][c] == TileType.B) {
+	                    		counterB++;
+	                    	}
+	                    	else if(tileTypes[r][c] == TileType.T) {
+	                    		counterT++;
+	                    	}
+	                    	else if(tileTypes[r][c] == TileType.F) {
+	                    		counterF++;
+	                    	}
+	                    	else if(tileTypes[r][c] == TileType.TR) {
+	                    		counterTR++;
+	                    	}
+	                    	else if(tileTypes[r][c] == TileType.P) {
+	                    		counterP++;
+	                    	}
+                    	}
+                    	
+                    	if(counterC == 8 || counterB == 8 || counterT == 8 || counterF == 8 || counterTR == 8 || counterP == 8) {
+                    		completedScore = points.get(0);
+                            points.remove(0);
+                            return completedScore;
+                    	}
+                    	
+                    }
+            	}   	
+                    	
+                break;    	
+                    	
+            	
+            	
             case 7: //5 tessere dello stesso tipo che formano una diagonale
                 boolean find = true;
 
