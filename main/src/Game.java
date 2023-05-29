@@ -112,7 +112,7 @@ public class Game {
         System.out.print(pl.getName() + "\n\nIn che colonna vuoi inserire le tessere prese?.....\t");
         do{
              col = sc.next().charAt(0);
-             insertionColumn = Character.getNumericValue(col);
+             insertionColumn = Character.getNumericValue(col)-1;
              if (!Character.isDigit(col)){
                  System.out.println(ANSI_RED + "inserire un numero" + ANSI_RESET);
              }
