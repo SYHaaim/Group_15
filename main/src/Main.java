@@ -1,6 +1,7 @@
 
 import board.Board;
 import objectives.CommonObjective;
+
 import java.util.*;
 
 public class Main {
@@ -8,6 +9,7 @@ public class Main {
     //codici per testi colorati
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
+
     public static void main(String[] args) throws Exception {
 
         Scanner sc = new Scanner(System.in);
@@ -19,7 +21,7 @@ public class Main {
             numPlayers = Character.getNumericValue(playerIn);
 
             if (numPlayers < 2 || numPlayers > 4) {
-                System.out.println(ANSI_RED + "Errore, inserire un numero compreso tra 2 e 4" +  ANSI_RESET);
+                System.out.println(ANSI_RED + "Errore, inserire un numero compreso tra 2 e 4" + ANSI_RESET);
             }
 
         } while (numPlayers < 2 || numPlayers > 4 || !Character.isDigit(playerIn));
@@ -85,10 +87,11 @@ public class Main {
 
         System.out.println("\n");
 
+
         //conteggio punti
-        for (Player pl : giocatori) {
-            pl.groupedTiles();
-            pl.playerObjectivesCheck();
+        for (int i = 0; i < giocatori.length; i++) {
+            giocatori[i].playerObjectivesCheck();
+            giocatori[i].groupedTiles();
         }
 
 

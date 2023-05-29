@@ -147,7 +147,7 @@ public class PersonalObjectiveCards {
     public String[] getRandomObjectiveCard() {
         String[] generated;
         Random r = new Random();
-        int randCard = r.nextInt((11) + 1);
+        int randCard = r.nextInt(11);
         generated = cards.get(randCard);
         cards.remove(randCard);
         return generated;

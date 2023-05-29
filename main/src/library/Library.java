@@ -94,10 +94,11 @@ public class Library {
         int objectiveRow;
         int objectiveColumn;
         TileType objectiveType;
-
+        TileType[][] copy = this.libreria;
 
         for (int i = 0; i < tempObj.length; i++) {
             // gli obb. personali sono formattati come "coord. x - coord. y - tipo tessera"
+
             String[] split;
             try {
                 split = tempObj[i].split("-");
@@ -109,7 +110,8 @@ public class Library {
             objectiveRow = (Integer.parseInt(split[0].trim())) - 1;
             objectiveColumn = (Integer.parseInt(split[1].trim())) - 1;
             objectiveType = TileType.valueOf(split[2].trim());
-            if (this.libreria[objectiveRow][objectiveColumn] != null && this.libreria[objectiveRow][objectiveColumn].equals(objectiveType)) {
+
+            if (copy[objectiveRow][objectiveColumn] != null && copy[objectiveRow][objectiveColumn].equals(objectiveType)) {
                 tempObj[i] = "completato";
             }
         }
@@ -123,7 +125,7 @@ public class Library {
 
     public int contPointsAdjacentTiles() {
         int contPoints = 0;
-        TileType[][] copiaLibreria = this.libreria;        //necessaria una copia della libreria che verrà modificata man mano all'interno di questo metodo
+        TileType[][] copiaLibreria = libreria;        //necessaria una copia della libreria che verrà modificata man mano all'interno di questo metodo
 
         for (int i = 0; i < ROWLEN; i++) {
             for (int j = 0; j < COLUMNLEN; j++) {
