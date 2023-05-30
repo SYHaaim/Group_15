@@ -161,7 +161,7 @@ public class CommonObjective {
                     }
                 }
 
-                if (groupCounter > 1) {
+                if (groupCounter > 3) {
                     completedScore = points.get(0);
                     points.remove(0);
                     return completedScore;
