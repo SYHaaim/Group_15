@@ -71,9 +71,9 @@ public class CommonObjective {
         switch ((cardId + 1)) {
             case 1: //Sei gruppi separati formati ciascuno da due tessere adiacenti dello stesso tipo.
                 int groupCounter = 0;
-                for (int c = 0; c < 4; c++) {
+                for (int c = 0; c <= 4; c++) {
                     int tileCounter = 0;
-                    for (int r = 0; r < 5; r++) {
+                    for (int r = 0; r <= 5; r++) {
                         if (tileTypes[r][c] != null && tileTypes[r][c] == tileTypes[r + 1][c]) {
                             tileCounter++;
 
@@ -88,9 +88,9 @@ public class CommonObjective {
                     }
                 }
 
-                for (int r = 0; r < 5; r++) {
+                for (int r = 0; r <= 5; r++) {
                     int tileCounter = 0;
-                    for (int c = 0; c < 4; c++) {
+                    for (int c = 0; c <= 4; c++) {
                         if (tileTypes[r][c] != null && tileTypes[r][c] == tileTypes[r][c + 1]) {
                             tileCounter++;
 
@@ -127,9 +127,9 @@ public class CommonObjective {
             case 3: //Quattro gruppi separati formati ciascuno da quattro tessere adiacenti dello stesso tipo
 
                 groupCounter = 0;
-                for (int c = 0; c < 4; c++) {
+                for (int c = 0; c <= 4; c++) {
                     int tileCounter = 0;
-                    for (int r = 0; r < 5; r++) {
+                    for (int r = 0; r <= 5; r++) {
                         if (tileTypes[r][c] != null && tileTypes[r][c] == tileTypes[r + 1][c]) {
                             tileCounter++;
 
@@ -144,9 +144,9 @@ public class CommonObjective {
                     }
                 }
 
-                for (int r = 0; r < 5; r++) {
+                for (int r = 0; r <= 5; r++) {
                     int tileCounter = 0;
-                    for (int c = 0; c < 4; c++) {
+                    for (int c = 0; c <= 4; c++) {
                         if (tileTypes[r][c] != null && tileTypes[r][c] == tileTypes[r][c + 1]) {
                             tileCounter++;
 
@@ -180,9 +180,9 @@ public class CommonObjective {
                     for (int j = 0; j < COLUMNLEN; j++)
                         controlList[i][j] = tileTypes[i][j];
                 }
-                for (int c = 0; c < 3; c++) {
+                for (int c = 0; c <= 3; c++) {
 
-                    for (int r = 0; r < 4; r++) {
+                    for (int r = 0; r <= 4; r++) {
                         if (controlList[r][c] != null &&
                                 controlList[r][c + 1] != null &&
                                 controlList[r + 1][c] != null &&
@@ -228,7 +228,7 @@ public class CommonObjective {
 
                 int counterDifferentTyle = 0;
                 int colGroup = 0;
-                for (int c = 0; c < 4; c++) {
+                for (int c = 0; c <= 4; c++) {
                     int counterTyleC = 0;
                     int counterTyleB = 0;
                     int counterTyleT = 0;
@@ -236,7 +236,7 @@ public class CommonObjective {
                     int counterTyleTR = 0;
                     int counterTyleP = 0;
                     boolean notFull = false;
-                    for (int r = 0; r < 5; r++) {
+                    for (int r = 0; r <= 5; r++) {
                         if (tileTypes[r][c] != null) {
                             if (tileTypes[r][c] == TileType.C) {
                                 counterTyleC++;
@@ -296,8 +296,8 @@ public class CommonObjective {
                 int counterTR = 0;
                 int counterP = 0;
 
-                for (int c = 0; c < 4; c++) {
-                    for (int r = 0; r < 5; r++) {
+                for (int c = 0; c <= 4; c++) {
+                    for (int r = 0; r <= 5; r++) {
                         if (tileTypes[r][c] != null) {
                             if (tileTypes[r][c] == TileType.C) {
                                 counterC++;
@@ -369,7 +369,7 @@ public class CommonObjective {
 
                 int counterDifferentTyle2 = 0;
                 int colGroup2 = 0;
-                for (int r = 0; r < 5; r++) {
+                for (int r = 0; r <= 5; r++) {
                     int counterTyleC2 = 0;
                     int counterTyleB2 = 0;
                     int counterTyleT2 = 0;
@@ -377,7 +377,7 @@ public class CommonObjective {
                     int counterTyleTR2 = 0;
                     int counterTyleP2 = 0;
                     boolean notFull2 = false;
-                    for (int c = 0; c < 4; c++) {
+                    for (int c = 0; c <= 4; c++) {
                         if (tileTypes[r][c] != null) {
                             if (tileTypes[r][c] == TileType.C) {
                                 counterTyleC2++;
