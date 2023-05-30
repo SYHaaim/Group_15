@@ -314,7 +314,7 @@ public class CommonObjective {
                             }
                         }
 
-                        if (counterC == 8 || counterB == 8 || counterT == 8 || counterF == 8 || counterTR == 8 || counterP == 8) {
+                        if (counterC >= 8 || counterB >= 8 || counterT >= 8 || counterF >= 8 || counterTR >= 8 || counterP >= 8) {
                             completedScore = points.get(0);
                             points.remove(0);
                             return completedScore;
