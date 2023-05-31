@@ -55,7 +55,7 @@ public class Player {
         Scanner sc = new Scanner(System.in);
         Player[] players = new Player[numPlayers];
         for (int i = 0; i < players.length; i++) {
-            System.out.println("come si chiama il " + (i + 1) + "° giocatore?");
+            System.out.println("come si chiama il giocatore " + (i + 1) + " ?");
             players[i] = new Player(i + 1, sc.next(), (i + 1 == 1));
 
 
