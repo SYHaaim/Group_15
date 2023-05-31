@@ -73,7 +73,7 @@ public class CommonObjective {
                 int groupCounter = 0;
                 for (int c = 0; c <= 4; c++) {
                     int tileCounter = 0;
-                    for (int r = 0; r <= 5; r++) {
+                    for (int r = 0; r < 5; r++) {
                         if (tileTypes[r][c] != null && tileTypes[r][c] == tileTypes[r + 1][c]) {
                             tileCounter++;
 
@@ -90,7 +90,7 @@ public class CommonObjective {
 
                 for (int r = 0; r <= 5; r++) {
                     int tileCounter = 0;
-                    for (int c = 0; c <= 4; c++) {
+                    for (int c = 0; c < 4; c++) {
                         if (tileTypes[r][c] != null && tileTypes[r][c] == tileTypes[r][c + 1]) {
                             tileCounter++;
 
@@ -129,7 +129,7 @@ public class CommonObjective {
                 groupCounter = 0;
                 for (int c = 0; c <= 4; c++) {
                     int tileCounter = 0;
-                    for (int r = 0; r <= 5; r++) {
+                    for (int r = 0; r < 5; r++) {
                         if (tileTypes[r][c] != null && tileTypes[r][c] == tileTypes[r + 1][c]) {
                             tileCounter++;
 
@@ -146,7 +146,7 @@ public class CommonObjective {
 
                 for (int r = 0; r <= 5; r++) {
                     int tileCounter = 0;
-                    for (int c = 0; c <= 4; c++) {
+                    for (int c = 0; c < 4; c++) {
                         if (tileTypes[r][c] != null && tileTypes[r][c] == tileTypes[r][c + 1]) {
                             tileCounter++;
 
@@ -205,9 +205,9 @@ public class CommonObjective {
                     }
                 }
 
-                for (int i = 0; i < groupList.size(); i++) {
+                for (int i = 0; i < groupList.size()-1; i++) {
                     groupCounter = 0;
-                    for (int j = 0; j < groupList.size(); i++) {
+                    for (int j = 0; j < groupList.size()-1; i++) {
                         if (j != i) {
                             if (groupList.get(i) == groupList.get(j)) {
                                 groupCounter++;
@@ -439,7 +439,7 @@ public class CommonObjective {
                     int counterTyleF3 = 0;
                     int counterTyleTR3 = 0;
                     int counterTyleP3 = 0;
-                    for (int r = 0; r < ROWLEN; r++) {                    	
+                    for (int r = 0; r < ROWLEN; r++) { 
                     	if (tileTypes[r][c] != null) {
                             if (tileTypes[r][c] == TileType.C) {
                                 counterTyleC3++;
@@ -470,22 +470,45 @@ public class CommonObjective {
 
             case 10: //Due righe formate ciascuna da 5 diversi tipi di tessere.
 
-                int Righe = 0, contRighe = 0;
-                for (int i = 0; i < ROWLEN; i++) {
-                    for (int j = 0; j < COLUMNLEN; j++) {
-                        if ((j + 1) < COLUMNLEN && tileTypes[i][j] != tileTypes[i][j + 1]) {
-                            Righe++;
-                            if (Righe == 4) {
-                                contRighe++;
+            	int rowCounter = 0;
+                for (int r = 0; r < ROWLEN; r++) {
+                	int counterTyleC4 = 0;
+                    int counterTyleB4 = 0;
+                    int counterTyleT4 = 0;
+                    int counterTyleF4 = 0;
+                    int counterTyleTR4 = 0;
+                    int counterTyleP4 = 0;
+                    boolean notFull = false;
+                    for (int c = 0; c < COLUMNLEN; c++) {                    	
+                    	if (tileTypes[r][c] != null) {
+                            if (tileTypes[r][c] == TileType.C) {
+                                counterTyleC4++;
+                            } else if (tileTypes[r][c] == TileType.B) {
+                                counterTyleB4++;
+                            } else if (tileTypes[r][c] == TileType.T) {
+                                counterTyleT4++;
+                            } else if (tileTypes[r][c] == TileType.F) {
+                                counterTyleF4++;
+                            } else if (tileTypes[r][c] == TileType.TR) {
+                                counterTyleTR4++;
+                            } else if (tileTypes[r][c] == TileType.P) {
+                                counterTyleP4++;
                             }
                         }
-                        if (contRighe == 2) {
-                            completedScore = points.get(0);
-                            points.remove(0);
-                            return completedScore;
-                        }
+                    	else {
+                    		notFull = true;
+                    	}
+                    }
+                    if(notFull == false && counterTyleC4 <= 1 && counterTyleB4 <= 1 && counterTyleT4 <= 1 && counterTyleF4 <= 1 && counterTyleTR4 <= 1 && counterTyleP4 <= 1) {
+                    	rowCounter++;
+                    }
+                    if(rowCounter == 2) {
+                    	completedScore = points.get(0);
+                        points.remove(0);
+                        return completedScore;
                     }
                 }
+ 
                 break;
 
             case 11: //cinque tessere uguali che formano una X
@@ -504,12 +527,14 @@ public class CommonObjective {
                         upLeft = tileTypes[i - 1][j - 1];
                         downRight = tileTypes[i + 1][j + 1];
                         downLeft = tileTypes[i - 1][j - 1];
-
-                        if (upRight.equals(center) && upLeft.equals(center)
-                                && downRight.equals(center) && downLeft.equals(center)) {
-                            completedScore = points.get(0);
-                            points.remove(0);
-                            return completedScore;
+                        if (upRight != null && upLeft != null &&  downRight != null &&  downLeft != null) {
+                        
+	                        if (upRight.equals(center) && upLeft.equals(center)
+	                                && downRight.equals(center) && downLeft.equals(center)) {
+	                            completedScore = points.get(0);
+	                            points.remove(0);
+	                            return completedScore;
+	                        }
                         }
                     }
                 }
