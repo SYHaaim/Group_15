@@ -430,24 +430,42 @@ public class CommonObjective {
                 break;
 
             case 9: //Due colonne formate ciascuna da 6 diversi tipi di tessere
-
-                int colonne = 0, countcolonne = 0;
-                for (int i = 0; i < ROWLEN; i++) {
-                    for (int j = 0; j < COLUMNLEN; j++) {
-                        if ((i + 1) < ROWLEN && tileTypes[i][j] != tileTypes[i + 1][j]) {
-                            colonne++;
-                            if (colonne == 5) {
-                                System.out.println("colonna " + (j + 1) + "con tutti elementi diversi");
-                                countcolonne++;
+  
+                int colCounter = 0;
+                for (int c = 0; c < COLUMNLEN; c++) {
+                	int counterTyleC3 = 0;
+                    int counterTyleB3 = 0;
+                    int counterTyleT3 = 0;
+                    int counterTyleF3 = 0;
+                    int counterTyleTR3 = 0;
+                    int counterTyleP3 = 0;
+                    for (int r = 0; r < ROWLEN; r++) {                    	
+                    	if (tileTypes[r][c] != null) {
+                            if (tileTypes[r][c] == TileType.C) {
+                                counterTyleC3++;
+                            } else if (tileTypes[r][c] == TileType.B) {
+                                counterTyleB3++;
+                            } else if (tileTypes[r][c] == TileType.T) {
+                                counterTyleT3++;
+                            } else if (tileTypes[r][c] == TileType.F) {
+                                counterTyleF3++;
+                            } else if (tileTypes[r][c] == TileType.TR) {
+                                counterTyleTR3++;
+                            } else if (tileTypes[r][c] == TileType.P) {
+                                counterTyleP3++;
                             }
                         }
-                        if (countcolonne == 2) {
-                            completedScore = points.get(0);
-                            points.remove(0);
-                            return completedScore;
-                        }
+                    }
+                    if(counterTyleC3 == 1 && counterTyleB3 == 1 && counterTyleT3 == 1 && counterTyleF3 == 1 && counterTyleTR3 == 1 && counterTyleP3 == 1) {
+                    	colCounter++;
+                    }
+                    if(colCounter == 2) {
+                    	completedScore = points.get(0);
+                        points.remove(0);
+                        return completedScore;
                     }
                 }
+ 
                 break;
 
             case 10: //Due righe formate ciascuna da 5 diversi tipi di tessere.
