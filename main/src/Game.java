@@ -103,6 +103,7 @@ public class Game {
         char col;
         int insertionColumn;
         System.out.println("\n" + "OBIETTIVI DI " + pl.getName() + ": ");
+        System.out.println("(riga - colonna - tipo di tessera)");
         pl.printObjective();
         System.out.println("\n" + pl.getName() + " HA PRESO: ");
         pl.printPicked();
