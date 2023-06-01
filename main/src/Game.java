@@ -10,9 +10,10 @@ public class Game {
     Player[] players;
     int numPlayers;
     //codici per testi colorati
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_BLUE = "\u001B[34m";
+    static final String ANSI_RESET = "\u001B[0m";
+    static final String ANSI_RED = "\u001B[31m";
+    static final String ANSI_BLUE = "\u001B[34m";
+
     public Game(Player[] players, int numPlayers) {
         this.players = players;
         this.numPlayers = numPlayers;
@@ -20,19 +21,21 @@ public class Game {
 
     /**
      * stampa ordinata rispetto ai punti per determinare il vincitore
+     *
      * @param players lista di tutti i giocatori nella partita corrente
      */
     public void PrintLeaderboard(Player[] players) {
         SortByPoints(players);
         int count = 1;
-        for (Player player : players){
-            System.out.println( count + ". " + player.getName() + " punti: " + player.getPoints());
+        for (Player player : players) {
+            System.out.println(count + ". " + player.getName() + " punti: " + player.getPoints());
             count++;
         }
     }
 
     /**
      * ordinamento decrescente rispetto ai punti dei giocatori
+     *
      * @param players lista di tutti i giocatori nella partita corrente
      */
     void SortByPoints(Player[] players) {
@@ -46,8 +49,7 @@ public class Game {
     }
 
     /**
-     *
-     * @param pl giocatore corrente
+     * @param pl         giocatore corrente
      * @param numPlayers numero totale di giocatori nella partita
      */
     public void PlayerTurn(Player pl, int numPlayers) {
@@ -67,7 +69,7 @@ public class Game {
         System.out.println("TURNO DI: " + pl.getName());
         while (pickMore) {
 
-            if (nav.isBoardAllEmpty() || nav.arePreviousSorroundingsEmpty(correctPrevRow,correctPrevCol)){
+            if (nav.isBoardAllEmpty() || nav.arePreviousSorroundingsEmpty(correctPrevRow, correctPrevCol)) {
                 System.out.println(ANSI_RED + "non è possibile prendere altre tessere" + ANSI_RESET);
                 break;
             }
@@ -80,7 +82,7 @@ public class Game {
                 column = provideValidInput(column);
             }
 
-            pl.pickTiles(row, column, pickedCount,numPlayers);
+            pl.pickTiles(row, column, pickedCount, numPlayers);
             pickedCount++;
             if (pickedCount > 2)
                 break;
@@ -101,6 +103,7 @@ public class Game {
 
     /**
      * metodo usato per far inserire al giocatore corrente le tessere prese da esso nella sua libreria
+     *
      * @param pl giocatore corrente
      * @throws InterruptedException in caso il wait di 1s vada in errore
      */
@@ -116,18 +119,18 @@ public class Game {
         Scanner sc = new Scanner(System.in);
         System.out.println(ANSI_BLUE + "in caso di errore ricomicerai il processo di inserimento da capo" + ANSI_RESET);
         System.out.print(pl.getName() + "\n\nIn che colonna vuoi inserire le tessere prese?.....\t");
-        do{
-             col = sc.next().charAt(0);
-             insertionColumn = Character.getNumericValue(col)-1;
-             if (!Character.isDigit(col)){
-                 System.out.println(ANSI_RED + "inserire un numero" + ANSI_RESET);
-             }
-        }while(!Character.isDigit(col));
+        do {
+            col = sc.next().charAt(0);
+            insertionColumn = Character.getNumericValue(col) - 1;
+            if (!Character.isDigit(col)) {
+                System.out.println(ANSI_RED + "inserire un numero" + ANSI_RESET);
+            }
+        } while (!Character.isDigit(col));
 
         try {
             pl.insertInLibrary(insertionColumn);
         } catch (Exception e) {
-            System.out.println(ANSI_RED + e + ", riprova (attendi 1 secondo)" +  ANSI_RESET);
+            System.out.println(ANSI_RED + e + ", riprova (attendi 1 secondo)" + ANSI_RESET);
             Thread.sleep(1000);
             pl.printPlayerLibrary();
             insertPicked(pl);
@@ -182,10 +185,11 @@ public class Game {
 
     /**
      * controlla che la tessera specificata dall'utente può essere presa
-     * @param row riga in cui si trova la tessera specificata
-     * @param col colonna in cui si trova la tessera specificata
-     * @param prevRow riga della tessera presa in precedenza
-     * @param prevCol colonna della tessera presa in precedenza
+     *
+     * @param row        riga in cui si trova la tessera specificata
+     * @param col        colonna in cui si trova la tessera specificata
+     * @param prevRow    riga della tessera presa in precedenza
+     * @param prevCol    colonna della tessera presa in precedenza
      * @param numPlayers numero totale dei giocatori in partita
      * @return true: se la tessera è valida false: se la tessera specificata non può essere presa
      */
@@ -219,7 +223,6 @@ public class Game {
     }
 
     /**
-     *
      * @param pl lista di tutti i giocatori nella partita corrente
      * @return true: se almeno uno dei giocatori ha riempito la libreria / false: nessuno dei giocatori ha riempito la libreria
      */
