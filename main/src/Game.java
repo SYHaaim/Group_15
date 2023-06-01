@@ -58,6 +58,8 @@ public class Game {
         char prevRow = ' ';
         int prevCol = 0;
         int pickedCount = 0;
+        int correctPrevRow = -1;
+        int correctPrevCol = -1;
         boolean pickMore = true;
         Scanner sc = new Scanner(System.in);
 
@@ -65,7 +67,8 @@ public class Game {
         System.out.println("TURNO DI: " + pl.getName());
         while (pickMore) {
 
-            if (nav.isBoardAllEmpty()){
+            if (nav.isBoardAllEmpty() || nav.arePreviousSorroundingsEmpty(correctPrevRow,correctPrevCol)){
+                System.out.println(ANSI_RED + "non è possibile prendere altre tessere" + ANSI_RESET);
                 break;
             }
 
@@ -89,6 +92,8 @@ public class Game {
 
             prevRow = row;
             prevCol = column;
+            correctPrevRow = (Character.getNumericValue(prevRow) - 9) - 1;
+            correctPrevCol = prevCol - 1;
 
         }
 

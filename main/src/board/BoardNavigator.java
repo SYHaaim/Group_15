@@ -102,6 +102,20 @@ public class BoardNavigator extends Board {
     }
 
     /**
+     * controlla l'esistenza di una tessera che può essere presa nel turno successivo
+     * @param prevRow
+     * @param prevCol
+     * @return true: se la tessera corrente non ha nulla attorno / false: se almeno uno dei lati della tessera corrente tocca un'altra tessera
+     */
+    public boolean arePreviousSorroundingsEmpty(int prevRow, int prevCol){
+        if (prevRow < 0 && prevCol < 0)
+            return false; //se i 2 valori sono minori di 0 non è ancora stata presa nessuna tessera
+
+        return getRight(prevRow, prevCol) == null && getLeft(prevRow, prevCol) == null
+                && getDown(prevRow, prevCol) == null && getUp(prevRow, prevCol) == null;
+    }
+
+    /**
      * controlla l'adiacenza della tessera specificata correntemente con quella presa in precedenzza
      *
      * @param row     riga in cui si trova la tessera corrente
