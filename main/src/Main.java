@@ -17,6 +17,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int numPlayers = 0;
         char playerIn;
+        System.out.println(ANSI_BLUE + "se stai usando una versione vecchia di eclipse (precedente a 2021), leggi 'IMPORTANTE.txt'" +  ANSI_RESET);
         System.out.print("Quanti giocatori stanno giocando? (Min 2 o Max di 4)\t");
         do {
             playerIn = sc.next().charAt(0);
