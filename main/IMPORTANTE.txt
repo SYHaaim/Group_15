@@ -1,0 +1,10 @@
+Se stai usando una versione vecchia di eclipse (precedente al 2022) è richiesta l'installazione
+del plugin "ANSI escape in console"; per installarlo segui i seguenti passaggi:
+
+dopo aver aperto eclipse,
+
+1. nella barra in alto cliccare su "Help"
+2. da questo menù a tendina selezionare "Eclipse Marketplace"
+3. una volta apertasi una nuova finestra nella sezione "find" scrivere "ANSI Escape in Console"
+4. installare il plugin che esce come primo risultato, avrà come autore "Mihai Nita" e circa 85k installazioni
+5. aprire il programma e giocare!
