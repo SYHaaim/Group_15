@@ -79,7 +79,7 @@ public class Main {
             try{
             giocatori[playCount].addPoints(common1.checkCommonObjectives(giocatori[playCount].getShelf().getLibreria()));
             giocatori[playCount].addPoints(common2.checkCommonObjectives(giocatori[playCount].getShelf().getLibreria()));
-            }catch (Exception e){ //exceptions might be generated thus a wait of 1 second
+            }catch (Exception e){ //unexpected exceptions might be generated thus a wait of 1 second
                 System.out.println(ANSI_RED + "errore di calcolo, attendi 1 secondo" + ANSI_RESET);
                 Thread.sleep(1000);
             }
