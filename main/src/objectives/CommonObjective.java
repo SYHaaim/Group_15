@@ -106,9 +106,11 @@ public class CommonObjective {
                 }
 
                 if (groupCounter > 5) {
+                    if(!points.isEmpty()){
                     completedScore = points.get(0);
                     points.remove(0);
                     return completedScore;
+                    }
                 }
 
                 break;
@@ -162,9 +164,11 @@ public class CommonObjective {
                 }
 
                 if (groupCounter > 3) {
-                    completedScore = points.get(0);
-                    points.remove(0);
-                    return completedScore;
+                    if(!points.isEmpty()){
+                        completedScore = points.get(0);
+                        points.remove(0);
+                        return completedScore;
+                    }
                 }
 
                 break;
@@ -214,9 +218,11 @@ public class CommonObjective {
                             }
                         }
                         if (groupCounter == 2) {
-                            completedScore = points.get(0);
-                            points.remove(0);
-                            return completedScore;
+                            if(!points.isEmpty()){
+                                completedScore = points.get(0);
+                                points.remove(0);
+                                return completedScore;
+                            }
                         }
                     }
                 }
@@ -278,9 +284,11 @@ public class CommonObjective {
                         if (counterDifferentTyle < 4) {
                             colGroup++;
                             if (colGroup == 3) {
-                                completedScore = points.get(0);
-                                points.remove(0);
-                                return completedScore;
+                                if(!points.isEmpty()){
+                                    completedScore = points.get(0);
+                                    points.remove(0);
+                                    return completedScore;
+                                }
                             }
                         }
                     }
@@ -315,9 +323,11 @@ public class CommonObjective {
                         }
 
                         if (counterC >= 8 || counterB >= 8 || counterT >= 8 || counterF >= 8 || counterTR >= 8 || counterP >= 8) {
-                            completedScore = points.get(0);
-                            points.remove(0);
-                            return completedScore;
+                            if(!points.isEmpty()){
+                                completedScore = points.get(0);
+                                points.remove(0);
+                                return completedScore;
+                            }
                         }
 
                     }
@@ -358,9 +368,11 @@ public class CommonObjective {
                 }
 
                 if (find) {
-                    completedScore = points.get(0);
-                    points.remove(0);
-                    return completedScore;
+                    if(!points.isEmpty()){
+                        completedScore = points.get(0);
+                        points.remove(0);
+                        return completedScore;
+                    }
                 }
 
                 break;
@@ -419,9 +431,11 @@ public class CommonObjective {
                         if (counterDifferentTyle2 < 4) {
                             colGroup2++;
                             if (colGroup2 == 3) {
-                                completedScore = points.get(0);
-                                points.remove(0);
-                                return completedScore;
+                                if(!points.isEmpty()){
+                                    completedScore = points.get(0);
+                                    points.remove(0);
+                                    return completedScore;
+                                }
                             }
                         }
                     }
@@ -460,9 +474,11 @@ public class CommonObjective {
                     	colCounter++;
                     }
                     if(colCounter == 2) {
-                    	completedScore = points.get(0);
-                        points.remove(0);
-                        return completedScore;
+                        if(!points.isEmpty()){
+                            completedScore = points.get(0);
+                            points.remove(0);
+                            return completedScore;
+                        }
                     }
                 }
  
@@ -503,9 +519,11 @@ public class CommonObjective {
                     	rowCounter++;
                     }
                     if(rowCounter == 2) {
-                    	completedScore = points.get(0);
-                        points.remove(0);
-                        return completedScore;
+                        if(!points.isEmpty()){
+                            completedScore = points.get(0);
+                            points.remove(0);
+                            return completedScore;
+                        }
                     }
                 }
  
@@ -531,9 +549,11 @@ public class CommonObjective {
                         
 	                        if (upRight.equals(center) && upLeft.equals(center)
 	                                && downRight.equals(center) && downLeft.equals(center)) {
-	                            completedScore = points.get(0);
-	                            points.remove(0);
-	                            return completedScore;
+                                if(!points.isEmpty()){
+                                    completedScore = points.get(0);
+                                    points.remove(0);
+                                    return completedScore;
+                                }
 	                        }
                         }
                     }
@@ -556,8 +576,11 @@ public class CommonObjective {
                     prec = cont;
                 }
                 if (objectiveCompleted) {
-                    System.out.println("5 colonne di altezza decrescente");
-                    break;
+                    if(!points.isEmpty()){
+                        completedScore = points.get(0);
+                        points.remove(0);
+                        return completedScore;
+                    }
                 }
 
                 prec = 0;
@@ -576,10 +599,11 @@ public class CommonObjective {
                 }
 
                 if (objectiveCompleted) {
-                    completedScore = points.get(0);
-                    points.remove(0);
-                    return completedScore;
-
+                    if(!points.isEmpty()){
+                        completedScore = points.get(0);
+                        points.remove(0);
+                        return completedScore;
+                    }
                 }
                 break;
         }
